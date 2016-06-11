@@ -1,0 +1,21 @@
+Proizvodi u korpi:
+<div ng-controller="shoppingCartController">
+		<table border="1">
+		<tr bgcolor="lightgrey">
+			<th>Naziv</th><th>Jedinicna cena</th><th>Komada</th><th>Ukupna cena</th></tr>
+			<tr ng-repeat="i in sc">
+			<td> {{i.product.name}}</td>
+			<td> {{i.product.price | currency : '' }}</td>
+			<td> {{i.count}} </td>
+			<td> {{i.total | currency : ''}} </td>
+			</tr>
+		</table>
+		<br /> <button ng-click="clearSc()" >Obriši korpu</button>
+		<p>
+		Ukupno: {{total | currency : ''}} dinara.
+		</p>
+	<p>
+		<a href="#/">Proizvodi</a>
+	</p>
+		
+</div>

@@ -1,0 +1,23 @@
+Raspolozivi proizvodi:
+<div ng-controller="productsController">
+	<table border="1">
+	<tr bgcolor="lightgrey">
+		<th>Naziv</th>
+		<th>Cena</th>
+		<th>&nbsp;</th>
+	</tr>
+		
+	<tr ng-repeat="p in products | filter:searchField | orderBy:'name'">
+		<td>{{p.name }}</td>
+		<td>{{p.price | currency : ''}}</td>
+		<td>
+			<add-to-cart />
+		</td>
+	</tr>
+</table>
+Filter: <input type="text" ng-model="searchField" /> 
+	<p>
+		<a href="#/sc">Pregled sadrzaja korpe</a>
+	</p>
+	
+</div>
