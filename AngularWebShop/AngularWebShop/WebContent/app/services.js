@@ -13,6 +13,17 @@ webShop.factory('productsFactory', function($http) {
 	
 });
 
+webShop.factory('userFactory',function($http) {
+	var factory = {};
+	factory.getUsers = function() {
+		return $http.get('/AngularWebShop/rest/users/getUsers');
+	}
+	factory.getUser = function(){
+		return $http.get('/AngularWebShop/rest/', {"username":''+user.username})
+	}
+	return factory;
+});
+
 webShop.factory('shoppingCartFactory', function($http) {
 
 	var factory = {};

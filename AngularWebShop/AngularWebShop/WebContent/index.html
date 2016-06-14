@@ -2,24 +2,70 @@
 <html ng-app="webShop">
 
 <head>
-	<link href="css/toast.css" rel="stylesheet" />
+	<script src="js/angular.js"></script>
+	<script src="js/angular-route.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="app/app.js"></script>
+	<script src="app/controllers.js"></script>
+	<script src="app/services.js"></script>
+	<script src="app/directives.js"></script>
+	
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<link href='http://fonts.googleapis.com/css?family=Allan:bold' rel='stylesheet' type='text/css'>
+
+<style type="text/css">
+
+body {
+    margin: 0;
+}
+ul.nvb {
+	
+	font-family: 'Allan', Helvetica, Arial, sans-serif;
+    position:relative;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+	width:980px;
+	text-align:center;
+    background: linear-gradient(141deg,  #ff4d4d 0%,#ff1a1a 51%,#990000 75%);
+    font-size: 18px;
+}
+li {
+	float:left;
+	text-align:left;
+	font-size: 25px;
+    cursor: pointer; 
+    cursor: hand;
+}
+.nvb li a {
+    float:left;
+	text-align:left;
+    display: block;
+    color: white;
+    padding: 18px 16px;
+    text-decoration: none;
+}
+.nvb li a:hover {
+    background: #111;
+}
+#grad1 {
+    height: 250px;
+    width:100%;
+    background: #111;
+    color:white;
+    opacity:0.95;
+}	
+</style>
+
 </head> 
 
 <body>
-
-<h3>Primer WebShop aplikacije u Angular tehnologiji</h3>
-
-	<div ng-view></div>
-
-
-<script src="js/angular.js"></script>
-<script src="js/angular-route.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/toast.js"></script>
-<script src="app/app.js"></script>
-<script src="app/controllers.js"></script>
-<script src="app/services.js"></script>
-<script src="app/directives.js"></script>
+<ul class="nvb">
+    <li><a href="#users" ng-href="#users">Dashboard</a></li>
+    <li><a href="#products" ng-href="#products" >Products</a></li>
+    </ul>
+<div ng-view></div>
 
 </body>
 </html>
