@@ -24,6 +24,14 @@ webShop.factory('userFactory',function($http) {
 	return factory;
 });
 
+webShop.factory('storeFactory',function($http){
+	var factory = {};
+	factory.getStores = function() {
+		return $http.get('/AngularWebShop/rest/stores/getStores');
+	}
+	return factory;
+});
+
 webShop.factory('shoppingCartFactory', function($http) {
 
 	var factory = {};

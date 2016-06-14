@@ -52,3 +52,18 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	}
 	init();
 })
+.controller('storeCtrl',function($scope,storeFactory){
+	function init() {
+		console.log('Store Controller');
+		storeFactory.getStores().success(function(data){
+			$scope.stores = data;
+		})
+	}
+	
+	$scope.addStore = function() {
+		console.log("Dodao sam novu prodavnicu")
+	}
+	
+	
+	init();
+})

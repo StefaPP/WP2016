@@ -23,7 +23,7 @@ public Users(String path) {
 		File file = new File(path + "/users.txt");
 		System.out.println(file.getCanonicalPath());
 		in = new BufferedReader(new FileReader(file));
-		readProducts(in);
+		readUsers(in);
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
@@ -41,7 +41,7 @@ public Users(String path) {
  * Cita proizvode iz datoteke i smesta ih u asocijativnu listu proizvoda.
  * Kljuc je id proizvoda.
  */
-private void readProducts(BufferedReader in) {
+private void readUsers(BufferedReader in) {
 	String line, username = "", password = "", firstName = "",
 			lastName = "",role="",contact="",
 			email="",address="",country="";
