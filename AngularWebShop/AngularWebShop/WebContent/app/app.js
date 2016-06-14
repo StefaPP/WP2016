@@ -2,14 +2,18 @@
 var webShop = angular.module('webShop', ['ngRoute']);
 
 webShop.config(function($routeProvider) {
-	$routeProvider.when('/',
+	$routeProvider.when('#/',
 	{
-		//controller: 'productsController',// inace je podeseno ng-controller atributom
-		templateUrl: 'partials/products.html'
-	}).when('/sc',
+		templateUrl: 'index.html'
+	}).when('/products',
 	{
 		//controller: 'shoppingCartController', // inace je podeseno ng-controller atributom
-		templateUrl: 'partials/shoppingCart.html'
+		templateUrl: 'partials/products.html',
+		controller : 'productsController'
+	})
+	.when('/users',{
+		templateUrl: 'partials/user.html',
+		controller : 'userCtrl'
 	})
 });
 

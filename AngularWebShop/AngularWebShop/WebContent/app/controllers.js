@@ -18,9 +18,8 @@ webShop.controller('productsController', function($scope, productsFactory) {
 			toast('Product ' + product.name + " added to the Shopping Cart");
 		});	
 	}; 
-});
-
-webShop.controller('shoppingCartController', function($scope, shoppingCartFactory) {
+})
+.controller('shoppingCartController', function($scope, shoppingCartFactory) {
 	
     function init() {
     	console.log('ShoppingCartController.Init');
@@ -43,4 +42,13 @@ webShop.controller('shoppingCartController', function($scope, shoppingCartFactor
 	    	});
 		}
     };
-});
+})
+.controller('userCtrl',function($scope,userFactory){
+	function init() { 
+		console.log('User Controller');
+		userFactory.getUsers().success(function(data){
+			$scope.users = data;
+		})
+	}
+	init();
+})
