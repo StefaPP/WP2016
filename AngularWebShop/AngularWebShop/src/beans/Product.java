@@ -75,7 +75,7 @@ public class Product {
 	}
 
 	public Product(String id, String name, double price, double size, double weight, String origin, String brandName,
-			String category, String image, String video, String rating, String review, int lager, int count) {
+			String category, String image, String video, String rating, String review, int lager) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -90,7 +90,6 @@ public class Product {
 		this.rating = rating;
 		this.review = review;
 		this.lager = lager;
-		this.count = count;
 	}
 
 	public double getSize() {

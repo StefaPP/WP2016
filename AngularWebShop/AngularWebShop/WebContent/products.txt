@@ -1,4 +1,4 @@
-1;Televizor marke Sony, 51 cm dijagonala;22000
-2;Sony digitalna kamera;32000
-3;Samsung monitor 17";35000
-4;Pioneer DVD pisac;7100
+1;Televizor marke Sony, 51 cm dijagonala;22000.00;30.00;100.00;Kina;Sony;Tehnika;http://pcw.cdn.dixons.com/css/themes/sony_tv_range/img/r4-hero-tv.png; ; ; ;3;
+2;Sony digitalna kamera;32000;30.00;100.00;Kina;Sony;Tehnika;http://media.coopelectricalshop.co.uk/media/default/Products/SON-CAM-DSCWX100B-BK.png; ; ; ;3;
+3;Samsung monitor 17";35000;30.00;100.00;Kina;Samsung;Tehnika;http://www.kulltech.com/wordpress/wp-content/uploads/2014/06/Samsung-UD590.png; ; ; ;2;
+4;Pioneer DVD pisac;7100;30.00;100.00;Kina;Pioneer;Tehnika;http://forum.imgburn.com/uploads/monthly_06_2009/post-20-1246207568.png; ; ; ;1;

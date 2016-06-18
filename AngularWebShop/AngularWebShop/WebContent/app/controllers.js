@@ -22,7 +22,7 @@ webShop.controller('productsController', function($scope, productsFactory) {
 		var id = $routeParams.id;
 		console.log(id);
 		productsFactory.getProduct(id).success(function(data){	
-			$scope.product = JSON.stringify(data);
+			$scope.product = data
 		})
 	};
 	

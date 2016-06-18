@@ -16,18 +16,17 @@ import java.util.StringTokenizer;
  */
 public class Products {
 	private HashMap<String, Product> products = new HashMap<String, Product>();
-	
 
 	public void setProducts(HashMap<String, Product> products) {
 		this.products = products;
 	}
 
 	private ArrayList<Product> productList = new ArrayList<Product>();
-	
+
 	public Products() {
 		this("C:\\Users\\Bebica\\git\\WP2016\\README.md\\AngularWebShop\\AngularWebShop\\WebContent\\");
 	}
-	
+
 	public Products(String path) {
 		BufferedReader in = null;
 		try {
@@ -37,13 +36,12 @@ public class Products {
 			readProducts(in);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally {
-			if ( in != null ) {
+		} finally {
+			if (in != null) {
 				try {
 					in.close();
+				} catch (Exception e) {
 				}
-				catch (Exception e) { }
 			}
 		}
 	}
@@ -51,9 +49,17 @@ public class Products {
 	/**
 	 * Cita proizvode iz datoteke i smesta ih u asocijativnu listu proizvoda.
 	 * Kljuc je id proizvoda.
+	 *
+	 *
+	 * private String id; private String name; private double price; private
+	 * double size; public double weight; private String origin; private String
+	 * brandName; private String category; private String image; private String
+	 * video; private String rating; private String review; private int lager;
 	 */
 	private void readProducts(BufferedReader in) {
-		String line, id = "", name = "", price = "";
+		String line, id = "", name = "", price = "", size = "", weight = "", origin = "", brandName = "", category = "",
+				image = "", video = "", rating = "", review = "", lager = "";
+
 		StringTokenizer st;
 		try {
 			while ((line = in.readLine()) != null) {
@@ -65,9 +71,20 @@ public class Products {
 					id = st.nextToken().trim();
 					name = st.nextToken().trim();
 					price = st.nextToken().trim();
+					size = st.nextToken().trim();
+					weight = st.nextToken().trim();
+					origin = st.nextToken().trim();
+					brandName = st.nextToken().trim();
+					category = st.nextToken().trim();
+					image = st.nextToken().trim();
+					video = st.nextToken().trim();
+					rating = st.nextToken().trim();
+					review = st.nextToken().trim();
+					lager = st.nextToken().trim();
+
 				}
-				Product product = new Product(id, name, Double
-						.parseDouble(price));
+				Product product = new Product(id, name, Double.parseDouble(price), Double.parseDouble(size), Double.parseDouble(weight), origin, brandName, category, image, video,
+						rating, review, Integer.parseInt(lager));
 				products.put(id, product);
 				productList.add(product);
 			}
@@ -76,16 +93,15 @@ public class Products {
 		}
 	}
 
-
 	/** Vraca kolekciju proizvoda. */
 	public Collection<Product> getValues() {
 		return products.values();
 	}
-	
+
 	public HashMap<String, Product> getProducts() {
 		return (HashMap<String, Product>) products.values();
 	}
-	
+
 	/** Vraca proizvod na osnovu njegovog id-a. */
 	public Product getProduct(String id) {
 		return products.get(id);
