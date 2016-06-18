@@ -9,12 +9,20 @@ webShop.config(function($routeProvider) {
 		templateUrl: 'partials/products.html',
 		controller : 'productsController'
 	})
+	.when('/product/:id',{
+		templateUrl: 'partials/productDetails.html',
+		controller : 'productDetailsCtrl'
+	})
 	.when('/users',{
 		templateUrl: 'partials/user.html',
 		controller : 'userCtrl'
 	})
 	.when('/stores',{
 		templateUrl : 'partials/stores.html',
+		controller : 'storeCtrl'
+	})
+	.when('/store/:id',{
+		templateUrl : 'partials/store.html',
 		controller : 'storeCtrl'
 	})
 });

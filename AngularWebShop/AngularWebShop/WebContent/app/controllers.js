@@ -1,6 +1,3 @@
-
-
-// controller
 webShop.controller('productsController', function($scope, productsFactory) {
 	
     function init() {
@@ -8,7 +5,6 @@ webShop.controller('productsController', function($scope, productsFactory) {
         productsFactory.getProducts().success(function (data) {
         	$scope.products = data;
 		});
-        //$scope.products = [{"id":"3","name":"Samsung monitor 17\"","price":35000.0},{"id":"2","name":"Sony digitalna kamera","price":32000.0},{"id":"1","name":"Televizor marke Sony, 51 cm dijagonala","price":22000.0},{"id":"4","name":"Pioneer DVD pisac","price":7100.0}]
     }
 
 	init();
@@ -18,6 +14,19 @@ webShop.controller('productsController', function($scope, productsFactory) {
 			toast('Product ' + product.name + " added to the Shopping Cart");
 		});	
 	}; 
+})
+.controller('productDetailsCtrl',function($scope,$routeParams,productsFactory){
+		
+	function init() { 
+		console.log('ProductDetailsController.Init');
+		var id = $routeParams.id;
+		console.log(id);
+		productsFactory.getProduct(id).success(function(data){	
+			$scope.product = JSON.stringify(data);
+		})
+	};
+	
+	init();
 })
 .controller('shoppingCartController', function($scope, shoppingCartFactory) {
 	
@@ -52,18 +61,30 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	}
 	init();
 })
-.controller('storeCtrl',function($scope,storeFactory){
+.controller('storeCtrl',function($scope,$location,$routeParams,storeFactory){
+	
 	function init() {
 		console.log('Store Controller');
 		storeFactory.getStores().success(function(data){
+			$scope.store = {} 
 			$scope.stores = data;
-		})
+			
+	})
+	}
+	
+	$scope.storeDetails = function (store) {
+		console.log("Usao u je u storeDetails "+ store.id);
+		$location.path('/store/'+store.id);
+		
 	}
 	
 	$scope.addStore = function() {
-		console.log("Dodao sam novu prodavnicu")
+		console.log("Dodao sam novu prodavnicu" + $scope.store.name)
+		console.log($scope.store);
+		storeFactory.addStore($scope.store).success(function(data){
+			$scope.store = {};
+		})
+		
 	}
-	
-	
 	init();
 })

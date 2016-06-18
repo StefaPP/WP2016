@@ -51,6 +51,18 @@ public class ProductService {
 				+ " added with count: " + p.count);
 		return "OK";
 	}
+	
+	@GET
+	@Path("/getProduct")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.TEXT_PLAIN)
+	public Product getProduct(String id) {
+		Products products = new Products();
+		System.out.println("dje ajdi " + id +" ???");
+		System.out.println(products.getProduct("1"));
+		return products.getProduct("1");
+	}
+	
 
 	@GET
 	@Path("/getJustSc")

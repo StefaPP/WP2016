@@ -16,19 +16,25 @@
 
 <style type="text/css">
 
+p {
+	font-family: Century Gothic, sans-serif;
+}
+
+a{
+	font-family: Century Gothic, sans-serif;
+}
 body {
+	font-family: Century Gothic, sans-serif;
     margin: 0;
 }
 ul.nvb {
-	
-	font-family: 'Allan', Helvetica, Arial, sans-serif;
-    position:relative;
-    margin: 0 auto;
+	font-family: Century Gothic, sans-serif;
+    margin: 0;
     padding: 0;
     overflow: hidden;
-	width:980px;
+	width:100%;
 	text-align:center;
-    background: linear-gradient(141deg,  #ff4d4d 0%,#ff1a1a 51%,#990000 75%);
+    background-color: #333;
     font-size: 18px;
 }
 li {
@@ -37,6 +43,7 @@ li {
 	font-size: 25px;
     cursor: pointer; 
     cursor: hand;
+    font-family: Century Gothic, sans-serif;
 }
 .nvb li a {
     float:left;
@@ -61,11 +68,12 @@ li {
 </head> 
 
 <body>
+
 <ul class="nvb">
-    <li><a href="#users" ng-href="#users">Dashboard</a></li>
-    <li><a href="#products" ng-href="#products" >Products</a></li>
+    <li style="margin-left:25%;"><a href="#users" ng-href="#users">Dashboard</a></li>
+    <li><a href="#products" ng-href="#products">Products</a></li>
     <li><a href="#stores" ng-href="#stores" >Stores</a></li>    
-     </ul>
+</ul>
 <div ng-view></div>
 
 </body>

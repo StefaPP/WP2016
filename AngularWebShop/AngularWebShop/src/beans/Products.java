@@ -16,10 +16,16 @@ import java.util.StringTokenizer;
  */
 public class Products {
 	private HashMap<String, Product> products = new HashMap<String, Product>();
+	
+
+	public void setProducts(HashMap<String, Product> products) {
+		this.products = products;
+	}
+
 	private ArrayList<Product> productList = new ArrayList<Product>();
 	
 	public Products() {
-		this("D:\\Nastava\\Web programiranje\\workspace\\WebShop\\WebContent");
+		this("D:\\apache\\apache-tomcat-7.0.69\\webapps\\AngularWebShop");
 	}
 	
 	public Products(String path) {
@@ -70,16 +76,16 @@ public class Products {
 		}
 	}
 
-	/** Vraca kolekciju proizvoda. */
-	public Collection<Product> values() {
-		return products.values();
-	}
 
 	/** Vraca kolekciju proizvoda. */
 	public Collection<Product> getValues() {
 		return products.values();
 	}
-
+	
+	public HashMap<String, Product> getProducts() {
+		return (HashMap<String, Product>) products.values();
+	}
+	
 	/** Vraca proizvod na osnovu njegovog id-a. */
 	public Product getProduct(String id) {
 		return products.get(id);
