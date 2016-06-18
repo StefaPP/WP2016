@@ -7,7 +7,10 @@ webShop.factory('productsFactory', function($http) {
 
 	factory.getProduct = function(id){
 		console.log("jebeni ajdi " + id);
-		return $http.get('/AngularWebShop/rest/proizvodi/getProduct',{"id":''+id});
+		//return $http.get('/AngularWebShop/rest/proizvodi/getProduct',{"id":'1'});
+		return $http.get('/AngularWebShop/rest/proizvodi/getProduct', {
+		    params: { id: id }
+		});
 	}
 	
 	factory.addToCart = function(product) {
@@ -29,6 +32,14 @@ webShop.factory('userFactory',function($http) {
 	return factory;
 });
 
+webShop.factory('deliveryFactory',function($http){
+	var factory = {};
+	factory.getDeliverers = function(){
+		return $http.get('/AngularWebShop/rest/delivery/getDeliverers');
+	}
+	return factory;
+})
+
 webShop.factory('storeFactory',function($http){
 	var factory = {};
 	factory.getStores = function() {
@@ -45,11 +56,14 @@ webShop.factory('storeFactory',function($http){
 				"email":''+store.email,
 				"seller":''+store.seller})
 		}
+	factory.getStore = function(store){
+		console.log(store);
+		return $http.get('/AngularWebShop/rest/stores/getStore',{"id":''+store})
+		
+	}
 	
 	return factory;
 });
-
-
 webShop.factory('shoppingCartFactory', function($http) {
 
 	var factory = {};

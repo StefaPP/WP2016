@@ -23,7 +23,11 @@ webShop.config(function($routeProvider) {
 	})
 	.when('/store/:id',{
 		templateUrl : 'partials/store.html',
-		controller : 'storeCtrl'
+		controller : 'storeDetailsCtrl'
+	})
+	.when('/delivery/',{
+		templateUrl : 'partials/delivery.html',
+		controller : 'deliveryCtrl'
 	})
 });
 

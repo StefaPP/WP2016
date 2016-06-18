@@ -66,11 +66,10 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	function init() {
 		console.log('Store Controller');
 		storeFactory.getStores().success(function(data){
-			$scope.store = {} 
 			$scope.stores = data;
 			
-	})
-	}
+	});
+}
 	
 	$scope.storeDetails = function (store) {
 		console.log("Usao u je u storeDetails "+ store.id);
@@ -79,12 +78,30 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	}
 	
 	$scope.addStore = function() {
-		console.log("Dodao sam novu prodavnicu" + $scope.store.name)
+		console.log("Dodao sam novu prodavnicu " + $scope.store.name)
 		console.log($scope.store);
-		storeFactory.addStore($scope.store).success(function(data){
-			$scope.store = {};
-		})
-		
+		storeFactory.addStore($scope.store,init)
+
 	}
+
+		init();
+})
+.controller('storeDetailsCtrl',function($scope,$location,$routeParams,storeFactory){
+		function init() {
+		var id = $routeParams.id;
+		console.log("id prodavnice " + id );
+		storeFactory.getStore(id).success(function(data){
+			$scope.st = data;
+		})
+	}
+		init();
+})
+.controller('deliveryCtrl',function($scope,deliveryFactory){
+	function init() {
+	console.log('DeliveryCtrl');
+	deliveryFactory.getDeliverers().success(function(data){
+		$scope.deliverers = data;
+	})	
+}
 	init();
 })

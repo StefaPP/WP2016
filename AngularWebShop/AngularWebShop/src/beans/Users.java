@@ -14,7 +14,7 @@ private HashMap<String, User> users = new HashMap<String, User>();
 private ArrayList<User> userList = new ArrayList<User>();
 
 public Users() {
-	this("D:\\apach\\webapps\\AngularWebShop");
+	this("C:\\Users\\Bebica\\git\\WP2016\\README.md\\AngularWebShop\\AngularWebShop\\WebContent\\");
 }
 
 public Users(String path) {
