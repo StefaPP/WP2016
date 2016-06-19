@@ -63,12 +63,35 @@ li {
     color:white;
     opacity:0.95;
 }	
+
+
+ul.ver {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 150px;
+    background-color: #f1f1f1;
+}
+
+.ver li a {
+    display: block;
+    color: #000;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+.ver li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+
+
 </style>
 
 </head> 
-
 <body>
-
 <ul class="nvb">
     <li style="margin-left:25%;"><a href="#users" ng-href="#users">Dashboard</a></li>
     <li><a href="#products" ng-href="#products">Products</a></li>
@@ -76,7 +99,8 @@ li {
 	<li><a href="#delivery" ng-href="#delivery" >Delivery</a></li>    
 	
 </ul>
-<div ng-view></div>
+<div ng-view>
 
+</div>
 </body>
 </html>

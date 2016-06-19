@@ -5,15 +5,29 @@ webShop.controller('productsController', function($scope, productsFactory) {
         productsFactory.getProducts().success(function (data) {
         	$scope.products = data;
 		});
+       
+        
     }
 
 	init();
+	
+	function initCats() {
+		productsFactory.getCategories().success(function (data) {
+       	console.log("pozvao sam kategorije");
+       		$scope.categories = data;
+      
+	 });
+	}
+	
+	initCats();
 	
 	$scope.addToCart = function(product) {
 		productsFactory.addToCart(product).success(function(data) {
 			toast('Product ' + product.name + " added to the Shopping Cart");
 		});	
 	}; 
+	
+	
 })
 .controller('productDetailsCtrl',function($scope,$routeParams,productsFactory){
 		
@@ -66,7 +80,7 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	function init() {
 		console.log('Store Controller');
 		storeFactory.getStores().success(function(data){
-			$scope.stores = data;
+		$scope.stores = data;
 			
 	});
 }
@@ -80,7 +94,8 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	$scope.addStore = function() {
 		console.log("Dodao sam novu prodavnicu " + $scope.store.name)
 		console.log($scope.store);
-		storeFactory.addStore($scope.store,init)
+		storeFactory.addStore($scope.store);
+		init();
 
 	}
 

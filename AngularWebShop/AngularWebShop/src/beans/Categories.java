@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
@@ -16,9 +17,6 @@ public class Categories {
 	public Categories() {
 		this("C:\\Users\\Bebica\\git\\WP2016\\README.md\\AngularWebShop\\AngularWebShop\\WebContent\\");
 	}
-	
-	
-	
 	
 	
 	public Categories(String path) {
@@ -40,10 +38,6 @@ public class Categories {
 			}
 		}
 	}
-
-
-
-
 
 	private void readCategories(BufferedReader in) {
 		String line, id = "", name = "", description = "";
@@ -67,11 +61,8 @@ public class Categories {
 		}
 	}
 	
-	
-	
-
-	public HashMap<String, Category> getCategories() {
-		return categories;
+	public Collection<Category> getCategories() {
+		return categories.values();
 	}
 	public void setCategories(HashMap<String, Category> categories) {
 		this.categories = categories;

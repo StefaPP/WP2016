@@ -35,9 +35,11 @@ public class StoreService {
 	@GET
 	@Path("/getStore")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Store getStore(String id) {
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Store getStore(String s) {
 	Stores stores = new Stores();
-	return stores.getStore(id);
+	System.out.println("ID prodavnice : " + s + ".");
+	return stores.getStore(s);
 	}
 	
 	@POST

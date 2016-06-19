@@ -1,12 +1,16 @@
-<h1 align="center">Raspolozivi proizvodi:</h1>
 <div>
-<div class="col" ng-repeat="p in products">
-  <div class="col-md-2">
+<div class="col"> 
+  <div class="col-md-2" ng-repeat="p in products">
     <a  ng-href="#/product/{{p.id}}" class="thumbnail">
       <p>{{p.name}}</p>
       <p>{{p.price}}</p>
       <img src="{{p.image}}" style="width:150px;height:100px">
     </a>
   </div>
+<ul class="ver" ng-repeat="c in categories">
+  <li><a href="#products">{{c.name}}</a></li>
+</ul>
 </div>	
 </div>
+
+
