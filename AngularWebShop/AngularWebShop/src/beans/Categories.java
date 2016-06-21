@@ -1,8 +1,12 @@
 package beans;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,10 +16,10 @@ public class Categories {
 	
 	private HashMap<String,Category> categories = new HashMap<>();
 	private ArrayList<Category> categoryList = new ArrayList<>();
-	
+	private static String path = "C:\\Users\\Strefa\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
 	
 	public Categories() {
-		this("C:\\Users\\Bebica\\git\\WP2016\\README.md\\AngularWebShop\\AngularWebShop\\WebContent\\");
+		this(path);
 	}
 	
 	
@@ -60,6 +64,20 @@ public class Categories {
 			ex.printStackTrace();
 		}
 	}
+	
+	public static void writeCategory(Category c) throws IOException{
+		String line="";
+		line += c.getName() + ";";
+		line += c.getDescription() + ";";
+		File file = new File(path + "/categories.txt");
+		BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
+		out.append(line);
+		out.newLine();
+		out.close();
+	}
+	
+	
+	
 	
 	public Collection<Category> getCategories() {
 		return categories.values();

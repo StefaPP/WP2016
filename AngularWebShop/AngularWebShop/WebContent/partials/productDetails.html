@@ -1,9 +1,15 @@
 <div>
 <div class="jumbotron">
   <h1>{{product.name}}</h1>
-  <p><h3>Price {{product.price}} RSD</h3></p>
-  <p><h3>Lager {{product.lager}} </h3></p>
-  <img src="{{product.image}}">
+  <h3>Price {{product.price}} RSD</h3>
+  <h3>Lager {{product.lager}} </h3>
+  <img style="width:400px;height:300px;" src="{{product.image}}">
   <p><a class="btn btn-primary btn-lg" href="#" role="button">Buy !</a></p>
+</div>
+<div class="form-group">
+  <label for="comment">Review:</label>
+  <textarea class="form-control" ng-model="commentAdd.text" rows="3" cols="80" id="comment"></textarea><br/>
+  <button type="button" class="btn btn-primary" ng-click="addComment()" ng-disabled="!commentAdd.text">Add comment</button>
+  <br/><br/>
 </div>
 

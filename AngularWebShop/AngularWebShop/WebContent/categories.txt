@@ -4,3 +4,4 @@ clothing,shoes & jewelry; ;
 home,furniture & patio; ;
 movies,music & books; ;
 sports,fitness & outdoors; ;
+Antiques; ;

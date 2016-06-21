@@ -4,6 +4,8 @@ public class Category {
 	String name;
 	String description;
 	
+	public Category() {}
+	
 	public Category(String name, String description) {
 		super();
 		this.name = name;

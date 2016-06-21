@@ -1,5 +1,6 @@
 package services;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import com.google.gson.Gson;
 import com.sun.media.jfxmedia.Media;
 
 import beans.Categories;
@@ -22,6 +24,8 @@ import beans.ProductToAdd;
 import beans.Products;
 import beans.ShoppingCart;
 import beans.ShoppingCartItem;
+import beans.Store;
+import beans.Stores;
 
 @Path("/proizvodi")
 public class ProductService {
@@ -67,14 +71,12 @@ public class ProductService {
 	@GET
 	@Path("/getProduct")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Product getProduct(String id) {
 		Products products = new Products();
-		System.out.println("dje ajdi " + id + " ???");
-		System.out.println(products.getProduct("1"));
-		return products.getProduct("1");
+		return products.getProduct(request.getParameter("id"));
 	}
-
+	
 	@GET
 	@Path("/getJustSc")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -82,6 +84,22 @@ public class ProductService {
 		return getShoppingCart().getItems();
 	}
 
+	@POST
+	@Path("/addCategory")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String addCategory(Category c) {
+		System.out.println("236t135214526536212154");
+		
+		Categories cats = (Categories) ctx.getAttribute("categories");
+		try{
+			Categories.writeCategory(c);
+			ctx.setAttribute("categories", cats);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+		return "Dodata";
+	}
+	
 	@GET
 	@Path("/getTotal")
 	@Produces(MediaType.TEXT_PLAIN)

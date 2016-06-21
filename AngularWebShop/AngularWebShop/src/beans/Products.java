@@ -24,7 +24,8 @@ public class Products {
 	private ArrayList<Product> productList = new ArrayList<Product>();
 
 	public Products() {
-		this("C:\\Users\\Bebica\\git\\WP2016\\README.md\\AngularWebShop\\AngularWebShop\\WebContent\\");
+		
+		this("C:\\Users\\Strefa\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\");
 	}
 
 	public Products(String path) {

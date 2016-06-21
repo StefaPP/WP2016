@@ -7,7 +7,7 @@ public class Product {
 	private String name;
 	private double price;
 	private double size;
-	public double weight;
+	private double weight;
 	private String origin;
 	private String brandName;
 	private String category;
@@ -18,8 +18,6 @@ public class Product {
 	private int lager;
 	
 	/** Koristi se samo za AngularJS */
-
-	
 	private int count;
 
 	public Product() {

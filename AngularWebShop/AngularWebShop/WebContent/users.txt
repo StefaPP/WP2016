@@ -1,2 +1,2 @@
-stefancina;asdf;Stefan;Popov;customer;0649204732;stefancina@live.com;Gagarinova 20,Novi Sad;Serbia
+stefan;asdf;Stefan;Popov;customer;0649204732;stefancina@live.com;Gagarinova 20,Novi Sad;Serbia
 dox;asdf;Igor;Dojcinovic;customer;n/a;dox@sonicline.com;Prljavi telep 10,Novi Sad;Serbia

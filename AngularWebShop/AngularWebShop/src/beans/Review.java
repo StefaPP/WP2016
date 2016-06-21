@@ -1,6 +1,7 @@
 package beans;
 
 public class Review {
+	
 	private String id;
 	private String user;
 	private String date;

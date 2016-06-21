@@ -1,5 +1,4 @@
 <h1 align="center">Prodavnice:</h1>
-<div>
 <div class="col" ng-repeat="s in stores">
   <div class="col-md-2">
      <a href ng-click="storeDetails(s)" class="thumbnail">
@@ -10,7 +9,6 @@
     <button class="btn-group-default" ng-click="storeDetails(s)">Store details</button>
   </div>
 </div>	
-
 
 <button ng-click="value = !value">Add new store</button>
 <div align="center" ng-show="value">

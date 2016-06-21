@@ -29,6 +29,10 @@ webShop.config(function($routeProvider) {
 		templateUrl : 'partials/delivery.html',
 		controller : 'deliveryCtrl'
 	})
+	.when('/category/',{
+		templateUrl : 'partials/category.html',
+		controller : 'productsController'
+	})
 });
 
 webShop.config(function($logProvider){

@@ -7,9 +7,7 @@ public class Delivery {
 	private String country;
 	private double rate;
 	
-	public Delivery(){
-		
-	}
+	public Delivery(){}
 	
 	public Delivery(String id, String name, String description, String country, double rate) {
 		super();

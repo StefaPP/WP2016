@@ -38,7 +38,7 @@ public class StoreService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Store getStore(String s) {
 	Stores stores = new Stores();
-	System.out.println("ID prodavnice : " + s + ".");
+	s = request.getParameter("id");
 	return stores.getStore(s);
 	}
 	
@@ -49,6 +49,8 @@ public class StoreService {
 		Stores stores = (Stores) ctx.getAttribute("stores");
 		try {
 			Stores.writeStore(s);
+			stores.getValues().add(s);
+			stores.getStoreList().add(s);
 			ctx.setAttribute("stores", stores);
 		} catch (IOException e) {
 			e.printStackTrace();

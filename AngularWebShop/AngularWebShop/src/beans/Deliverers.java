@@ -13,7 +13,6 @@ public class Deliverers {
 private HashMap<String, Delivery> deliverers = new HashMap<String, Delivery>();
 private ArrayList<Delivery> deliverersList = new ArrayList<Delivery>();
 
-
 	public Deliverers() {
 		this("C:\\Users\\Bebica\\git\\WP2016\\README.md\\AngularWebShop\\AngularWebShop\\WebContent\\");
 	}
@@ -38,18 +37,6 @@ private ArrayList<Delivery> deliverersList = new ArrayList<Delivery>();
 		}
 	}
 
-	/**
-	 * Cita proizvode iz datoteke i smesta ih u asocijativnu listu proizvoda.
-	 * Kljuc je id proizvoda.
-	 *
-	 *	this.name = name;
-		this.description = description;
-		this.country = country;
-		this.rate = rate;
-	 *
-	 */
-	
-	
 	private void readDeliverers(BufferedReader in) {
 		String line, id = "", name = "", description = "",country = " ",rate = "";
 		StringTokenizer st;
@@ -74,7 +61,6 @@ private ArrayList<Delivery> deliverersList = new ArrayList<Delivery>();
 			ex.printStackTrace();
 		}
 	}
-
 
 	/** Vraca kolekciju proizvoda. */
 	public Collection<Delivery> getValues() {

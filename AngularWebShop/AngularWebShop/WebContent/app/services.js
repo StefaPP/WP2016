@@ -1,4 +1,4 @@
-webShop.factory('productsFactory', function($http) {
+webShop.factory('productsFactory', function($http,$window) {
 	
 	var factory = {};
 	factory.getProducts = function() {
@@ -6,10 +6,7 @@ webShop.factory('productsFactory', function($http) {
 	};
 
 	factory.getProduct = function(id){
-		//return $http.get('/AngularWebShop/rest/proizvodi/getProduct',{"id":'1'});
-		return $http.get('/AngularWebShop/rest/proizvodi/getProduct', {
-		    params: { id: id }
-		});
+		return $http.get('/AngularWebShop/rest/proizvodi/getProduct/', { params: { "id" : id }});
 	};
 	
 	factory.getCategories = function(){
@@ -21,6 +18,13 @@ webShop.factory('productsFactory', function($http) {
 		return $http.post('/AngularWebShop/rest/proizvodi/add', {"id":''+product.id, "count":parseInt(product.count)});
 	};
 	
+	//Pitanje 
+	factory.addCategory = function(category){
+		return $http.post('/AngularWebShop/rest/proizvodi/addCategory' ,
+		{"name":''+category.name,
+		 "description":''+category.description});
+	
+	};
 	return factory;
 	
 });
@@ -62,7 +66,7 @@ webShop.factory('storeFactory',function($http){
 		};
 	factory.getStore = function(store){
 		console.log(store);
-		return $http.get('/AngularWebShop/rest/stores/getStore',{"id":''+store})
+		return $http.get('/AngularWebShop/rest/stores/getStore',{params : {"id":''+store}})
 		
 	};
 	
