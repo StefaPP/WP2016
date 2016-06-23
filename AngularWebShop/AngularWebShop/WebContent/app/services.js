@@ -37,6 +37,22 @@ webShop.factory('productsFactory', function($http,$window) {
 	
 });
 
+webShop.factory('reviewFactory',function($http){
+	var factory = {};
+
+	factory.addReview = function(review){
+		return $http.post('/AngularWebShop/rest/reviews/addReview',{
+			"rating" : review.rating,
+			"productId" : review.productId,
+			"comment" : review.comment
+		});
+	}
+
+	return factory;
+})
+
+
+
 webShop.factory('userFactory',function($http) {
 	var factory = {};
 	factory.getUsers = function() {

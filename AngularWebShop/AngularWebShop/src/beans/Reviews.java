@@ -44,7 +44,7 @@ public class Reviews {
 	}
 
 	private void readReviews(BufferedReader in) {
-		String line,id="", user = "",date = "",rating="",comment="";
+		String line,id="", user = "",date = "",rating="",comment="",productId = "";
 		
 		StringTokenizer st;
 		try {
@@ -59,8 +59,9 @@ public class Reviews {
 					date = st.nextToken().trim();
 					rating = st.nextToken().trim();
 					comment = st.nextToken().trim();
+					productId = st.nextToken().trim();
 				}
-			Review rev = new Review(id, user, date, rating, comment);
+			Review rev = new Review(id, user, date, rating, comment,productId);
 				reviews.put(id, rev);
 				reviewList.add(rev);
 			}
@@ -73,12 +74,12 @@ public class Reviews {
 		String line = "";
 		line += r.getId() + ";";
 		line += r.getUser() + ";";
-		Date date = new Date();
-		line += date.toString() + ";";
-		line += " " + ";";
+		line += r.getDate() + ";";
+		line += r.getRating() + ";";
 		line += r.getComment() + ";";
+		line += r.getProductId() + ";";
 		
-		File file = new File(path + "/reviewss.txt");
+		File file = new File(path + "/reviews.txt");
 		BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
 		out.append(line);
 		out.newLine();

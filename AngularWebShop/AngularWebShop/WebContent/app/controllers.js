@@ -45,21 +45,30 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	}
 	init();
 })
-.controller('productDetailsCtrl',function($scope,$routeParams,productsFactory){
-		
+.controller('productDetailsCtrl',function($scope,$routeParams,productsFactory,reviewFactory){
+	 $scope.review = {};
+	 $scope.starRating = 0;	
+	
+	 $scope.click = function (param) {
+	        console.log('Click(' + param + ')');
+	        $scope.review.rating = param;     
+	 };
+
 	function init() { 
 		console.log('ProductDetailsController.Init');
 		var id = $routeParams.id;
+		$scope.review.productId = id;
 		console.log(id);
 		productsFactory.getProduct(id).success(function(data){	
 			$scope.product = data;
 		})
-		productsFactory.getReviews().success(function(data){
-			$scope.reviews = data;
-			
-		})
+
+		
 	};
-	
+	$scope.addReview = function(review) {
+		console.log("Ovo je review " + JSON.stringify($scope.review));
+		reviewFactory.addReview($scope.review);
+	}
 	
 	
 	init();

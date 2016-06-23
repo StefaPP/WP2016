@@ -61,12 +61,12 @@ public class ProductService {
 		
 	}
 	
-	@GET
+/*	@GET
 	@Path("/getReviews")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Review> getReviews(){
 		return getRevs().getReviews();
-	}
+	}*/
 	
 	@GET
 	@Path("/getProductsForCategory")
@@ -161,15 +161,6 @@ public class ProductService {
 
 	}
 	
-	private Reviews getRevs(){
-		Reviews revs = (Reviews) ctx.getAttribute("reviews");
-		if(revs == null)
-		{
-			revs = new Reviews(ctx.getRealPath(""));
-			ctx.setAttribute("reviews", revs);
-		}
-		return revs;
-	}
 
 	private ShoppingCart getShoppingCart() {
 		ShoppingCart sc = (ShoppingCart) request.getSession().getAttribute("shoppingCart");
