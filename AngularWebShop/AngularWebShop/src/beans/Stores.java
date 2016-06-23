@@ -16,6 +16,8 @@ public class Stores {
 	private HashMap<String, Store> stores = new HashMap<String, Store>();
 	private ArrayList<Store> storeList = new ArrayList<Store>();
 	private static String path = "C:\\Users\\Strefa\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+//	private static String path = "C:\\Users\\Strefa\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	
 	
 	public Stores() {
 		this(path);
@@ -118,6 +120,8 @@ public static void deleteStore(String id) throws IOException {
 	file.delete();
 	temp.renameTo(file);
 }
+
+
 
 
 public Collection<Store> getValues() {

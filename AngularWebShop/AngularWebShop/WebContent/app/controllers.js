@@ -28,6 +28,22 @@ webShop.controller('productsController', function($scope, productsFactory) {
 		initCats();
 	}
 	
+	
+	
+})
+.controller('categoryProductsCtrl',function($scope,$routeParams,productsFactory){
+		
+	function init() { 
+		productsFactory.getCategories().success(function (data) {
+       		$scope.categories = data;
+       		$scope.category = {};
+	 });
+		
+		productsFactory.getProductsForCategory($routeParams.name).success(function(data){
+			$scope.categoryProducts = data;
+		})
+	}
+	init();
 })
 .controller('productDetailsCtrl',function($scope,$routeParams,productsFactory){
 		
@@ -36,9 +52,15 @@ webShop.controller('productsController', function($scope, productsFactory) {
 		var id = $routeParams.id;
 		console.log(id);
 		productsFactory.getProduct(id).success(function(data){	
-			$scope.product = data
+			$scope.product = data;
+		})
+		productsFactory.getReviews().success(function(data){
+			$scope.reviews = data;
+			
 		})
 	};
+	
+	
 	
 	init();
 })

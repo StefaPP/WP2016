@@ -18,13 +18,21 @@ webShop.factory('productsFactory', function($http,$window) {
 		return $http.post('/AngularWebShop/rest/proizvodi/add', {"id":''+product.id, "count":parseInt(product.count)});
 	};
 	
-	//Pitanje 
 	factory.addCategory = function(category){
 		return $http.post('/AngularWebShop/rest/proizvodi/addCategory' ,
 		{"name":''+category.name,
 		 "description":''+category.description});
 	
 	};
+	
+	factory.getReviews = function(){
+		return $http.get('/AngularWebShop/rest/proizvodi/getReviews');
+	}
+	
+	factory.getProductsForCategory = function(categoryName){
+		return $http.get('/AngularWebShop/rest/proizvodi/getProductsForCategory',{params:{"name" : categoryName}})
+	};
+	
 	return factory;
 	
 });

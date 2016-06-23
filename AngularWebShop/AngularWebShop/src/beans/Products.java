@@ -1,8 +1,10 @@
 package beans;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +24,7 @@ public class Products {
 	}
 
 	private ArrayList<Product> productList = new ArrayList<Product>();
-
+	private static String path = "C:\\Users\\Strefa\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
 	public Products() {
 		
 		this("C:\\Users\\Strefa\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\");
@@ -93,6 +95,33 @@ public class Products {
 			ex.printStackTrace();
 		}
 	}
+	
+	public static void writeProduct(Product p) throws IOException{
+		String line="";
+		line += p.getId() + ";";
+		line += p.getName() + ";";
+		line += p.getPrice() + ";";
+		line += p.getSize() + ";";
+		line += p.getWeight() + ";";
+		line += p.getOrigin() + ";";
+		line += p.getBrandName() + ";";
+		line += p.getCategory() + ";";
+		line += p.getImage() + ";";
+		line += p.getVideo() + ";";
+		line += p.getLager() + ";";
+		
+		
+		File file = new File(path + "/products.txt");
+		BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
+		out.append(line);
+		out.newLine();
+		out.close();
+	}
+	
+	
+	
+	
+	
 
 	/** Vraca kolekciju proizvoda. */
 	public Collection<Product> getValues() {

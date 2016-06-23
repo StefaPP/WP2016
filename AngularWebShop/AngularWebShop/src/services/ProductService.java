@@ -2,6 +2,7 @@ package services;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -22,6 +23,8 @@ import beans.Category;
 import beans.Product;
 import beans.ProductToAdd;
 import beans.Products;
+import beans.Review;
+import beans.Reviews;
 import beans.ShoppingCart;
 import beans.ShoppingCartItem;
 import beans.Store;
@@ -57,7 +60,31 @@ public class ProductService {
 		return getCats().getCategories();
 		
 	}
-
+	
+	@GET
+	@Path("/getReviews")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Review> getReviews(){
+		return getRevs().getReviews();
+	}
+	
+	@GET
+	@Path("/getProductsForCategory")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Product> getProductsForCategory(){
+		HashMap<String,Product> categoryP = new HashMap<String,Product>();
+		String catName = request.getParameter("name");
+		for(Product p : getProducts().getValues()){
+			if (p.getCategory().equals(catName))
+			{
+				categoryP.put(p.getId(), p);
+			}
+				
+		}
+	
+		return categoryP.values();
+	}
+	
 	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -132,6 +159,16 @@ public class ProductService {
 		}
 		return cats;
 
+	}
+	
+	private Reviews getRevs(){
+		Reviews revs = (Reviews) ctx.getAttribute("reviews");
+		if(revs == null)
+		{
+			revs = new Reviews(ctx.getRealPath(""));
+			ctx.setAttribute("reviews", revs);
+		}
+		return revs;
 	}
 
 	private ShoppingCart getShoppingCart() {

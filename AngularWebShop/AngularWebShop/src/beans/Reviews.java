@@ -1,10 +1,14 @@
 package beans;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
@@ -64,6 +68,24 @@ public class Reviews {
 			ex.printStackTrace();
 		}
 	}
+	
+	public static void writeReview(Review r) throws IOException {
+		String line = "";
+		line += r.getId() + ";";
+		line += r.getUser() + ";";
+		Date date = new Date();
+		line += date.toString() + ";";
+		line += " " + ";";
+		line += r.getComment() + ";";
+		
+		File file = new File(path + "/reviewss.txt");
+		BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
+		out.append(line);
+		out.newLine();
+		out.close();
+		
+	}
+	
 
 	public Collection<Review> getReviews() {
 		return reviews.values();

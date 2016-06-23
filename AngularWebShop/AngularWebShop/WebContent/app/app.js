@@ -25,6 +25,10 @@ webShop.config(function($routeProvider) {
 		templateUrl : 'partials/store.html',
 		controller : 'storeDetailsCtrl'
 	})
+	.when('/category/:name',{
+		templateUrl : 'partials/categoryProducts.html',
+		controller : 'categoryProductsCtrl'
+	})
 	.when('/delivery/',{
 		templateUrl : 'partials/delivery.html',
 		controller : 'deliveryCtrl'

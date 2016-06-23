@@ -1,8 +1,11 @@
 package beans;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,9 +15,9 @@ public class Deliverers {
 
 private HashMap<String, Delivery> deliverers = new HashMap<String, Delivery>();
 private ArrayList<Delivery> deliverersList = new ArrayList<Delivery>();
-
+private static String path = "C:\\Users\\Bebica\\git\\WP2016\\README.md\\AngularWebShop\\AngularWebShop\\WebContent\\";
 	public Deliverers() {
-		this("C:\\Users\\Bebica\\git\\WP2016\\README.md\\AngularWebShop\\AngularWebShop\\WebContent\\");
+		this(path);
 	}
 	
 	public Deliverers(String path) {
@@ -61,6 +64,47 @@ private ArrayList<Delivery> deliverersList = new ArrayList<Delivery>();
 			ex.printStackTrace();
 		}
 	}
+	
+	public static void writeDelivery(Delivery d) throws IOException{
+		String line="";
+		line += d.getId() + ";";
+		line += d.getName() + ";";
+		line += d.getDescription() + ";";
+		line += d.getCountry() + ";";
+		line += d.getRate() + ";";
+		
+		File file = new File(path + "/deliverers.txt");
+		BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
+		out.append(line);
+		out.newLine();
+		out.close();
+	}
+	
+	public static void deleteDelivery(String id) throws IOException{
+		File file = new File(path + "/deliverers.txt");
+		File temp = new File(path + "/temp.txt");
+		
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+		String line;
+		synchronized (Store.class) { 
+			while((line = reader.readLine()) != null){
+				if(!line.startsWith(id)){
+					writer.write(line);
+					writer.newLine();
+				}
+				
+			}
+				reader.close();
+				writer.close();
+		}
+		file.delete();
+		temp.renameTo(file);
+		
+	}
+	
+	
+	
 
 	/** Vraca kolekciju proizvoda. */
 	public Collection<Delivery> getValues() {

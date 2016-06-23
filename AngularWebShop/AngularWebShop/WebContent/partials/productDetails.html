@@ -6,10 +6,15 @@
   <img style="width:400px;height:300px;" src="{{product.image}}">
   <p><a class="btn btn-primary btn-lg" href="#" role="button">Buy !</a></p>
 </div>
+
+<ul ng-repeat="r in reviews">
+  <li><div style="width:500px;max-width:500px;display:inline-block;background-color:lightgray;"><p>{{r.comment}}</p></div>
+</li>
+</ul>
 <div class="form-group">
   <label for="comment">Review:</label>
   <textarea class="form-control" ng-model="commentAdd.text" rows="3" cols="80" id="comment"></textarea><br/>
-  <button type="button" class="btn btn-primary" ng-click="addComment()" ng-disabled="!commentAdd.text">Add comment</button>
+  <button type="button" class="btn btn-primary" ng-click="addReview()" ng-disabled="!commentAdd.text">Add comment</button>
   <br/><br/>
 </div>
 
