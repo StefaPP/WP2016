@@ -46,6 +46,7 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	init();
 })
 .controller('productDetailsCtrl',function($scope,$routeParams,productsFactory,reviewFactory){
+	
 	 $scope.review = {};
 	 $scope.starRating = 0;	
 	
@@ -62,9 +63,15 @@ webShop.controller('productsController', function($scope, productsFactory) {
 		productsFactory.getProduct(id).success(function(data){	
 			$scope.product = data;
 		})
+		
+		reviewFactory.getReviews().success(function(data){
+			 $scope.reviews = data;
+		 })
 
 		
 	};
+	
+	
 	$scope.addReview = function(review) {
 		console.log("Ovo je review " + JSON.stringify($scope.review));
 		reviewFactory.addReview($scope.review);
@@ -106,7 +113,7 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	}
 	init();
 })
-.controller('storeCtrl',function($scope,$location,$routeParams,storeFactory){
+.controller('storeCtrl',function($scope,$window,$location,$routeParams,storeFactory){
 	
 	function init() {
 		console.log('Store Controller');
@@ -128,7 +135,7 @@ webShop.controller('productsController', function($scope, productsFactory) {
 		console.log($scope.store);
 		storeFactory.addStore($scope.store);
 		init();
-
+		$window.location.href('/stores');
 	}
 
 		init();

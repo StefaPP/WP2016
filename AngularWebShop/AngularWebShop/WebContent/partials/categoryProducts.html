@@ -1,0 +1,23 @@
+<div>
+<div style="float:left; width:20%;">
+<ul class="ver"  ng-repeat="c in categories">
+  <li class="ver"><a ng-href="#/category/{{c.name}}" href="#products">{{c.name}}</a></li>
+</ul>
+<ul class="ver">
+<li class=""><a href="#category"">Add new category...</a></li>
+</ul>
+</div>
+<div style="float:left; width:80%;">
+<br/><br/><br/>
+<div class="col"> 
+  <div class="col-md-4" ng-repeat="p in categoryProducts">
+    <a ng-href="#/product/{{p.id}}" class="thumbnail">
+      <p>{{p.name}}</p>
+      <p>{{p.price}}</p>
+      <img src="{{p.image}}" style="width:150px;height:100px">
+    </a>
+  </div>
+</div>	
+</div>
+</div>
+

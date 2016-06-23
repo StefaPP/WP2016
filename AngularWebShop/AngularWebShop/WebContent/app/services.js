@@ -25,9 +25,7 @@ webShop.factory('productsFactory', function($http,$window) {
 	
 	};
 	
-	factory.getReviews = function(){
-		return $http.get('/AngularWebShop/rest/proizvodi/getReviews');
-	}
+	
 	
 	factory.getProductsForCategory = function(categoryName){
 		return $http.get('/AngularWebShop/rest/proizvodi/getProductsForCategory',{params:{"name" : categoryName}})
@@ -47,7 +45,11 @@ webShop.factory('reviewFactory',function($http){
 			"comment" : review.comment
 		});
 	}
-
+	
+	factory.getReviews = function(){
+		return $http.get('/AngularWebShop/rest/reviews/getReviews');
+	}
+	
 	return factory;
 })
 
