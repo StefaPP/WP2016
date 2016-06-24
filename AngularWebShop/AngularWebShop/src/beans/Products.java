@@ -24,10 +24,10 @@ public class Products {
 	}
 
 	private ArrayList<Product> productList = new ArrayList<Product>();
-	private static String path = "C:\\Users\\Strefa\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
 	public Products() {
 		
-		this("C:\\Users\\Strefa\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\");
+		this(path);
 	}
 
 	public Products(String path) {

@@ -16,7 +16,7 @@ public class Categories {
 	
 	private HashMap<String,Category> categories = new HashMap<>();
 	private ArrayList<Category> categoryList = new ArrayList<>();
-	private static String path = "C:\\Users\\Strefa\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
 	
 	public Categories() {
 		this(path);

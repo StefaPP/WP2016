@@ -8,81 +8,80 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-public class Users 	{
-	
-private HashMap<String, User> users = new HashMap<String, User>();
-private ArrayList<User> userList = new ArrayList<User>();
+public class Users {
 
-public Users() {
-	this("C:\\Users\\Bebica\\git\\WP2016\\README.md\\AngularWebShop\\AngularWebShop\\WebContent\\");
-}
+	private HashMap<String, User> users = new HashMap<String, User>();
+	private ArrayList<User> userList = new ArrayList<User>();
+	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
 
-public Users(String path) {
-	BufferedReader in = null;
-	try {
-		File file = new File(path + "/users.txt");
-		System.out.println(file.getCanonicalPath());
-		in = new BufferedReader(new FileReader(file));
-		readUsers(in);
-	} catch (Exception e) {
-		e.printStackTrace();
+	public Users() {
+		this(path);
 	}
-	finally {
-		if ( in != null ) {
-			try {
-				in.close();
+
+	public Users(String path) {
+		BufferedReader in = null;
+		try {
+			File file = new File(path + "/users.txt");
+			System.out.println(file.getCanonicalPath());
+			in = new BufferedReader(new FileReader(file));
+			readUsers(in);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (Exception e) {
+				}
 			}
-			catch (Exception e) { }
 		}
 	}
-}
 
-/**
- * Cita proizvode iz datoteke i smesta ih u asocijativnu listu proizvoda.
- * Kljuc je id proizvoda.
- */
-private void readUsers(BufferedReader in) {
-	String line, username = "", password = "", firstName = "",
-			lastName = "",role="",contact="",
-			email="",address="",country="";
-	StringTokenizer st;
-	try {
-		while ((line = in.readLine()) != null) {
-			line = line.trim();
-			if (line.equals("") || line.indexOf('#') == 0)
-				continue;
-			st = new StringTokenizer(line, ";");
-			while (st.hasMoreTokens()) {
-				username = st.nextToken().trim();
-				password = st.nextToken().trim();
-				firstName = st.nextToken().trim();
-				lastName = st.nextToken().trim();
-				role = st.nextToken().trim();
-				contact = st.nextToken().trim();
-				email = st.nextToken().trim();
-				address = st.nextToken().trim();
-				country = st.nextToken().trim();
+	/**
+	 * Cita proizvode iz datoteke i smesta ih u asocijativnu listu proizvoda.
+	 * Kljuc je id proizvoda.
+	 */
+	private void readUsers(BufferedReader in) {
+		String line, username = "", password = "", firstName = "", lastName = "", role = "", contact = "", email = "",
+				address = "", country = "";
+		StringTokenizer st;
+		try {
+			while ((line = in.readLine()) != null) {
+				line = line.trim();
+				if (line.equals("") || line.indexOf('#') == 0)
+					continue;
+				st = new StringTokenizer(line, ";");
+				while (st.hasMoreTokens()) {
+					username = st.nextToken().trim();
+					password = st.nextToken().trim();
+					firstName = st.nextToken().trim();
+					lastName = st.nextToken().trim();
+					role = st.nextToken().trim();
+					contact = st.nextToken().trim();
+					email = st.nextToken().trim();
+					address = st.nextToken().trim();
+					country = st.nextToken().trim();
+				}
+				User user = new User(username, password, firstName, lastName, role, contact, email, address, country);
+				users.put(username, user);
+				userList.add(user);
 			}
-			User user = new User(username, password, firstName, lastName, role, contact, email, address, country);
-			users.put(username, user);
-			userList.add(user);
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-	} catch (Exception ex) {
-		ex.printStackTrace();
 	}
-}
 
-public Collection<User> getValues() {
-	return users.values();
-}
+	public Collection<User> getValues() {
+		return users.values();
+	}
 
-/** Vraca proizvod na osnovu njegovog id-a. */
-public User getUser(String id) {
-	return users.get(id);
-}
+	/** Vraca proizvod na osnovu njegovog id-a. */
+	public User getUser(String id) {
+		return users.get(id);
+	}
 
-/** Vraca listu proizvoda. */
-public ArrayList<User> getUserList() {
-	return userList;
-}
+	/** Vraca listu proizvoda. */
+	public ArrayList<User> getUserList() {
+		return userList;
+	}
 }

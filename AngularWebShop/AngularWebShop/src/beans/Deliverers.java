@@ -15,7 +15,7 @@ public class Deliverers {
 
 private HashMap<String, Delivery> deliverers = new HashMap<String, Delivery>();
 private ArrayList<Delivery> deliverersList = new ArrayList<Delivery>();
-private static String path = "C:\\Users\\Bebica\\git\\WP2016\\README.md\\AngularWebShop\\AngularWebShop\\WebContent\\";
+private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
 	public Deliverers() {
 		this(path);
 	}
