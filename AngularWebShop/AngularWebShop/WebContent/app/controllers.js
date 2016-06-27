@@ -1,4 +1,4 @@
-webShop.controller('productsController', function($scope, productsFactory) {
+webShop.controller('productsController', function($scope,$location,productsFactory) {
 	
     function init() {
         productsFactory.getProducts().success(function (data) {
@@ -24,13 +24,18 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	
 	$scope.addCategory = function()
 	{
-		productsFactory.addCategory($scope.category);
-		initCats();
+		productsFactory.addCategory($scope.category).success(function(){
+			initCats();
+			$location.path("/products");
+		});
+		
+	}	
+	$scope.deleteCategory = function(category) {
+		console.log("Deleting this category");
+		productsFactory.deleteCategory(category).success(function(){
+			initCats();
+		})
 	}
-	
-	
-	
-	
 	
 })
 .controller('categoryProductsCtrl',function($scope,$routeParams,productsFactory){
@@ -45,9 +50,16 @@ webShop.controller('productsController', function($scope, productsFactory) {
 			$scope.categoryProducts = data;
 		})
 	}
+	
+	$scope.deleteCategory = function() {
+		console.log("Deleting this category");
+		productsFactory.deleteCategory(category).success(function(){
+			init();
+		})
+	}
 	init();
 })
-.controller('productDetailsCtrl',function($scope,$routeParams,productsFactory,reviewFactory){
+.controller('productDetailsCtrl',function($scope,$location,$routeParams,productsFactory,reviewFactory){
 	
 	 $scope.starRating = 0;	
 	 $scope.click = function (param) {
@@ -55,29 +67,34 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	        $scope.review.rating = param;     
 	 };
 	 
+	 $scope.deleteProduct = function(product) {
+		 productsFactory.deleteProduct(product).success(function() {
+			 $location.path("/products");
+		 })
+	 }
+	 
+	 $scope.deleteReview = function(review) {
+		 reviewFactory.deleteReview(review).success(function() {
+			 init();
+		 })
+	 }
 	 $scope.get = function(star){
 		 $scope.stars = parseInt(star);
 		// console.log("stars : " + stars)
 		 return new Array($scope.stars);
 	 }
-	 
 	 	function init() { 
 		console.log('ProductDetailsController.Init');
 		$scope.review = {};
 		var id = $routeParams.id;
 		$scope.review.productId = id;
-		console.log(id);
-		$scope.ajdi = $routeParams.id;
 		productsFactory.getProduct(id).success(function(data){	
 			$scope.product = data;
 		})
-		
 		reviewFactory.getReviews().success(function(data){
 			 $scope.reviews = data;
 		 })
-
 	};
-	
 	    $scope.getNumber = function(num) {
 		num = parseInt($scope.review.rating, 10);
 		return new Array(num);   
@@ -90,8 +107,6 @@ webShop.controller('productsController', function($scope, productsFactory) {
 		$scope.review = {};
 		$scope.starRating = 0;	
 		}
-	
-	
 	init();
 })
 .controller('shoppingCartController', function($scope, shoppingCartFactory) {
@@ -133,25 +148,19 @@ webShop.controller('productsController', function($scope, productsFactory) {
 		console.log('Store Controller');
 		storeFactory.getStores().success(function(data){
 		$scope.store = {};
-		$scope.stores = data;
-			
+		$scope.stores = data;			
 	});
 }
-	
 	$scope.storeDetails = function (store) {
-		$location.path('/store/'+store.id);
-		
+		$location.path('/store/'+store.id);	
 	}
-	
 	$scope.addStore = function() {
 		console.log("Dodao sam novu prodavnicu " + $scope.store.name)
 		console.log($scope.store);
 		storeFactory.addStore($scope.store).success(function(){
 			init();
 		});
-	
 	}
-
 		init();
 })
 .controller('storeDetailsCtrl',function($scope,$location,$routeParams,storeFactory,productsFactory){
@@ -170,7 +179,7 @@ webShop.controller('productsController', function($scope, productsFactory) {
 		
 		productsFactory.getStoreProducts($routeParams.id).success(function(data){
 			$scope.storeProducts = data;
-			console.log(JSON.stringify($scope.storeProducts) +" <<<<<<<<<<<<<<<");
+			console.log(JSON.stringify($scope.storeProducts) + " <<<<<<<<<<<<<<<");
 		})
 
 	}
@@ -185,9 +194,13 @@ webShop.controller('productsController', function($scope, productsFactory) {
 				init();
 			});
 	}
-		
-		
-		
+		$scope.deleteStore = function(store){
+			console.log($routeParams.id + " <<<<<<<<<<")
+			storeFactory.deleteStore(store).success(function() {
+				$location.path('/stores/');
+				init();
+			})
+		}
 		
 		init();
 })

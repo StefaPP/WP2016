@@ -16,9 +16,8 @@ public class Reviews {
 	
 	private HashMap<String,Review> reviews = new HashMap<String , Review>();
 	private ArrayList<Review> reviewList = new ArrayList<Review>();
-	//private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
 	//private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent/";
-	private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent/";
 	
 	public Reviews() {
 		this(path);
@@ -68,7 +67,8 @@ public class Reviews {
 				reviewList.add(rev);
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			System.out.println("This product has no reviews");
+			//ex.printStackTrace();
 		}
 	}
 	
@@ -88,6 +88,30 @@ public class Reviews {
 		out.close();
 		
 	}
+	
+	public static void deleteReview(String id) throws IOException{
+		File file = new File(path + "/reviews.txt");
+		File temp = new File(path + "/temp.txt");
+		
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+		String line;
+		synchronized (Store.class) { 
+			while((line = reader.readLine()) != null){
+				if(!line.startsWith(id)){
+					writer.write(line);
+					writer.newLine();
+				}
+				
+			}
+				reader.close();
+				writer.close();
+		}
+		file.delete();
+		temp.renameTo(file);
+		
+	}
+	
 	
 	public HashMap<String,Review> getRevs() {
 		return reviews;

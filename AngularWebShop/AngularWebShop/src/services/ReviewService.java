@@ -8,6 +8,7 @@ import java.util.Iterator;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,6 +16,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.Categories;
+import beans.Category;
 import beans.Review;
 import beans.Reviews;
 
@@ -57,6 +60,23 @@ public class ReviewService {
 		}
 		return "dodat rivju";
 	}
+	
+	@DELETE
+	@Path("/deleteReview")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteProduct(Review r){
+		Reviews revs = (Reviews) ctx.getAttribute("reviews");
+		if(revs.getRevs().get(r.getId()) != null){
+			try {
+				Reviews.deleteReview(r.getId());
+				revs.getRevs().remove(r.getId());
+				revs.getReviewList().remove(r);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	
 	
 	private Reviews getRevs(){

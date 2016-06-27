@@ -1,28 +1,58 @@
 <div>
-<div class="jumbotron">
-  <h1>{{product.name}}</h1>
-  <h3>Price {{product.price}} RSD</h3>
-  <h3>Lager {{product.lager}} </h3>
-  <img style="width:400px;height:300px;" src="{{product.image}}">
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Buy !</a></p>
-</div>
+	<div class="jumbotron">
+		<h1>{{product.name}}</h1>
+		<h3>Price {{product.price}} RSD</h3>
+		<h3>Lager {{product.lager}}</h3>
+		<img style="width: 400px; height: 300px;" src="{{product.image}}">
+		<p>
+			<a class="btn btn-primary btn-lg" href="#" role="button">Buy !</a>
+		</p>
+	</div>
+	<button class="btn btn-danger topright"
+		ng-click="deleteProduct(product)">Delete product</button>
+	<ul class="comments" ng-repeat="r in reviews | orderBy:'-rating'">
 
-<ul class="comments" ng-repeat="r in reviews | orderBy:'-rating'">
- <div style="width:500px;max-width:500px;display:inline-block;background-color:lightgray;" ng-show="r.productId === ajdi "><li id="ranks"><p>{{r.comment}} <br/> 
-  <div style='display: inline-block; margin: 0px; padding: 0px; cursor:pointer;' ng-repeat='i in get(r.rating) track by $index'>
-  <img src="http://www.codeproject.com/script/ratings/images/star-fill-lg.png">
-  </div>
-</div>
-</li>
-</ul><br/><br/>
+		<div
+			style="width: 500px; max-width: 500px; display: inline-block; background-color: lightgray;"
+			ng-show="r.productId === review.productId ">
+			<li id="ranks"><p style="font-size: 16px;">{{r.comment}}</p> <br />
 
-<div class="form-group">
-  <label for="comment">Review:</label>
-  <textarea class="form-control" ng-model="review.comment" rows="3" cols="80" id="comment"></textarea><br/>
-  <div star-rating rating="starRating" read-only="false" max-rating="10" click="click(param)"></div><p ng-show="starRating==0">Please rate this product</p>
-            <div> <span class="label label-primary">Product rating: {{starRating}}</span><br/><br/>
- 	<button type="button" class="btn btn-primary" ng-click="addReview()" ng-disabled="!review.comment || starRating==0">Add review</button>
-  <br/><br/>
- </div>
-</div>
+				<button type="button"
+					class="btn btn-danger btn-xs toprightRemoveReview"
+					ng-click="deleteReview(r)">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				</button>
+
+				<div
+					style='display: inline-block; margin: 0px; padding: 0px; cursor: pointer;'
+					ng-repeat='i in get(r.rating) track by $index'>
+					<img
+						src="http://www.codeproject.com/script/ratings/images/star-fill-lg.png">
+				</div>
+
+				<p style="font-size: 14px;" class="text-right">
+					<i style="color: gray">{{r.date|date:'medium'}}<br /></i>
+				</p>
+		</div>
+		</li>
+	</ul>
+	<br /> <br />
+	<div class="form-group">
+		<label for="comment">Review:</label>
+		<textarea class="form-control" ng-model="review.comment" rows="3"
+			cols="80" id="comment"></textarea>
+		<br />
+		<div star-rating rating="starRating" read-only="false" max-rating="10"
+			click="click(param)"></div>
+		<p ng-show="starRating==0">Please rate this product</p>
+		<div>
+			<span class="label label-primary">Product rating:
+				{{starRating}}</span><br />
+			<br />
+			<button type="button" class="btn btn-primary" ng-click="addReview()"
+				ng-disabled="!review.comment || starRating==0">Add review</button>
+			<br />
+			<br />
+		</div>
+	</div>
 </div>

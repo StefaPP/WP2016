@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -48,7 +49,6 @@ public class ProductService {
 	@Path("/getCategories")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Category> getCategories(){
-		System.out.println("Usao u categorije");
 		return getCats().getCategories();
 		
 	}
@@ -77,6 +77,42 @@ public class ProductService {
 		System.out.println(p + " <<<<<<<<");
 		return null;
 	}
+	
+	@DELETE
+	@Path("/deleteProduct")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteProduct(Product p){
+		Products products = (Products) ctx.getAttribute("products");
+		if(products.getProducts().get(p.getId()) != null){
+			
+			try {
+				Products.deleteProduct(p.getId());
+				products.getProducts().remove(p.getId());
+				products.getProductList().remove(p);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	@DELETE
+	@Path("/deleteCategory")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteProduct(Category c){
+		Categories categories = (Categories) ctx.getAttribute("categories");
+		if(categories.getCats().get(c.getName()) != null){
+			
+			try {
+				Categories.deleteCategory(c.getName());
+				categories.getCats().remove(c.getName());
+				categories.getCategoryList().remove(c);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	
 	@GET
 	@Path("/getProductsOfStore")

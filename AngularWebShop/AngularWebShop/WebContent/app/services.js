@@ -49,6 +49,20 @@ webShop.factory('productsFactory', function($http, $window) {
 					}
 				})
 	};
+	
+	factory.deleteCategory = function(category)
+	{
+		return	$http({
+		    method : "DELETE",
+		    url : '/AngularWebShop/rest/proizvodi/deleteCategory',
+		    data : category,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+	}
+	
+	
 	factory.getStoreProducts = function(id) {
 		return $http.get('/AngularWebShop/rest/proizvodi/getProductsOfStore', {
 			params : {
@@ -56,6 +70,17 @@ webShop.factory('productsFactory', function($http, $window) {
 			}
 		})
 	};
+	
+	factory.deleteProduct = function (product){
+		return	$http({
+		    method : "DELETE",
+		    url : '/AngularWebShop/rest/proizvodi/deleteProduct',
+		    data : product,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+	}
 	return factory;
 
 });
@@ -71,6 +96,17 @@ webShop.factory('reviewFactory', function($http) {
 	}
 	factory.getReviews = function() {
 		return $http.get('/AngularWebShop/rest/reviews/getReviews');
+	}
+	
+	factory.deleteReview = function(review){
+		return	$http({
+		    method : "DELETE",
+		    url : '/AngularWebShop/rest/reviews/deleteReview',
+		    data : review,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
 	}
 
 	return factory;
@@ -129,6 +165,20 @@ webShop.factory('storeFactory', function($http) {
 			}
 		});
 	}
+	
+	factory.deleteStore = function (store){
+		//return $http.delete('/AngularWebShop/rest/stores/',{ params :{"id" : id} });
+	 return	$http({
+		    method : "DELETE",
+		    url : '/AngularWebShop/rest/stores/deleteStore',
+		    data : store,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+	
+	}
+	
 	return factory;
 });
 webShop.factory('shoppingCartFactory', function($http) {

@@ -19,8 +19,8 @@ import java.util.StringTokenizer;
 public class Products {
 	private HashMap<String, Product> products = new HashMap<String, Product>();
 	private ArrayList<Product> productList = new ArrayList<Product>();
-	//private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
-	private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent/";
+	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	//private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent/";
 	
 	public Products() {
 		

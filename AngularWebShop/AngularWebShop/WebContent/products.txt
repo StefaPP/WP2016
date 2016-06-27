@@ -1,13 +1,9 @@
 1;Televizor marke Sony, 51 cm dijagonala;22000.00;30.00;100.00;Kina;Sony;electronic & office;http://pcw.cdn.dixons.com/css/themes/sony_tv_range/img/r4-hero-tv.png;1; ; ;3;
 2;Sony digitalna kamera;32000;30.00;100.00;Kina;Sony;electronic & office;http://media.coopelectricalshop.co.uk/media/default/Products/SON-CAM-DSCWX100B-BK.png;2; ; ;3;
 3;Samsung monitor 17";35000;30.00;100.00;Kina;Samsung;electronic & office;http://www.kulltech.com/wordpress/wp-content/uploads/2014/06/Samsung-UD590.png;3; ; ;2;
-4;Pioneer DVD pisac;7100;30.00;100.00;Kina;Pioneer;electronic & office;http://forum.imgburn.com/uploads/monthly_06_2009/post-20-1246207568.png;1; ; ;1;
 5;Nike Roshe;8000;13.00;400.00;Kina;Nike;clothing,shoes & jewelry;http://images.nike.com/is/image/DotCom/THN_PS/Nike-Roshe-Run-Mens-Shoe-511881_010.jpg?hei=300&wid=400&fmt=png; ; ; ;1;
 6;Nike T-shirt;4000;42.00;500.00;Kina;Nike;clothing,shoes & jewelry;http://icons.iconarchive.com/icons/michael/nike/256/Nike-Shirt-10-icon.png; ; ; ;1;
 7;Nike Shorts;8000;26.00;600.00;Kina;Nike;clothing,shoes & jewelry;http://cdn2.bigcommerce.com/server4200/qpfrc9yq/products/14211/images/7636/619171_010_A__14936.1405427149.1280.1280.png?c=2; ; ; ;1;
 9;Yeezy Boost 360;750000.0;46.0;500.0;USA;Adiddas;clothing,shoes & jewelry;images/2.png;4;  ;  ;3;
 10;Decija kolica;50000.0;300.0;2000.0;Vietnam;Chico;baby & kids;http://www.decjibazar.rs/3906-thickbox_default/chicco-kolica-liteway-complete-anthractive-siva.jpg;5;  ;  ;7;
-11;Fudbalska lopta;2500.0;5.0;300.0;Kina;Adiddas;sports,fitness & outdoors;https://lh3.googleusercontent.com/-1zZI_3PWRMI/VhQmF9LDZvI/AAAAAAAAfT8/ha83HT6eeV0/s800-Ic42/adidas-jabulani-2010-world-cup-soccer-ball.png;4;  ;  ;5;
 12;Kosarkaska lopta;3000.0;9.0;1000.0;China;Spalding;sports,fitness & outdoors;http://assets.academy.com/mgen/82/10298482.jpg;4;  ;  ;5;
-13;Pegla;400000.0;50.0;2000.0;India;/;Antiques;http://www.patented-antiques.com/IRONS/IRON-PICS/M-auct-USE/12323_01.jpg;6;  ;  ;1;
-14;jfdsjdf;331.0;38.0;3212.0;Kina;Ndjs;electronic & office;dsa;1;  ;  ;2;
