@@ -55,7 +55,6 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	        $scope.review.rating = param;     
 	 };
 	 
-	 
 	 $scope.get = function(star){
 		 $scope.stars = parseInt(star);
 		// console.log("stars : " + stars)
@@ -68,7 +67,7 @@ webShop.controller('productsController', function($scope, productsFactory) {
 		var id = $routeParams.id;
 		$scope.review.productId = id;
 		console.log(id);
-		
+		$scope.ajdi = $routeParams.id;
 		productsFactory.getProduct(id).success(function(data){	
 			$scope.product = data;
 		})
@@ -79,19 +78,18 @@ webShop.controller('productsController', function($scope, productsFactory) {
 
 	};
 	
-		//$scope.rtng = parseInt($scope.review.rating, 10);
 	    $scope.getNumber = function(num) {
 		num = parseInt($scope.review.rating, 10);
 		return new Array(num);   
     }
 	
 	$scope.addReview = function(review) {
-		console.log("Ovo je review " + JSON.stringify($scope.review));
-		reviewFactory.addReview($scope.review);
+		reviewFactory.addReview($scope.review).success(function() {
+		init();
+	});
 		$scope.review = {};
 		$scope.starRating = 0;	
-		init();
-	}
+		}
 	
 	
 	init();
@@ -141,7 +139,6 @@ webShop.controller('productsController', function($scope, productsFactory) {
 }
 	
 	$scope.storeDetails = function (store) {
-		console.log("Usao u je u storeDetails "+ store.id);
 		$location.path('/store/'+store.id);
 		
 	}
@@ -149,9 +146,10 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	$scope.addStore = function() {
 		console.log("Dodao sam novu prodavnicu " + $scope.store.name)
 		console.log($scope.store);
-		storeFactory.addStore($scope.store);
-		init();
-		$window.location.href('/stores');
+		storeFactory.addStore($scope.store).success(function(){
+			init();
+		});
+	
 	}
 
 		init();
@@ -169,6 +167,11 @@ webShop.controller('productsController', function($scope, productsFactory) {
        		$scope.cats = data;
        		
 	 });
+		
+		productsFactory.getStoreProducts($routeParams.id).success(function(data){
+			$scope.storeProducts = data;
+			console.log(JSON.stringify($scope.storeProducts) +" <<<<<<<<<<<<<<<");
+		})
 
 	}
 		$scope.showAddProduct = false;
@@ -182,6 +185,9 @@ webShop.controller('productsController', function($scope, productsFactory) {
 				init();
 			});
 	}
+		
+		
+		
 		
 		init();
 })

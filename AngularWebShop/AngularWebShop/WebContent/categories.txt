@@ -5,3 +5,5 @@ home,furniture & patio; ;
 movies,music & books; ;
 sports,fitness & outdoors; ;
 Antiques; ;Mixtapes ;undefined ;
+Antiques ;Antikviteti i starine ;
+undefined ;undefined ;

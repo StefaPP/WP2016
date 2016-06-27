@@ -47,6 +47,7 @@ public class ReviewService {
 		r.setUser("1");
 		try {
 			Reviews.writeReview(r);
+			revs.getRevs().put(r.getId(), r);
 			revs.getReviewList().add(r);
 			ctx.setAttribute("reviews",revs);
 			getReviews();

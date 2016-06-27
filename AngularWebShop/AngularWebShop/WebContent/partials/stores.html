@@ -1,5 +1,5 @@
 <div>
-<h1 align="center">Prodavnice:</h1>
+<h1 align="center">Stores:</h1>
 <div id="top">
 <div class="col" ng-repeat="s in stores">
   <div class="col-md-2">
@@ -11,9 +11,8 @@
   </div>
 </div>
 </div>	
-
+<button class="btn btn-info topright" ng-click="value = !value" >Add new store</button>
 <div id="bottom">
-<button ng-click="value = !value">Add new store</button>
 <div align="center" ng-show="value">
 <h1 align="center">Adding new store</h1>
 Name : <input class="form-group" type="text" name="name" ng-model="store.name"/><br/>

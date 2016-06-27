@@ -19,7 +19,9 @@ import java.util.StringTokenizer;
 public class Products {
 	private HashMap<String, Product> products = new HashMap<String, Product>();
 	private ArrayList<Product> productList = new ArrayList<Product>();
-	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	//private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent/";
+	
 	public Products() {
 		
 		this(path);
@@ -128,18 +130,20 @@ public class Products {
 		temp.renameTo(file);
 		
 	}
+	
+	
+	public HashMap<String, Product> getProducts() {
+		return products;
+	}
 
-	/** Vraca kolekciju proizvoda. */
 	public Collection<Product> getValues() {
 		return products.values();
 	}
 
-	/** Vraca proizvod na osnovu njegovog id-a. */
 	public Product getProduct(String id) {
 		return products.get(id);
 	}
 
-	/** Vraca listu proizvoda. */
 	public ArrayList<Product> getProductList() {
 		return productList;
 	}

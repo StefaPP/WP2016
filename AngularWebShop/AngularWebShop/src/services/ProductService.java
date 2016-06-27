@@ -16,7 +16,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
-import com.sun.media.jfxmedia.Media;
 
 import beans.Categories;
 import beans.Category;
@@ -68,6 +67,7 @@ public class ProductService {
 		
 		try { 
 			Products.writeProduct(p);
+			products.getProducts().put(p.getId(), p);
 			products.getProductList().add(p);
 			ctx.setAttribute("products", products);
 		}
@@ -78,6 +78,22 @@ public class ProductService {
 		return null;
 	}
 	
+	@GET
+	@Path("/getProductsOfStore")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Product> getProductsFromStore() {
+		HashMap<String,Product> storeProducts = new HashMap<String,Product> ();
+		String storeId = request.getParameter("id");
+		for(Product p : getProducts().getValues()){
+			if (p.getStoreId().equals(storeId))
+			{
+				storeProducts.put(p.getId(), p);
+			}
+				
+		}
+			return storeProducts.values();
+	}
+
 	@GET
 	@Path("/getProductsForCategory")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -128,6 +144,8 @@ public class ProductService {
 		Categories cats = (Categories) ctx.getAttribute("categories");
 		try{
 			Categories.writeCategory(c);
+			cats.getCats().put(c.getName(), c);
+			cats.getCategoryList().add(c);
 			ctx.setAttribute("categories", cats);
 		} catch (IOException e) {
 			e.printStackTrace();

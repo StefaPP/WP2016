@@ -8,7 +8,7 @@
 </div>
 
 <ul class="comments" ng-repeat="r in reviews | orderBy:'-rating'">
- <div style="width:500px;max-width:500px;display:inline-block;background-color:lightgray;"><li id="ranks"><p>{{r.comment}} <br/> 
+ <div style="width:500px;max-width:500px;display:inline-block;background-color:lightgray;" ng-show="r.productId === ajdi "><li id="ranks"><p>{{r.comment}} <br/> 
   <div style='display: inline-block; margin: 0px; padding: 0px; cursor:pointer;' ng-repeat='i in get(r.rating) track by $index'>
   <img src="http://www.codeproject.com/script/ratings/images/star-fill-lg.png">
   </div>

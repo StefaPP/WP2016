@@ -15,8 +15,9 @@ public class Stores {
 
 	private HashMap<String, Store> stores = new HashMap<String, Store>();
 	private ArrayList<Store> storeList = new ArrayList<Store>();
-	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
-
+	//private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent/";
+	
 	public Stores() {
 		this(path);
 	}
@@ -90,6 +91,7 @@ public static void writeStore(Store s) throws IOException {
 	out.append(line);
 	out.newLine();
 	out.close();
+	Stores st = new Stores(path);
 }
 
 public static void deleteStore(String id) throws IOException {
@@ -115,8 +117,9 @@ public static void deleteStore(String id) throws IOException {
 	temp.renameTo(file);
 }
 
-
-
+public HashMap<String,Store> getStores(){
+	return stores;
+}
 
 public Collection<Store> getValues() {
 	return stores.values();

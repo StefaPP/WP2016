@@ -3,3 +3,7 @@
 3;WinWin;Hebrejska;Serbia;NA;na;na; ; ;
 4;Djak sport;Sutjeska 2 , Novi Sad;Serbia;021 555 444;djaksport@gmail.com;n/a; ; ;
 5;Chico;Laze Teleckog 20;Serbia;021 539 302;chico@live.com;n/a; ; ;
+6;Pawn Shop;Los Andjeles;Amerika;0800 222  444;paws@gmail.com;n/a; ; ;
+7;Maxi;Bulevar Narodnog Fronta 30, Novi Sad;Serbia;0641 219321;maxi@live.com;n/a; ; ;
+8;Vulkan;Zmaj Jovina 21,Novi Sad;Serbia;N/A;vulkan@gmail.com;n/a; ; ;
+9;dnsanjkdn;njdsnjn;njnfdsjfnjndsj;njfdnsj;jnfdjsdfds;n/a; ; ;

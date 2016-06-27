@@ -14,9 +14,10 @@ import java.util.StringTokenizer;
 
 public class Categories {
 	
-	private HashMap<String,Category> categories = new HashMap<>();
+	private HashMap<String,Category> categories = new HashMap<String,Category>();
 	private ArrayList<Category> categoryList = new ArrayList<>();
-	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	//private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent/";
 	
 	public Categories() {
 		this(path);
@@ -100,11 +101,13 @@ public class Categories {
 	}
 	
 	
+	
+	public HashMap<String, Category> getCats() {
+		return categories;
+	}
+
 	public Collection<Category> getCategories() {
 		return categories.values();
-	}
-	public void setCategories(HashMap<String, Category> categories) {
-		this.categories = categories;
 	}
 	public ArrayList<Category> getCategoryList() {
 		return categoryList;

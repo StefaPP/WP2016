@@ -18,6 +18,18 @@
   </table>
 </div>
 </div>
+
+<div class="col"> 
+  <div class="col-md-4" ng-repeat="p in storeProducts">
+    <a ng-href="#/product/{{p.id}}" class="thumbnail">
+      <p>{{p.name}}</p>
+      <p>{{p.price}}</p>
+      <img src="{{p.image}}" style="width:150px;height:100px">
+    </a>
+  </div>
+</div>	
+
+
 <div style="float:left; width:33%;" ng-show="showAddProduct">
  <h1 align="center"> Add new product </h1>
  <table class="table"> 
@@ -35,7 +47,6 @@
  </table>
 <div align="center"><button type="button"  class="btn btn-default"  ng-click="addProduct()">Add product</button></tr>
  </div> 
- 
 </div>
 <div style="float:left; width:33%;" ng-show="showAddSeller">
  <h1> Hire new seller </h1>
@@ -44,6 +55,7 @@
 <div style="float:left; width:33%;" ng-show="showUpdateStore">
  <h1> Update store </h1>
 </div>
+
 </div>
 
 

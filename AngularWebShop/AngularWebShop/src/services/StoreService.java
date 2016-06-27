@@ -62,6 +62,7 @@ public class StoreService {
 		s.setSeller("n/a");
 		try {
 			Stores.writeStore(s);
+			stores.getStores().put(s.getId(),s);
 			stores.getStoreList().add(s);
 			ctx.setAttribute("stores", stores);
 		} catch (IOException e) {
