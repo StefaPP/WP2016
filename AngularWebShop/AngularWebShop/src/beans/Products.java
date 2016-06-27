@@ -18,11 +18,6 @@ import java.util.StringTokenizer;
  */
 public class Products {
 	private HashMap<String, Product> products = new HashMap<String, Product>();
-
-	public void setProducts(HashMap<String, Product> products) {
-		this.products = products;
-	}
-
 	private ArrayList<Product> productList = new ArrayList<Product>();
 	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
 	public Products() {
@@ -34,7 +29,6 @@ public class Products {
 		BufferedReader in = null;
 		try {
 			File file = new File(path + "/products.txt");
-			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			readProducts(in);
 		} catch (Exception e) {
@@ -49,19 +43,10 @@ public class Products {
 		}
 	}
 
-	/**
-	 * Cita proizvode iz datoteke i smesta ih u asocijativnu listu proizvoda.
-	 * Kljuc je id proizvoda.
-	 *
-	 *
-	 * private String id; private String name; private double price; private
-	 * double size; public double weight; private String origin; private String
-	 * brandName; private String category; private String image; private String
-	 * video; private String rating; private String review; private int lager;
-	 */
+	
 	private void readProducts(BufferedReader in) {
 		String line, id = "", name = "", price = "", size = "", weight = "", origin = "", brandName = "", category = "",
-				image = "", video = "", rating = "", review = "", lager = "";
+				image = "", storeId = "", rating = "", review = "", lager = "";
 
 		StringTokenizer st;
 		try {
@@ -80,13 +65,13 @@ public class Products {
 					brandName = st.nextToken().trim();
 					category = st.nextToken().trim();
 					image = st.nextToken().trim();
-					video = st.nextToken().trim();
+					storeId = st.nextToken().trim();
 					rating = st.nextToken().trim();
 					review = st.nextToken().trim();
 					lager = st.nextToken().trim();
 
 				}
-				Product product = new Product(id, name, Double.parseDouble(price), Double.parseDouble(size), Double.parseDouble(weight), origin, brandName, category, image, video,
+				Product product = new Product(id, name, Double.parseDouble(price), Double.parseDouble(size), Double.parseDouble(weight), origin, brandName, category, image, storeId,
 						rating, review, Integer.parseInt(lager));
 				products.put(id, product);
 				productList.add(product);
@@ -107,7 +92,9 @@ public class Products {
 		line += p.getBrandName() + ";";
 		line += p.getCategory() + ";";
 		line += p.getImage() + ";";
-		line += p.getVideo() + ";";
+		line += p.getStoreId() + ";";
+		line += p.getRating() + " ;";
+		line += p.getReview() + " ;";
 		line += p.getLager() + ";";
 		
 		
@@ -141,15 +128,10 @@ public class Products {
 		temp.renameTo(file);
 		
 	}
-	
 
 	/** Vraca kolekciju proizvoda. */
 	public Collection<Product> getValues() {
 		return products.values();
-	}
-
-	public HashMap<String, Product> getProducts() {
-		return (HashMap<String, Product>) products.values();
 	}
 
 	/** Vraca proizvod na osnovu njegovog id-a. */

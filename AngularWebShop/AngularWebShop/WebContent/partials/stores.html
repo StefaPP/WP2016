@@ -1,25 +1,27 @@
+<div>
 <h1 align="center">Prodavnice:</h1>
+<div id="top">
 <div class="col" ng-repeat="s in stores">
   <div class="col-md-2">
      <a href ng-click="storeDetails(s)" class="thumbnail">
+      <img src="http://shmector.com/_ph/7/794491321.png" style="width:200px;height:150px" />
       <p>{{s.name}}</p>
       <p>{{s.address}}</p>
-      <img src="http://www.thecollectorz.com/images/icon_shopcart.png" style="width:150px;height:100px">
     </a>
-    <button class="btn-group-default" ng-click="storeDetails(s)">Store details</button>
   </div>
+</div>
 </div>	
 
+<div id="bottom">
 <button ng-click="value = !value">Add new store</button>
 <div align="center" ng-show="value">
 <h1 align="center">Adding new store</h1>
-Id : <input class="form-group" type="text" name="storeId" ng-model="store.id"/><br/>
 Name : <input class="form-group" type="text" name="name" ng-model="store.name"/><br/>
 Address : <input class="form-group" type="text" name="address" ng-model="store.address"/><br/>
 Country : <input class="form-group" type="text" name="country" ng-model="store.country"/><br/>
 Contact : <input class="form-group" type="text" name="contact" ng-model="store.contact"/><br/>
 Email : <input class="form-group" type="text" name="email" ng-model="store.email"/><br/>
-Seller : <input class="form-group" type="text" name="seller" ng-model="store.seller"/><br/>
 <button type="button" ng-click="addStore()">Add store</button>
+</div>
 </div>
 </div>

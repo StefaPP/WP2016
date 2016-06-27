@@ -12,68 +12,19 @@ public class Product {
 	private String brandName;
 	private String category;
 	private String image;
-	private String video;
+	private String storeId;
 	private String rating;
 	private String review;
 	private int lager;
-	
+
 	/** Koristi se samo za AngularJS */
 	private int count;
 
 	public Product() {
-		this.count = 1;
-	}
-	
-	public Product(String id, String name, double price) {
-		this.id = id;
-		this.name = name;
-		this.price = price;
-		this.count = 1;
-	}
-	
-	
-	public void setId(String i) {
-		id = i;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setName(String n) {
-		name = n;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setPrice(double p) {
-		price = p;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public int getCount() {
-		return count;
-	}
-
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", price=" + price
-				+ "]";
 	}
 
 	public Product(String id, String name, double price, double size, double weight, String origin, String brandName,
-			String category, String image, String video, String rating, String review, int lager) {
+			String category, String image, String storeId, String rating, String review, int lager) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -84,7 +35,7 @@ public class Product {
 		this.brandName = brandName;
 		this.category = category;
 		this.image = image;
-		this.video = video;
+		this.storeId = storeId;
 		this.rating = rating;
 		this.review = review;
 		this.lager = lager;
@@ -138,12 +89,12 @@ public class Product {
 		this.image = image;
 	}
 
-	public String getVideo() {
-		return video;
+	public String getStoreId() {
+		return storeId;
 	}
 
-	public void setVideo(String video) {
-		this.video = video;
+	public void setStoreId(String storeId) {
+		this.storeId = storeId;
 	}
 
 	public String getRating() {
@@ -169,7 +120,30 @@ public class Product {
 	public void setLager(int lager) {
 		this.lager = lager;
 	}
-	
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	
 }

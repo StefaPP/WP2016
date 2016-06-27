@@ -1,3 +1,5 @@
 1;Gigatron;Bulevar Oslobodjenja 13, Novi sad;Serbia; ; ; ; ; ;
 2;Comtrade;Mercator;Serbia;na;na;na; ; ;
 3;WinWin;Hebrejska;Serbia;NA;na;na; ; ;
+4;Djak sport;Sutjeska 2 , Novi Sad;Serbia;021 555 444;djaksport@gmail.com;n/a; ; ;
+5;Chico;Laze Teleckog 20;Serbia;021 539 302;chico@live.com;n/a; ; ;

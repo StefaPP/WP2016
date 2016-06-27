@@ -1,4 +1,7 @@
 2;1;Thu Jun 23 11:50:14 CEST 2016;5;Dobar sorc;7;
 3;1;Thu Jun 23 12:11:56 CEST 2016;6;A sad;3;
 4;1;Thu Jun 23 16:07:22 CEST 2016;8;Novi revju;7;
-5;1;Thu Jun 23 16:08:01 CEST 2016;1;Proba ratinga;7;
+5;1;Fri Jun 24 16:24:52 CEST 2016;7;Drugi rating;2;
+51;1;Fri Jun 24 16:45:22 CEST 2016;1;poslednji;2;
+52;1;Fri Jun 24 16:48:10 CEST 2016;2;pretposlednji;2;
+53;1;Sat Jun 25 08:37:06 CEST 2016;5;ddasdas;6;

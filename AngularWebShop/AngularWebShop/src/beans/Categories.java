@@ -67,8 +67,8 @@ public class Categories {
 	
 	public static void writeCategory(Category c) throws IOException{
 		String line="";
-		line += c.getName() + ";";
-		line += c.getDescription() + ";";
+		line += c.getName() + " ;";
+		line += c.getDescription() + " ;";
 		File file = new File(path + "/categories.txt");
 		BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
 		out.append(line);

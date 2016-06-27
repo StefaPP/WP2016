@@ -39,13 +39,6 @@ public class ProductService {
 	ServletContext ctx;
 
 	@GET
-	@Path("/test")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String test() {
-		return "Hello Jersey";
-	}
-
-	@GET
 	@Path("/getJustProducts")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Product> getJustProducts() {
@@ -61,12 +54,29 @@ public class ProductService {
 		
 	}
 	
-/*	@GET
-	@Path("/getReviews")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Review> getReviews(){
-		return getRevs().getReviews();
-	}*/
+	@POST
+	@Path("/addProduct")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String addProduct(Product p) {
+		Products products = (Products) ctx.getAttribute("products");
+		products = getProducts();
+		int id = Integer.parseInt(products.getProductList().get(products.getProductList().size()-1).getId());
+		id +=1;
+		p.setId(Integer.toString(id));
+		p.setReview(" ");
+		p.setRating(" ");
+		
+		try { 
+			Products.writeProduct(p);
+			products.getProductList().add(p);
+			ctx.setAttribute("products", products);
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println(p + " <<<<<<<<");
+		return null;
+	}
 	
 	@GET
 	@Path("/getProductsForCategory")
@@ -115,8 +125,6 @@ public class ProductService {
 	@Path("/addCategory")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String addCategory(Category c) {
-		System.out.println("236t135214526536212154");
-		
 		Categories cats = (Categories) ctx.getAttribute("categories");
 		try{
 			Categories.writeCategory(c);

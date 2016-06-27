@@ -25,6 +25,21 @@ webShop.factory('productsFactory', function($http,$window) {
 	
 	};
 	
+	factory.addProduct = function(product){
+		return $http.post('/AngularWebShop/rest/proizvodi/addProduct',
+				{"name" : product.name,
+				"price" : product.price,
+				"size" : product.size,
+				"weight" : product.weight,
+				"origin" : product.origin,
+				"brandName" : product.brandName,
+				"category" : product.category,
+				"image" : product.image,
+				"storeId" : product.storeId,
+				"lager" : product.lager,
+				}
+		)
+	}
 	
 	
 	factory.getProductsForCategory = function(categoryName){
@@ -95,6 +110,10 @@ webShop.factory('storeFactory',function($http){
 		return $http.get('/AngularWebShop/rest/stores/getStore',{params : {"id":''+store}})
 		
 	};
+	
+	factory.getStoreProducts = function() {
+		return $http.get('/AngularWebShop/rest/stores/getStoreProducts', {params : {"id":''+store}});
+	}
 	
 	return factory;
 });

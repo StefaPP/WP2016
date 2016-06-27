@@ -16,9 +16,7 @@ public class Stores {
 	private HashMap<String, Store> stores = new HashMap<String, Store>();
 	private ArrayList<Store> storeList = new ArrayList<Store>();
 	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
-//	private static String path = "C:\\Users\\Strefa\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
-	
-	
+
 	public Stores() {
 		this(path);
 	}
@@ -27,7 +25,6 @@ public Stores(String path) {
 	BufferedReader in = null;
 	try {
 		File file = new File(path + "/stores.txt");
-		System.out.println(file.getCanonicalPath());
 		in = new BufferedReader(new FileReader(file));
 		readStores(in);
 	} catch (Exception e) {
@@ -43,10 +40,7 @@ public Stores(String path) {
 	}
 }
 
-/**
- * Cita proizvode iz datoteke i smesta ih u asocijativnu listu proizvoda.
- * Kljuc je id proizvoda.
- */
+
 private void readStores(BufferedReader in) {
 	String line, id = "", name = "", address = "",
 			country = "",contact="",email="",
@@ -128,12 +122,12 @@ public Collection<Store> getValues() {
 	return stores.values();
 }
 
-/** Vraca proizvod na osnovu njegovog id-a. */
+/** Vraca prodavnicu na osnovu njenog id-a. */
 public Store getStore(String id) {
 	return stores.get(id);
 }
 
-/** Vraca listu proizvoda. */
+/** Vraca listu prodavnica. */
 public ArrayList<Store> getStoreList() {
 	return storeList;
 }

@@ -14,6 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.ProductsInStore;
+import beans.ProductsInStoreData;
 import beans.Store;
 import beans.Stores;
 
@@ -33,6 +35,13 @@ public class StoreService {
 	}
 	
 	@GET
+	@Path("/getStoreProducts")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<ProductsInStore> getStoreProducts(){
+		return getProductsOfStore().getProducts();
+	}
+	
+	@GET
 	@Path("/getStore")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -47,17 +56,18 @@ public class StoreService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addStore(Store s){
 		Stores stores = (Stores) ctx.getAttribute("stores");
+		int id = Integer.parseInt(stores.getStoreList().get(stores.getStoreList().size()-1).getId());
+		id +=1;
+		s.setId(Integer.toString(id));
+		s.setSeller("n/a");
 		try {
 			Stores.writeStore(s);
-			stores.getValues().add(s);
 			stores.getStoreList().add(s);
 			ctx.setAttribute("stores", stores);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		for(Store store : stores.getStoreList()){
-			System.out.println(store.getName() + " " + store.getId());
-		}
+
 		return "Dodata";
 	}
 	
@@ -69,6 +79,15 @@ public class StoreService {
 		}
 		return stores;
 		
+	}
+	
+	private ProductsInStoreData getProductsOfStore() {
+		ProductsInStoreData pis = (ProductsInStoreData) ctx.getAttribute("pis");
+		if(pis == null){
+			pis = new ProductsInStoreData(ctx.getRealPath(""));
+			ctx.setAttribute("pis", pis);
+		}
+		return pis;
 	}
 	
 	

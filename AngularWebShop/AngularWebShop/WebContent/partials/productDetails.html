@@ -7,7 +7,7 @@
   <p><a class="btn btn-primary btn-lg" href="#" role="button">Buy !</a></p>
 </div>
 
-<ul class="ver" ng-repeat="r in reviews | orderBy:'-rating'">
+<ul class="comments" ng-repeat="r in reviews | orderBy:'-rating'">
  <div style="width:500px;max-width:500px;display:inline-block;background-color:lightgray;"><li id="ranks"><p>{{r.comment}} <br/> 
   <div style='display: inline-block; margin: 0px; padding: 0px; cursor:pointer;' ng-repeat='i in get(r.rating) track by $index'>
   <img src="http://www.codeproject.com/script/ratings/images/star-fill-lg.png">
@@ -19,9 +19,9 @@
 <div class="form-group">
   <label for="comment">Review:</label>
   <textarea class="form-control" ng-model="review.comment" rows="3" cols="80" id="comment"></textarea><br/>
-  <div star-rating rating="starRating" read-only="false" max-rating="10" click="click(param)"></div>
+  <div star-rating rating="starRating" read-only="false" max-rating="10" click="click(param)"></div><p ng-show="starRating==0">Please rate this product</p>
             <div> <span class="label label-primary">Product rating: {{starRating}}</span><br/><br/>
- 	<button type="button" class="btn btn-primary" ng-click="addReview()" ng-disabled="!review.comment">Add review</button>
+ 	<button type="button" class="btn btn-primary" ng-click="addReview()" ng-disabled="!review.comment || starRating==0">Add review</button>
   <br/><br/>
  </div>
 </div>

@@ -30,6 +30,8 @@ webShop.controller('productsController', function($scope, productsFactory) {
 	
 	
 	
+	
+	
 })
 .controller('categoryProductsCtrl',function($scope,$routeParams,productsFactory){
 		
@@ -154,14 +156,33 @@ webShop.controller('productsController', function($scope, productsFactory) {
 
 		init();
 })
-.controller('storeDetailsCtrl',function($scope,$location,$routeParams,storeFactory){
+.controller('storeDetailsCtrl',function($scope,$location,$routeParams,storeFactory,productsFactory){
+		
 		function init() {
+		$scope.product = {};
 		var id = $routeParams.id;
 		console.log("id prodavnice " + id );
 		storeFactory.getStore(id).success(function(data){
 			$scope.st = data;
 		})
+		productsFactory.getCategories().success(function (data) {
+       		$scope.cats = data;
+       		
+	 });
+
 	}
+		$scope.showAddProduct = false;
+		$scope.showAddSeller = false;
+		$scope.showUpdateStore = false;
+		
+		
+		$scope.addProduct = function(){
+		$scope.product.storeId = $routeParams.id;
+			productsFactory.addProduct($scope.product).success(function (){
+				init();
+			});
+	}
+		
 		init();
 })
 .controller('deliveryCtrl',function($scope,deliveryFactory){
