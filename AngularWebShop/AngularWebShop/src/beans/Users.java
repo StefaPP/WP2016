@@ -1,8 +1,11 @@
 package beans;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -36,11 +39,6 @@ public class Users {
 			}
 		}
 	}
-
-	/**
-	 * Cita proizvode iz datoteke i smesta ih u asocijativnu listu proizvoda.
-	 * Kljuc je id proizvoda.
-	 */
 	private void readUsers(BufferedReader in) {
 		String line, username = "", password = "", firstName = "", lastName = "", role = "", contact = "", email = "",
 				address = "", country = "";
@@ -70,17 +68,40 @@ public class Users {
 			ex.printStackTrace();
 		}
 	}
+	
+	public static void writeStore(User u) throws IOException {
+		String line = "";
+		line += u.getUsername() + ";";
+		line += u.getPassword() + ";";
+		line += u.getFirstName() + ";";
+		line += u.getLastName() + ";";
+		line +=  "customer;";
+		line += u.getContact() + ";";
+		line += u.getEmail() + ";";
+		line += u.getAddress() + ";";
+		line += u.getCountry() + ";";
+
+		
+		File file = new File(path + "/users.txt");
+		BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
+		out.append(line);
+		out.newLine();
+		out.close();
+	}
+	
 
 	public Collection<User> getValues() {
 		return users.values();
 	}
+	
+	public HashMap<String,User> getUsers() {
+		return users;
+	}
 
-	/** Vraca proizvod na osnovu njegovog id-a. */
 	public User getUser(String id) {
 		return users.get(id);
 	}
-
-	/** Vraca listu proizvoda. */
+	
 	public ArrayList<User> getUserList() {
 		return userList;
 	}

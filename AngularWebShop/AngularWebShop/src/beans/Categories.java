@@ -100,6 +100,29 @@ public class Categories {
 		
 	}
 	
+	public static void updateCategory(String name,Category newCategory) throws IOException{
+		File file = new File(path + "/categories.txt");
+		File temp = new File(path + "/temp.txt");
+		
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+		String line;
+		synchronized (Store.class) { 
+			while((line = reader.readLine()) != null){
+				if(!line.startsWith(name)){
+					writer.write(line);
+					writer.newLine();
+				}
+					
+				
+			}
+				reader.close();
+				writer.close();
+		}
+		file.delete();
+		temp.renameTo(file);
+	}
+	
 	
 	
 	public HashMap<String, Category> getCats() {

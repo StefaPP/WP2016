@@ -204,6 +204,24 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		
 		init();
 })
+.controller('signupCtrl',function($scope,$location,signupFactory,userFactory){
+	
+	function init() {
+	console.log('Signup Controller')
+	userFactory.getUsers().success(function(data){
+			$scope.users = data;
+		})
+	}
+	
+	init();
+	
+	$scope.user={};
+	$scope.signup=function () {
+		signupFactory.signup($scope.user).success(function (){
+			$location.path('/login');
+		})
+	}
+})
 .controller('deliveryCtrl',function($scope,deliveryFactory){
 	function init() {
 	console.log('DeliveryCtrl');

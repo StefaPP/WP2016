@@ -91,7 +91,6 @@ public static void writeStore(Store s) throws IOException {
 	out.append(line);
 	out.newLine();
 	out.close();
-	Stores st = new Stores(path);
 }
 
 public static void deleteStore(String id) throws IOException {

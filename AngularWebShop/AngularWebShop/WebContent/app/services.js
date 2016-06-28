@@ -181,6 +181,24 @@ webShop.factory('storeFactory', function($http) {
 	
 	return factory;
 });
+webShop.factory('signupFactory',function($http){
+	
+	var factory = {};
+	
+	factory.signup = function(user){
+		return $http({
+		    method : "POST",
+		    url : '/AngularWebShop/rest/users/signUp',
+		    data : user,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		})
+		
+}
+	return factory
+	
+});
 webShop.factory('shoppingCartFactory', function($http) {
 
 	var factory = {};

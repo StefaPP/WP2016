@@ -2,8 +2,16 @@
 var webShop = angular.module('webShop', ['ngRoute']);
 
 webShop.config(function($routeProvider) {
-	$routeProvider.when('#/',{
+	$routeProvider
+	.when('#/',{
 		templateUrl: 'index.html'
+	})
+	.when('/signup',{
+		templateUrl: 'partials/signup.html',
+		controller : 'signupCtrl'
+	})
+	.when('/login',{
+		templateUrl: 'partials/login.html'
 	})
 	.when('/products',{
 		templateUrl: 'partials/products.html',
