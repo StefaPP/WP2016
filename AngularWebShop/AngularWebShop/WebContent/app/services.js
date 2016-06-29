@@ -15,12 +15,13 @@ webShop.factory('productsFactory', function($http, $window) {
 		console.log("usao u fabriku")
 		return $http.get('/AngularWebShop/rest/proizvodi/getCategories');
 	};
+	
 	factory.addToCart = function(product) {
 		return $http.post('/AngularWebShop/rest/proizvodi/add', {
 			"id" : '' + product.id,
-			"count" : parseInt(product.count)
 		});
 	};
+	
 	factory.addCategory = function(category) {
 		return $http.post('/AngularWebShop/rest/proizvodi/addCategory', {
 			"name" : '' + category.name,
@@ -194,8 +195,19 @@ webShop.factory('signupFactory',function($http){
 		        'Content-Type' : 'application/json'
 		    }
 		})
-		
-}
+	}
+	factory.customerLogin = function(user){
+			console.log("This is the customer " + JSON.stringify(user))
+			return $http({
+			    method : "POST",
+			    url : '/AngularWebShop/rest/users/login',
+			    data : user,
+			    headers : {
+			        'Content-Type' : 'application/json'
+			    }
+			})
+	}
+	
 	return factory
 	
 });

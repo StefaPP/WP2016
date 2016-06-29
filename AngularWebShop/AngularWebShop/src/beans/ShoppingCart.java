@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class ShoppingCart {
 	
 	private ArrayList<ShoppingCartItem> items;
-
+	
 	public ShoppingCart() {
 		items = new ArrayList<ShoppingCartItem>();
 	}
 
-	public void addItem(Product product, int count) {
-		items.add(new ShoppingCartItem(product, count));
+	public void addItem(Product product) {
+		items.add(new ShoppingCartItem(product));
 	}
 
 	public ArrayList<ShoppingCartItem> getItems() {

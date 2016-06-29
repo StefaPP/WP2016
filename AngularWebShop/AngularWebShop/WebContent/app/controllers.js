@@ -78,10 +78,16 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 			 init();
 		 })
 	 }
+	 
+	 $scope.addToCart = function(product) {
+		 alert('You have successfully added ' + $scope.product.name + ' to cart');
+		 $scope.product.lager -= 1; 
+	 }
+	 
 	 $scope.get = function(star){
 		 $scope.stars = parseInt(star);
-		// console.log("stars : " + stars)
 		 return new Array($scope.stars);
+		 
 	 }
 	 	function init() { 
 		console.log('ProductDetailsController.Init');
@@ -91,6 +97,7 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		productsFactory.getProduct(id).success(function(data){	
 			$scope.product = data;
 		})
+		
 		reviewFactory.getReviews().success(function(data){
 			 $scope.reviews = data;
 		 })
@@ -221,6 +228,27 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 			$location.path('/login');
 		})
 	}
+})
+.controller('loginCtrl',function($scope,$location,signupFactory,userFactory){
+	
+	function init() {
+		console.log('Login Controller')
+		userFactory.getUsers().success(function(data){
+				$scope.users = data;
+			})
+		}
+		
+		init();
+		
+	$scope.user = {};
+	$scope.login = function () {
+		signupFactory.customerLogin($scope.user).success(function(){
+			$location.path('/products');
+		}).error(function(){
+			alert('Login unsuccessful !');
+		})
+	}
+	
 })
 .controller('deliveryCtrl',function($scope,deliveryFactory){
 	function init() {

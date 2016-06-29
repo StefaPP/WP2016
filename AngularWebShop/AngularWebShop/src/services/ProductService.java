@@ -27,6 +27,7 @@ import beans.Review;
 import beans.Reviews;
 import beans.ShoppingCart;
 import beans.ShoppingCartItem;
+import beans.ShoppingList;
 import beans.Store;
 import beans.Stores;
 
@@ -152,11 +153,20 @@ public class ProductService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String add(ProductToAdd p) {
-		getShoppingCart().addItem(getProducts().getProduct(p.id), p.count);
+		getShoppingCart().addItem(getProducts().getProduct(p.id));
 		System.out.println("Product " + getProducts().getProduct(p.id) + " added with count: " + p.count);
 		return "OK";
 	}
 
+	@POST
+	@Path("/addToCart")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void addToCart(ShoppingList sp){
+		ShoppingCart sc = (ShoppingCart) request.getSession().getAttribute("shoppingCart");
+		
+		
+	}
 	@GET
 	@Path("/getProduct")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -223,6 +233,15 @@ public class ProductService {
 
 	}
 	
+	private ShoppingList getShoppingList(){
+		ShoppingList sp = (ShoppingList) request.getSession().getAttribute("shoppingList");
+		if(sp == null){
+			sp = new ShoppingList();
+			request.getSession().setAttribute("shoppingList", sp);
+			
+		}
+		return sp;
+	}
 
 	private ShoppingCart getShoppingCart() {
 		ShoppingCart sc = (ShoppingCart) request.getSession().getAttribute("shoppingCart");

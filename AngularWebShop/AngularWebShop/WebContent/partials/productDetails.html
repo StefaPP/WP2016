@@ -1,11 +1,12 @@
 <div>
 	<div class="jumbotron">
 		<h1>{{product.name}}</h1>
-		<h3>Price {{product.price}} RSD</h3>
-		<h3>Lager {{product.lager}}</h3>
+		<h3>Price : {{product.price}} RSD</h3>
+		<h3>Lager : {{product.lager}}</h3>
 		<img style="width: 400px; height: 300px;" src="{{product.image}}">
 		<p>
-			<a class="btn btn-primary btn-lg" href="#" role="button">Buy !</a>
+			<button class="btn btn-primary btn-lg" ng-click="addToCart(product)" role="button" ng-disabled="product.lager==0" >Add to cart !</button>
+			<div ng-show="product.lager==0">This product is currently unavailable</div>
 		</p>
 	</div>
 	<button class="btn btn-danger topright"

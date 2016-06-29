@@ -47,6 +47,23 @@ public class UserServices {
 		}
 	
 }
+	
+	@POST
+	@Path("/login")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean login(User u) {
+		Users users = (Users) ctx.getAttribute("users");
+		System.out.println("This is the customer " + u);
+		if (users.getUsers().containsKey(u.getUsername())){
+			System.out.println("Customer found!");
+			return true;
+		}
+		else {
+			System.out.println("ne postoji !");
+			return false;
+	}
+	}
+	
 	private Users getUsers(){
 		Users users = (Users) ctx.getAttribute("users");
 		if(users == null){

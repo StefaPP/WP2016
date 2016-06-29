@@ -11,7 +11,8 @@ webShop.config(function($routeProvider) {
 		controller : 'signupCtrl'
 	})
 	.when('/login',{
-		templateUrl: 'partials/login.html'
+		templateUrl: 'partials/login.html',
+		controller : 'loginCtrl'
 	})
 	.when('/products',{
 		templateUrl: 'partials/products.html',
