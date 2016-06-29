@@ -12,11 +12,11 @@
   <th>&nbsp;</th>
   </tr>
   
-  <tr><button type="button"  class="btn btn-default" ng-click="showAddProduct = !showAddProduct">Add new product</button></tr>
-  <tr><button type="button"  class="btn btn-default"  ng-click="showAddSeller = !showAddSeller">Hire new seller</button></tr>
-  <tr><button type="button"  class="btn btn-default"  ng-click="showUpdateStore= !showUpdateStore">Update store</button></tr>
+  <tr><button type="button"  class="btn btn-default" ng-click="showAddProduct = !showAddProduct" ng-show="currentRole==='admin'">Add new product</button></tr>
+  <tr><button type="button"  class="btn btn-default"  ng-click="showAddSeller = !showAddSeller" ng-show="currentRole==='admin'">Hire new seller</button></tr>
+  <tr><button type="button"  class="btn btn-default"  ng-click="showUpdateStore= !showUpdateStore" ng-show="currentRole!='customer'">Update store</button></tr>
   </table>
-</div>
+  </div>
 </div>
 
 <div class="col"> 
@@ -28,7 +28,6 @@
     </a>
   </div>
 </div>	
-
 
 <div style="float:left; width:33%;" ng-show="showAddProduct">
  <h1 align="center"> Add new product </h1>

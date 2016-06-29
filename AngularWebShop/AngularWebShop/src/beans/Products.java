@@ -19,8 +19,9 @@ import java.util.StringTokenizer;
 public class Products {
 	private HashMap<String, Product> products = new HashMap<String, Product>();
 	private ArrayList<Product> productList = new ArrayList<Product>();
-	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	//private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
 	//private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent/";
+	private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent";
 	
 	public Products() {
 		
@@ -107,6 +108,42 @@ public class Products {
 		out.close();
 	}
 	
+	public static void updateProduct(Product p) throws IOException{
+		
+		deleteProduct(p.getId());
+		
+		/*String line, id = "", name = "", price = "", size = "", weight = "", origin = "", brandName = "", category = "",
+				image = "", storeId = "", rating = "", review = "", lager = "";
+
+		
+		File file = new File(path + "/products.txt");
+		File temp = new File(path + "/temp.txt");
+		
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+		
+		String line;
+
+		StringTokenizer st;
+		st = new StringTokenizer(line, ";");
+		
+		while (st.hasMoreTokens()) {
+			id = st.nextToken().trim();
+			name = st.nextToken().trim();
+			price = st.nextToken().trim();
+			size = st.nextToken().trim();
+			weight = st.nextToken().trim();
+			origin = st.nextToken().trim();
+			brandName = st.nextToken().trim();
+			category = st.nextToken().trim();
+			image = st.nextToken().trim();
+			storeId = st.nextToken().trim();
+			rating = st.nextToken().trim();
+			review = st.nextToken().trim();
+			lager = st.nextToken().trim();
+		}
+		*/
+	}
 	
 	public static void deleteProduct(String id) throws IOException{
 		File file = new File(path + "/products.txt");
@@ -130,7 +167,6 @@ public class Products {
 		temp.renameTo(file);
 		
 	}
-	
 	
 	public HashMap<String, Product> getProducts() {
 		return products;

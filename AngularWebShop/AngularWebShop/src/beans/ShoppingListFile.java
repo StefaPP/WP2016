@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
@@ -14,7 +15,8 @@ public class ShoppingListFile {
 	
 	private HashMap<String,ShoppingList> shoppingList = new HashMap<String,ShoppingList>();
 	private ArrayList<ShoppingList> shoppingArrayList = new ArrayList<ShoppingList>();
-	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	//private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent";
 	
 	public ShoppingListFile()
 	{
@@ -87,5 +89,26 @@ public class ShoppingListFile {
 		out.newLine();
 		out.close();
 	}
+
+	public HashMap<String, ShoppingList> getShoppingList() {
+		return shoppingList;
+	}
+
+	public void setShoppingList(HashMap<String, ShoppingList> shoppingList) {
+		this.shoppingList = shoppingList;
+	}
+	
+	public Collection<ShoppingList> getValues() {
+		return shoppingList.values();
+	}
+
+	public ArrayList<ShoppingList> getShoppingArrayList() {
+		return shoppingArrayList;
+	}
+
+	public void setShoppingArrayList(ArrayList<ShoppingList> shoppingArrayList) {
+		this.shoppingArrayList = shoppingArrayList;
+	}
 		
+	
 }

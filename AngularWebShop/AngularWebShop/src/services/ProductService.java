@@ -28,6 +28,7 @@ import beans.Reviews;
 import beans.ShoppingCart;
 import beans.ShoppingCartItem;
 import beans.ShoppingList;
+import beans.ShoppingListFile;
 import beans.Store;
 import beans.Stores;
 
@@ -158,15 +159,32 @@ public class ProductService {
 		return "OK";
 	}
 
+	@GET
+	@Path("/getShoppingList")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Collection<ShoppingList> getProductList() {
+		return getShoppingList().getValues();
+	}
+	
 	@POST
 	@Path("/addToCart")
-	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addToCart(ShoppingList sp){
-		ShoppingCart sc = (ShoppingCart) request.getSession().getAttribute("shoppingCart");
-		
-		
+		ShoppingListFile spf = (ShoppingListFile) ctx.getAttribute("shoppingList");
+		int id = spf.getShoppingList().size();
+		id +=1;
+		sp.setId(Integer.toString(id+1));
+		sp.setDeliveryId("n/a");
+		System.out.println(sp + "    <<<<<<");
+		try {
+			ShoppingListFile.writeItem(sp);
+			spf.getShoppingList().put(sp.getId(), sp);
+			spf.getShoppingArrayList().add(sp);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
+	
 	@GET
 	@Path("/getProduct")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -233,11 +251,11 @@ public class ProductService {
 
 	}
 	
-	private ShoppingList getShoppingList(){
-		ShoppingList sp = (ShoppingList) request.getSession().getAttribute("shoppingList");
+	private ShoppingListFile getShoppingList(){
+		ShoppingListFile sp = (ShoppingListFile) ctx.getAttribute("shoppingList");
 		if(sp == null){
-			sp = new ShoppingList();
-			request.getSession().setAttribute("shoppingList", sp);
+			sp = new ShoppingListFile(ctx.getRealPath(""));
+			ctx.setAttribute("shoppingList", sp);
 			
 		}
 		return sp;

@@ -16,9 +16,21 @@ webShop.factory('productsFactory', function($http, $window) {
 		return $http.get('/AngularWebShop/rest/proizvodi/getCategories');
 	};
 	
+/*
+	this.storeId = storeId;
+	this.productId = productId;
+	this.deliveryId = deliveryId;*/
+	
+	factory.getShoppingList = function(){ 
+		return $http.get('/AngularWebShop/rest/proizvodi/getShoppingList');
+	}
+	
 	factory.addToCart = function(product) {
-		return $http.post('/AngularWebShop/rest/proizvodi/add', {
-			"id" : '' + product.id,
+		return $http.post('/AngularWebShop/rest/proizvodi/addToCart', {
+			"customerId": '' + product.customerId,
+			"storeId" : '' + product.storeId,
+			"productId" : '' + product.productId,
+			"deliveryId" : '' + product.deliveryId
 		});
 	};
 	
@@ -92,7 +104,8 @@ webShop.factory('reviewFactory', function($http) {
 		return $http.post('/AngularWebShop/rest/reviews/addReview', {
 			"rating" : review.rating,
 			"productId" : review.productId,
-			"comment" : review.comment
+			"comment" : review.comment,
+			"user" : review.user
 		});
 	}
 	factory.getReviews = function() {
@@ -196,7 +209,7 @@ webShop.factory('signupFactory',function($http){
 		    }
 		})
 	}
-	factory.customerLogin = function(user){
+	/*factory.customerLogin = function(user){
 			console.log("This is the customer " + JSON.stringify(user))
 			return $http({
 			    method : "POST",
@@ -207,10 +220,59 @@ webShop.factory('signupFactory',function($http){
 			    }
 			})
 	}
-	
+	*/
 	return factory
 	
 });
+
+webShop.factory('loginFactory',function($http,$localStorage,$log,$location,$route){
+	
+	var service = {};
+	
+	service.login = login;
+	service.logout = logout;
+	service.getCurrentUser = getCurrentUser;
+	
+	return service;
+	
+	function login(username,password,callback) {
+		console.log(username +  " " + password);
+		var user = {};
+		user.username = username;
+		user.password = password;
+		$http({
+		    method : "POST",
+		    url : '/AngularWebShop/rest/users/login',
+		    data : user,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		}).success(function (user){
+			console.log("This is what server returned " + user.username)
+			console.log(JSON.stringify(user) + " <<<<<<<<<<<<<<<<<<<<<")
+			if(user.username) {
+				var currentUser = {username : username , role : user.role};
+
+				$localStorage.currentUser = currentUser;
+				$location.path('/products');
+			}else {
+				callback(false);
+			}
+		})
+	}
+	
+	function logout() { 
+		delete $localStorage.currentUser;
+		$location.path('/login')
+	}
+	
+	function getCurrentUser() {
+		return $localStorage.currentUser;
+	}
+	
+});
+
+
 webShop.factory('shoppingCartFactory', function($http) {
 
 	var factory = {};

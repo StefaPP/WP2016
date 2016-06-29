@@ -5,22 +5,20 @@
 		<h3>Lager : {{product.lager}}</h3>
 		<img style="width: 400px; height: 300px;" src="{{product.image}}">
 		<p>
-			<button class="btn btn-primary btn-lg" ng-click="addToCart(product)" role="button" ng-disabled="product.lager==0" >Add to cart !</button>
+			<button class="btn btn-primary btn-lg" ng-click="addToCart(product)" role="button" ng-disabled="product.lager===0 || currentRole!='customer'" >Add to cart !</button>
 			<div ng-show="product.lager==0">This product is currently unavailable</div>
 		</p>
 	</div>
 	<button class="btn btn-danger topright"
 		ng-click="deleteProduct(product)">Delete product</button>
 	<ul class="comments" ng-repeat="r in reviews | orderBy:'-rating'">
-
 		<div
 			style="width: 500px; max-width: 500px; display: inline-block; background-color: lightgray;"
 			ng-show="r.productId === review.productId ">
-			<li id="ranks"><p style="font-size: 16px;">{{r.comment}}</p> <br />
-
+			<li id="ranks"><p style="font-size: 16px;">{{r.comment}}</p> <br/>
 				<button type="button"
 					class="btn btn-danger btn-xs toprightRemoveReview"
-					ng-click="deleteReview(r)">
+					ng-click="deleteReview(r)" ng-show="r.user===currentUser">
 					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 				</button>
 
@@ -32,7 +30,7 @@
 				</div>
 
 				<p style="font-size: 14px;" class="text-right">
-					<i style="color: gray">{{r.date|date:'medium'}}<br /></i>
+					<i style="color: gray">{{r.date | date:'medium'}}<br/>by:{{r.user}}</i>
 				</p>
 		</div>
 		</li>

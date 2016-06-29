@@ -47,7 +47,7 @@ public class ReviewService {
 		id +=1;
 		r.setId(Integer.toString(id));
 		r.setDate(date.toString());
-		r.setUser("1");
+		r.setUser(r.getUser());
 		try {
 			Reviews.writeReview(r);
 			revs.getRevs().put(r.getId(), r);

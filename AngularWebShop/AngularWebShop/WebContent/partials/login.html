@@ -13,6 +13,9 @@
             <label for="password">Password</label>
             <input type="password" name="password" id="password" class="form-control" ng-model="user.password" required />
            </div>
+           <div>
+           <p style="color:red;font-size:20px;" ng-show=value> Invalid username or password ! </p>
+           </div>
         <div class="form-actions">
         <input type="submit" value="Log in" class="btn btn-default dropdown-toggle"/>&nbsp;&nbsp;&nbsp;
         <input type="button" value="Sign up" ui-sref="signup" class="btn btn-default dropdown-toggle"/>

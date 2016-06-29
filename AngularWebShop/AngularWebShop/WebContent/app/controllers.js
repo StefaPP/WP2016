@@ -1,11 +1,16 @@
-webShop.controller('productsController', function($scope,$location,productsFactory) {
+webShop.controller('productsController', function($scope,$location,productsFactory,$rootScope) {
 	
     function init() {
         productsFactory.getProducts().success(function (data) {
         	$scope.products = data;
 		});
+        $scope.currentUser = $rootScope.getCurrentUser().username;
+        $scope.currentRole = $rootScope.getCurrentUser().role;
+
     }
 	init();
+	
+	
 	
 	function initCats() {
 		productsFactory.getCategories().success(function (data) {
@@ -59,7 +64,7 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	}
 	init();
 })
-.controller('productDetailsCtrl',function($scope,$location,$routeParams,productsFactory,reviewFactory){
+.controller('productDetailsCtrl',function($scope,$location,$rootScope,$routeParams,productsFactory,reviewFactory){
 	
 	 $scope.starRating = 0;	
 	 $scope.click = function (param) {
@@ -81,6 +86,15 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	 
 	 $scope.addToCart = function(product) {
 		 alert('You have successfully added ' + $scope.product.name + ' to cart');
+		 product.customerId =  $scope.currentUser;
+		 product.productId = $scope.product.id;
+		 product.storeId = $scope.product.storeId;
+		 
+		 console.log(JSON.stringify(product) + "<<<<<<<<<<<")
+		 productsFactory.addToCart(product).success(function(data) {
+			 init();
+		});	
+
 		 $scope.product.lager -= 1; 
 	 }
 	 
@@ -89,11 +103,19 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		 return new Array($scope.stars);
 		 
 	 }
-	 	function init() { 
+	 	function init() {
+	 	productsFactory.getShoppingList().success(function(data){
+	 		$scope.shoppingList = data;
+	 		console.log("Shopping list" + JSON.stringify($scope.shoppingList))
+	 	});
+	 	
+	 	$scope.currentUser = $rootScope.getCurrentUser().username;
+	 	$scope.currentRole = $rootScope.getCurrentUser().role;
 		console.log('ProductDetailsController.Init');
 		$scope.review = {};
 		var id = $routeParams.id;
 		$scope.review.productId = id;
+		$scope.review.user = $scope.currentUser;
 		productsFactory.getProduct(id).success(function(data){	
 			$scope.product = data;
 		})
@@ -170,9 +192,10 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	}
 		init();
 })
-.controller('storeDetailsCtrl',function($scope,$location,$routeParams,storeFactory,productsFactory){
+.controller('storeDetailsCtrl',function($scope,$location,$routeParams,$rootScope,storeFactory,productsFactory){
 		
 		function init() {
+		$scope.currentRole = $rootScope.getCurrentUser().role;	
 		$scope.product = {};
 		var id = $routeParams.id;
 		console.log("id prodavnice " + id );
@@ -229,7 +252,7 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		})
 	}
 })
-.controller('loginCtrl',function($scope,$location,signupFactory,userFactory){
+.controller('loginCtrl',function($scope,$location,loginFactory,userFactory){
 	
 	function init() {
 		console.log('Login Controller')
@@ -242,11 +265,16 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		
 	$scope.user = {};
 	$scope.login = function () {
-		signupFactory.customerLogin($scope.user).success(function(){
-			$location.path('/products');
-		}).error(function(){
-			alert('Login unsuccessful !');
-		})
+		console.log($scope.user.username + " " + $scope.user.password)
+		loginFactory.login($scope.user.username,$scope.user.password,loginCbck);
+	}
+	function loginCbck(success){
+		if(success){
+			console.log('success!');
+		}
+		else{
+			$scope.value = true;
+		}
 	}
 	
 })

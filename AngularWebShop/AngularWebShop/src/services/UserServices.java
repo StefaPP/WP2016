@@ -1,7 +1,5 @@
 package services;
 
-
-
 import java.io.IOException;
 import java.util.Collection;
 
@@ -45,22 +43,20 @@ public class UserServices {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
-	
 }
 	
 	@POST
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean login(User u) {
+	public User login(User u) {
 		Users users = (Users) ctx.getAttribute("users");
 		System.out.println("This is the customer " + u);
-		if (users.getUsers().containsKey(u.getUsername())){
-			System.out.println("Customer found!");
-			return true;
+		if (users.getUsers().containsKey(u.getUsername()) && (users.getUsers().get(u.getUsername())).getPassword().equals(u.getPassword())){
+			return users.getUsers().get(u.getUsername());
 		}
 		else {
 			System.out.println("ne postoji !");
-			return false;
+			return null;
 	}
 	}
 	

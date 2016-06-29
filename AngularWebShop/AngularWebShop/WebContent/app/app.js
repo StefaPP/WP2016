@@ -1,7 +1,11 @@
 // napravimo modul
-var webShop = angular.module('webShop', ['ngRoute']);
+var webShop = angular.module('webShop', ['ngRoute','ngStorage']);
 
-webShop.config(function($routeProvider) {
+webShop
+.config(config)
+.run(run);
+
+function config($routeProvider) {
 	$routeProvider
 	.when('#/',{
 		templateUrl: 'index.html'
@@ -46,8 +50,37 @@ webShop.config(function($routeProvider) {
 		templateUrl : 'partials/category.html',
 		controller : 'productsController'
 	})
-});
 
-webShop.config(function($logProvider){
-    $logProvider.debugEnabled(true);
-});
+}
+
+function run($rootScope,$http,$location,$localStorage,$route,loginFactory){
+	
+	$rootScope.getCurrentUser = function(){
+		if(!loginFactory.getCurrentUser()){
+			return undefined;
+		
+		}
+		else {
+			return loginFactory.getCurrentUser();
+		}
+	}
+	
+	$rootScope.getCurrentUserRole = function () {
+        if (!loginFactory.getCurrentUser()){
+          return undefined;
+        }
+        else{
+          return loginFactory.getCurrentUser().role;
+        }
+    }
+	
+	
+	 $rootScope.isLoggedIn = function () {
+         if (loginFactory.getCurrentUser()){
+           return true;
+         }
+         else{
+           return false;
+         }
+     }
+}
