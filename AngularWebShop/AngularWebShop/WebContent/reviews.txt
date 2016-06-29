@@ -3,3 +3,4 @@
 5;1;Fri Jun 24 16:24:52 CEST 2016;7;Drugi rating;2;
 6;Stefica;Wed Jun 29 11:25:04 CEST 2016;8;Ekstra tv;1;
 7;Kilje;Wed Jun 29 11:25:20 CEST 2016;3;LOs tv;1;
+8;Stefica;Wed Jun 29 19:07:35 CEST 2016;5;Rating;2;

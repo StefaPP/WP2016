@@ -8,7 +8,8 @@ webShop
 function config($routeProvider) {
 	$routeProvider
 	.when('#/',{
-		templateUrl: 'index.html'
+		templateUrl: 'index.html',
+		controller : 'productsController'
 	})
 	.when('/signup',{
 		templateUrl: 'partials/signup.html',
@@ -55,6 +56,12 @@ function config($routeProvider) {
 
 function run($rootScope,$http,$location,$localStorage,$route,loginFactory){
 	
+	
+	 $rootScope.logout = function () {
+		 console.log("Logged Out")
+         loginFactory.logout();
+     }
+	
 	$rootScope.getCurrentUser = function(){
 		if(!loginFactory.getCurrentUser()){
 			return undefined;
@@ -73,7 +80,6 @@ function run($rootScope,$http,$location,$localStorage,$route,loginFactory){
           return loginFactory.getCurrentUser().role;
         }
     }
-	
 	
 	 $rootScope.isLoggedIn = function () {
          if (loginFactory.getCurrentUser()){

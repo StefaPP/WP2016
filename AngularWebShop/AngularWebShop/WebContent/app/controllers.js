@@ -4,13 +4,10 @@ webShop.controller('productsController', function($scope,$location,productsFacto
         productsFactory.getProducts().success(function (data) {
         	$scope.products = data;
 		});
-        $scope.currentUser = $rootScope.getCurrentUser().username;
-        $scope.currentRole = $rootScope.getCurrentUser().role;
-
+     
+        console.log($scope.currentUser);
     }
 	init();
-	
-	
 	
 	function initCats() {
 		productsFactory.getCategories().success(function (data) {
@@ -20,10 +17,8 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	}
 	
 	initCats();
-	
 	$scope.addToCart = function(product) {
 		productsFactory.addToCart(product).success(function(data) {
-			toast('Product ' + product.name + " added to the Shopping Cart");
 		});	
 	};
 	
@@ -86,7 +81,7 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	 
 	 $scope.addToCart = function(product) {
 		 alert('You have successfully added ' + $scope.product.name + ' to cart');
-		 product.customerId =  $scope.currentUser;
+		 product.customerId = $rootScope.getCurrentUser().username;
 		 product.productId = $scope.product.id;
 		 product.storeId = $scope.product.storeId;
 		 
@@ -111,7 +106,7 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	 	
 	 	$scope.currentUser = $rootScope.getCurrentUser().username;
 	 	$scope.currentRole = $rootScope.getCurrentUser().role;
-		console.log('ProductDetailsController.Init');
+		
 		$scope.review = {};
 		var id = $routeParams.id;
 		$scope.review.productId = id;

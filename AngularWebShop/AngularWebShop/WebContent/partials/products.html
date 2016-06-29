@@ -1,7 +1,7 @@
 <div>
 <div style="float:left; width:20%;">
 <ul class="ver"  ng-repeat="c in categories">
-  <li class="ver"><div><a ng-href="#/category/{{c.name}}" href="#products">{{c.name}}</a>
+  <li class="ver"><div><a ng-href="#/category/{{c.name}}" href="#products" ng-disabled="!isLoggedIn()">{{c.name}}</a>
   <button type="button" class="btn btn-danger btn-xs toprightRemove" ng-click="deleteCategory(c)" ng-show="currentUser==='admin'">
   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 </button>

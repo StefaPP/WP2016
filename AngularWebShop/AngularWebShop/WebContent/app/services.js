@@ -209,18 +209,7 @@ webShop.factory('signupFactory',function($http){
 		    }
 		})
 	}
-	/*factory.customerLogin = function(user){
-			console.log("This is the customer " + JSON.stringify(user))
-			return $http({
-			    method : "POST",
-			    url : '/AngularWebShop/rest/users/login',
-			    data : user,
-			    headers : {
-			        'Content-Type' : 'application/json'
-			    }
-			})
-	}
-	*/
+
 	return factory
 	
 });

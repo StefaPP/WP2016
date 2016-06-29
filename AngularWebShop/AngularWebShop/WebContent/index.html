@@ -188,6 +188,12 @@ li.ver {
     background-color: #111;
 }
 
+li.topright {
+    position: absolute;
+    top: 0px;
+    right: 16px;
+    font-size: 25px;
+}
 
 
 </style>
@@ -197,9 +203,9 @@ li.ver {
 <ul class="nvb">
     <li style="margin-left:25%;"><a href="#users" ng-href="#users">Dashboard</a></li>
     <li><a href="#products" ng-href="#products">Products</a></li>
-    <li><a href="#stores" ng-href="#stores" >Stores</a></li>    
-	<li><a href="#delivery" ng-href="#delivery" >Delivery</a></li>    
-	
+    <li><a href="#stores" ng-href="#stores" >Stores</a></li> 
+	<li><a ng-if="!isLoggedIn()" href="#login" ng-href="#login">Login</a></li>   
+	<li class="topright"><a ng-if="isLoggedIn()" ng-click="logout()"> Logout</a> </li> 
 </ul>
 <div ng-view>
 
