@@ -13,6 +13,9 @@
 		{{p.brandName}}<br/>
 		{{p.category}}<br/>
 		<img src="{{p.image}}" style="width:250px;height:200px"/>
+		<select class="form-control" name="repeatSelect" id="repeatSelect" ng-model="deliveryId">
+        <option ng-repeat="d in deliverers" value="{{d.name}}">{{d.name}}</option>
+     </select>
   </div>
 </div>
 </div>

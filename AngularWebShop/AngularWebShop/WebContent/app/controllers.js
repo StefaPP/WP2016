@@ -291,10 +291,15 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	}
 	
 })
-.controller('shoppingListCtrl',function($scope,$rootScope,shoppingListFactory,productsFactory) {
+.controller('shoppingListCtrl',function($scope,$rootScope,shoppingListFactory,productsFactory,deliveryFactory) {
+	
 	function init(){
+		$scope.deliveryId = "";
 		$scope.currentUser = $rootScope.getCurrentUser().username;
 		$scope.products = []
+		deliveryFactory.getDeliverers().success(function(data){
+			$scope.deliverers = data;
+		})
 		shoppingListFactory.getUsersShoppingList($scope.currentUser).success(function(data){
 		
 			$scope.sp = data;
