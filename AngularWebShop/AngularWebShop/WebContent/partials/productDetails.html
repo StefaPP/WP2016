@@ -18,7 +18,7 @@
 			<li id="ranks"><p style="font-size: 16px;">{{r.comment}}</p> <br/>
 				<button type="button"
 					class="btn btn-danger btn-xs toprightRemoveReview"
-					ng-click="deleteReview(r)" ng-show="r.user===currentUser">
+					ng-click="deleteReview(r)" ng-show="r.user===currentUser || currentRole==='admin'">
 					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 				</button>
 
@@ -36,7 +36,7 @@
 		</li>
 	</ul>
 	<br /> <br />
-	<div class="form-group">
+	<div class="form-group" ng-show="loggedIn">
 		<label for="comment">Review:</label>
 		<textarea class="form-control" ng-model="review.comment" rows="3"
 			cols="80" id="comment"></textarea>

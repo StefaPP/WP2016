@@ -261,8 +261,7 @@ webShop.factory('loginFactory',function($http,$localStorage,$log,$location,$rout
 	
 });
 
-
-webShop.factory('shoppingCartFactory', function($http) {
+webShop.factory('shoppingListFactory', function($http) {
 
 	var factory = {};
 	factory.getSC = function() {
@@ -271,9 +270,20 @@ webShop.factory('shoppingCartFactory', function($http) {
 	factory.getTotal = function() {
 		return $http.get('/AngularWebShop/rest/proizvodi/getTotal');
 	};
-	factory.clearSc = function() {
-		return $http.post('/AngularWebShop/rest/proizvodi/clearSc');
+	factory.removeItem = function(customerId,productId) {
+		return $http.post('/AngularWebShop/rest/proizvodi/removeItem',
+		{
+			"productId" :'' + productId,
+			"customerId":'' + customerId
+		});
+};
+	
+	factory.getUsersShoppingList = function(user){
+		return $http.post('/AngularWebShop/rest/proizvodi/getUsersShoppingList', 
+				{ "customerId" :''+user })
+
 	};
+	
 	return factory;
 
 });

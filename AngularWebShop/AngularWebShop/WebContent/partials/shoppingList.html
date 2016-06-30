@@ -1,0 +1,19 @@
+<div>
+<div ng-repeat="p in products" style="float:left; width:50%;">
+
+ <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{p.name}} </h3>
+  <button type="button" class="btn btn-danger btn-xs right" ng-click="removeItem(p.id)">
+  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+</button>
+  </div>
+  <div class="panel-body">
+		{{p.price}}.00 DIN<br/>
+		{{p.brandName}}<br/>
+		{{p.category}}<br/>
+		<img src="{{p.image}}" style="width:250px;height:200px"/>
+  </div>
+</div>
+</div>
+</div>

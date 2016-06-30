@@ -7,6 +7,10 @@ webShop
 
 function config($routeProvider) {
 	$routeProvider
+	.when('/',{
+		templateUrl: 'partials/login.html',
+		controller : 'loginCtrl'
+	})
 	.when('#/',{
 		templateUrl: 'index.html',
 		controller : 'productsController'
@@ -51,7 +55,10 @@ function config($routeProvider) {
 		templateUrl : 'partials/category.html',
 		controller : 'productsController'
 	})
-
+	.when('/shoppingList',{
+		templateUrl : 'partials/shoppingList.html',
+		controller : 'shoppingListCtrl'
+	})
 }
 
 function run($rootScope,$http,$location,$localStorage,$route,loginFactory){

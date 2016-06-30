@@ -232,6 +232,64 @@ public class ProductService {
 		return "OK";
 	}
 
+	
+	/*@GET
+	@Path("/getUsersShoppingList")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<ShoppingList> getUserShoppingList(ShoppingList u){
+		HashMap<String,ShoppingList> sp = new HashMap<String,ShoppingList>();
+		
+		for(ShoppingList s : getShoppingList().getShoppingArrayList())
+		{
+			if(s.getCustomerId().equals(request.getParameter("customerId"))){
+				sp.put(s.getId(), s);
+			}
+			
+		}
+		return sp.values();
+	}*/
+	
+	@POST
+	@Path("/getUsersShoppingList")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<ShoppingList> getUserShoppingList(ShoppingList u){
+		HashMap<String,ShoppingList> sp = new HashMap<String,ShoppingList>();
+		
+		for(ShoppingList s : getShoppingList().getShoppingArrayList())
+		{
+			if(s.getCustomerId().equals(u.getCustomerId())){
+				sp.put(s.getId(), s);
+			}
+			
+		}
+		return sp.values();
+	}
+	
+	@POST
+	@Path("/removeItem")
+	public void removeItem(ShoppingList sp){
+		ShoppingListFile spl = (ShoppingListFile) ctx.getAttribute("shoppingList");
+		ShoppingList itemToRemove = new ShoppingList();
+		for(ShoppingList s : getShoppingList().getShoppingArrayList())
+		{
+			if(s.getCustomerId().equals(sp.getCustomerId()) && s.getProductId().equals(sp.getProductId())){
+				itemToRemove.setId(s.getId());
+			
+			}
+		}
+		try{
+			ShoppingListFile.deleteItem(itemToRemove.getId());
+			//spl.getShoppingList().remove(itemToRemove.getId());
+			itemToRemove = spl.getShoppingList().get(itemToRemove.getId());
+			spl.getShoppingArrayList().remove(itemToRemove);
+			
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
+	}
+	
 	private Products getProducts() {
 		Products products = (Products) ctx.getAttribute("products");
 		if (products == null) {

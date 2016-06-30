@@ -1,6 +1,10 @@
 webShop.controller('productsController', function($scope,$location,productsFactory,$rootScope) {
 	
     function init() {
+    	if($rootScope.isLoggedIn()){
+    		$scope.currentUser = $rootScope.getCurrentUser().username;
+    		$scope.currentRole = $rootScope.getCurrentUser().role;
+    	}
         productsFactory.getProducts().success(function (data) {
         	$scope.products = data;
 		});
@@ -99,14 +103,17 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		 
 	 }
 	 	function init() {
-	 	productsFactory.getShoppingList().success(function(data){
+	 	if($rootScope.isLoggedIn()){
+	 		$scope.loggedIn = true;
+	 		$scope.currentUser = $rootScope.getCurrentUser().username;
+		 	$scope.currentRole = $rootScope.getCurrentUser().role;
+	 	}
+	 		
+	 		productsFactory.getShoppingList().success(function(data){
 	 		$scope.shoppingList = data;
 	 		console.log("Shopping list" + JSON.stringify($scope.shoppingList))
 	 	});
 	 	
-	 	$scope.currentUser = $rootScope.getCurrentUser().username;
-	 	$scope.currentRole = $rootScope.getCurrentUser().role;
-		
 		$scope.review = {};
 		var id = $routeParams.id;
 		$scope.review.productId = id;
@@ -190,7 +197,12 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 .controller('storeDetailsCtrl',function($scope,$location,$routeParams,$rootScope,storeFactory,productsFactory){
 		
 		function init() {
-		$scope.currentRole = $rootScope.getCurrentUser().role;	
+		
+		if($rootScope.isLoggedIn()){
+	 		$scope.currentUser = $rootScope.getCurrentUser().username;
+		 	$scope.currentRole = $rootScope.getCurrentUser().role;		 	
+		 }
+		
 		$scope.product = {};
 		var id = $routeParams.id;
 		console.log("id prodavnice " + id );
@@ -240,6 +252,9 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	
 	init();
 	
+	$scope.login = function(){
+		$location.path('/login');
+	}
 	$scope.user={};
 	$scope.signup=function () {
 		signupFactory.signup($scope.user).success(function (){
@@ -257,7 +272,10 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		}
 		
 		init();
-		
+	
+	$scope.signUp = function(){
+		$location.path('/signup');
+	}
 	$scope.user = {};
 	$scope.login = function () {
 		console.log($scope.user.username + " " + $scope.user.password)
@@ -272,6 +290,31 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		}
 	}
 	
+})
+.controller('shoppingListCtrl',function($scope,$rootScope,shoppingListFactory,productsFactory) {
+	function init(){
+		$scope.currentUser = $rootScope.getCurrentUser().username;
+		$scope.products = []
+		shoppingListFactory.getUsersShoppingList($scope.currentUser).success(function(data){
+		
+			$scope.sp = data;
+			 angular.forEach($scope.sp, function(item){
+                 productsFactory.getProduct(item.productId).success(function (data){
+                	 $scope.products.push(data);
+                 })
+
+             })
+           
+		})
+		
+		$scope.removeItem = function(productId){
+			shoppingListFactory.removeItem($scope.currentUser,productId).success(function(){
+				alert('This item has been removed from your shopping list')
+				init();
+			})
+		}
+	}
+	init();
 })
 .controller('deliveryCtrl',function($scope,deliveryFactory){
 	function init() {

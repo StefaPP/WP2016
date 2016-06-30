@@ -89,6 +89,30 @@ public class ShoppingListFile {
 		out.newLine();
 		out.close();
 	}
+	
+	
+	public static void deleteItem(String id) throws IOException{
+		File file = new File(path + "/shoppingList.txt");
+		File temp = new File(path + "/temp.txt");
+		
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+		String line;
+		synchronized (Store.class) { 
+			while((line = reader.readLine()) != null){
+				if(!line.startsWith(id)){
+					writer.write(line);
+					writer.newLine();
+				}
+				
+			}
+				reader.close();
+				writer.close();
+		}
+		file.delete();
+		temp.renameTo(file);
+		
+	}
 
 	public HashMap<String, ShoppingList> getShoppingList() {
 		return shoppingList;
