@@ -144,7 +144,6 @@ public class ProductService {
 			}
 				
 		}
-	
 		return categoryP.values();
 	}
 	
@@ -162,18 +161,20 @@ public class ProductService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addToCart(ShoppingList sp){
 		ShoppingListFile spf = (ShoppingListFile) ctx.getAttribute("shoppingList");		
-		spf= getShoppingList();
-		for(ShoppingList spl : spf.getShoppingList().values()){
-			System.out.println(spl.getId() + " <<<<<<<<<<<<<<<<<<<<<<<<<");
-		    sId = spl.getId();
+		spf = getShoppingList();
+		
+		for(ShoppingList spl : spf.getShoppingArrayList()){
+			sId = spl.getId();
 		}
-		System.out.println(sId);
-		sp.setId(sId+1);
+		int i = Integer.parseInt(sId);
+		i+=1;
+		sp.setId(Integer.toString(i));
 		sp.setDeliveryId("n/a");
 		try {
 			ShoppingListFile.writeItem(sp);
 			spf.getShoppingList().put(sp.getId(), sp);
 			spf.getShoppingArrayList().add(sp);
+			ctx.setAttribute("shoppingList", spf);
 		}catch(IOException e){
 			e.printStackTrace();
 		}
@@ -214,29 +215,17 @@ public class ProductService {
 		{
 			if(s.getCustomerId().equals(u.getCustomerId())){
 				sp.put(s.getId(), s);
-			}
-			
+			}	
 		}
 		return sp.values();
 	}
 	
 	
-/*	public void removeItem(ShoppingList sp){
-		ShoppingListFile spl = (ShoppingListFile) ctx.getAttribute("shoppingList");
-		ShoppingList itemToRemove = new ShoppingList();
-		for(ShoppingList s : getShoppingList().getShoppingArrayList())
-		{
-			if(s.getCustomerId().equals(sp.getCustomerId()) && s.getProductId().equals(sp.getProductId())){
-				itemToRemove.setId(s.getId());
-			
-			}
-		}*/
-	public ShoppingList itemToRemove = new ShoppingList();
 	@POST
 	@Path("/clearShoppingList")
 	public void clearShoppingList(ShoppingList u) {
 		ShoppingListFile spl = (ShoppingListFile) ctx.getAttribute("shoppingList");
-		
+		ShoppingList itemToRemove = new ShoppingList();	
 		
 		for(ShoppingList s : getShoppingList().getShoppingList().values())
 		{
@@ -248,6 +237,7 @@ public class ProductService {
 			ShoppingListFile.deleteItem(itemToRemove.getId());
 			itemToRemove = spl.getShoppingList().get(itemToRemove.getId());
 			spl.getShoppingArrayList().remove(itemToRemove);
+			ctx.setAttribute("shoppingList", spl);
 			
 		}catch(IOException e){
 			e.printStackTrace();

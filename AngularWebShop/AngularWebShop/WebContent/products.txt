@@ -2,7 +2,6 @@
 2;Sony digitalna kamera;32000;30.00;100.00;Kina;Sony;electronic & office;http://media.coopelectricalshop.co.uk/media/default/Products/SON-CAM-DSCWX100B-BK.png;2; ; ;3;
 3;Samsung monitor 17";35000;30.00;100.00;Kina;Samsung;electronic & office;http://www.kulltech.com/wordpress/wp-content/uploads/2014/06/Samsung-UD590.png;3; ; ;2;
 5;Nike Roshe;8000;13.00;400.00;Kina;Nike;clothing,shoes & jewelry;http://images.nike.com/is/image/DotCom/THN_PS/Nike-Roshe-Run-Mens-Shoe-511881_010.jpg?hei=300&wid=400&fmt=png; ; ; ;1;
-6;Nike T-shirt;4000;42.00;500.00;Kina;Nike;clothing,shoes & jewelry;http://icons.iconarchive.com/icons/michael/nike/256/Nike-Shirt-10-icon.png; ; ; ;1;
 7;Nike Shorts;8000;26.00;600.00;Kina;Nike;clothing,shoes & jewelry;http://cdn2.bigcommerce.com/server4200/qpfrc9yq/products/14211/images/7636/619171_010_A__14936.1405427149.1280.1280.png?c=2; ; ; ;1;
 9;Yeezy Boost 360;750000.0;46.0;500.0;USA;Adiddas;clothing,shoes & jewelry;images/2.png;4;  ;  ;3;
 10;Decija kolica;50000.0;300.0;2000.0;Vietnam;Chico;baby & kids;http://www.decjibazar.rs/3906-thickbox_default/chicco-kolica-liteway-complete-anthractive-siva.jpg;5;  ;  ;7;
