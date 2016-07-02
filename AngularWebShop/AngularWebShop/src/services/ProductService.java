@@ -156,16 +156,20 @@ public class ProductService {
 		return getShoppingList().getValues();
 	}
 	
+	public String sId;
 	@POST
 	@Path("/addToCart")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addToCart(ShoppingList sp){
-		ShoppingListFile spf = (ShoppingListFile) ctx.getAttribute("shoppingList");
-		int id = spf.getShoppingList().size();
-		id +=1;
-		sp.setId(Integer.toString(id+1));
+		ShoppingListFile spf = (ShoppingListFile) ctx.getAttribute("shoppingList");		
+		spf= getShoppingList();
+		for(ShoppingList spl : spf.getShoppingList().values()){
+			System.out.println(spl.getId() + " <<<<<<<<<<<<<<<<<<<<<<<<<");
+		    sId = spl.getId();
+		}
+		System.out.println(sId);
+		sp.setId(sId+1);
 		sp.setDeliveryId("n/a");
-		System.out.println(sp + "    <<<<<<");
 		try {
 			ShoppingListFile.writeItem(sp);
 			spf.getShoppingList().put(sp.getId(), sp);
@@ -215,6 +219,43 @@ public class ProductService {
 		}
 		return sp.values();
 	}
+	
+	
+/*	public void removeItem(ShoppingList sp){
+		ShoppingListFile spl = (ShoppingListFile) ctx.getAttribute("shoppingList");
+		ShoppingList itemToRemove = new ShoppingList();
+		for(ShoppingList s : getShoppingList().getShoppingArrayList())
+		{
+			if(s.getCustomerId().equals(sp.getCustomerId()) && s.getProductId().equals(sp.getProductId())){
+				itemToRemove.setId(s.getId());
+			
+			}
+		}*/
+	public ShoppingList itemToRemove = new ShoppingList();
+	@POST
+	@Path("/clearShoppingList")
+	public void clearShoppingList(ShoppingList u) {
+		ShoppingListFile spl = (ShoppingListFile) ctx.getAttribute("shoppingList");
+		
+		
+		for(ShoppingList s : getShoppingList().getShoppingList().values())
+		{
+			if(s.getCustomerId().equals(u.getCustomerId())){
+				System.out.println(s.getCustomerId() + "==" + u.getCustomerId());
+				itemToRemove.setId(s.getId());
+			
+		try{
+			ShoppingListFile.deleteItem(itemToRemove.getId());
+			itemToRemove = spl.getShoppingList().get(itemToRemove.getId());
+			spl.getShoppingArrayList().remove(itemToRemove);
+			
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+}
+}
+		
 	
 	@POST
 	@Path("/buyProducts")

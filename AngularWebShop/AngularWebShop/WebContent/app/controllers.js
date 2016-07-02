@@ -22,9 +22,14 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	
 	initCats();
 	$scope.addToCart = function(product) {
+		
+		productsFactory.getShoppingList().success(function(data){
+	 		$scope.shoppingList = data;
 		productsFactory.addToCart(product).success(function(data) {
 		});	
-	};
+	})
+}
+	
 	
 	$scope.addCategory = function()
 	{
@@ -337,11 +342,12 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 			$scope.buying.deliveryId = item.deliveryId;
 			$scope.buying.totalPrice = $scope.total;
 			console.log(JSON.stringify($scope.buying));
-			productsFactory.buy($scope.buying).success(function(){
-				alert('Thank you for shopping with us <3');
-			})
+			productsFactory.buy($scope.buying)
 		})
-			
+			alert('Thank you for shopping with us <3');
+			shoppingListFactory.clearShoppingList($scope.buying.customerId).success(function(){
+				init();
+			});
 	}
 		
 	

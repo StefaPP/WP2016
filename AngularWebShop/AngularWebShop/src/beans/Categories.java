@@ -16,8 +16,8 @@ public class Categories {
 	
 	private HashMap<String,Category> categories = new HashMap<String,Category>();
 	private ArrayList<Category> categoryList = new ArrayList<>();
-	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
-	//private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent";
+	//private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent";
 	
 	public Categories() {
 		this(path);

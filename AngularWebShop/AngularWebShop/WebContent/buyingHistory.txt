@@ -1,3 +1,23 @@
-4;Kilje;5;10;D Express;61000:
-5;Kilje;;7;DHL;61000:
-6;Kilje;4;12;Post express;61000:
+2;Stefica;1;1;undefined;22000:
+3;Stefica;1;1;DHL;22000:
+4;Stefica;4;12;undefined;57000:
+5;Stefica;1;1;undefined;57000:
+4;Stefica;2;2;undefined;57000:
+7;Stefica;1;1;undefined;22000:
+8;Stefica;1;1;DHL;22000:
+9;Stefica;4;12;Post express;25000:
+10;Stefica;1;1;D Express;25000:
+11;Stefica;1;1;Post express;25000:
+12;Stefica;4;12;Post express;25000:
+13;Stefica;4;12;Post express;25000:
+13;Stefica;1;1;Post express;25000:
+15;Stefica;4;12;DHL;25000:
+16;Stefica;1;1;Post express;25000:
+17;Stefica;4;12;DHL;25000:
+18;Stefica;1;1;DHL;25000:
+19;Stefica;1;1;Post express;25000:
+20;Stefica;4;12;DHL;25000:
+21;Stefica;5;10;undefined;50000:
+22;Stefica;2;2;undefined;32000:
+23;Stefica;2;2;undefined;32000:
+24;Stefica;2;2;undefined;32000:

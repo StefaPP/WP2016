@@ -3,5 +3,3 @@
 5;dox;4;12;n/a;
 6;Kilje;5;10;n/a;
 7;Kilje;3;7;n/a;
-8;Stefica;3;3;n/a;
-9;Stefica;2;2;n/a;
