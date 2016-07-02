@@ -197,6 +197,10 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 			init();
 		});
 	}
+	
+	$scope.updateStore = function(){
+		console.log("Update store metod for:" + JSON.stringify($scope.store))
+	}
 		init();
 })
 .controller('storeDetailsCtrl',function($scope,$location,$routeParams,$rootScope,storeFactory,productsFactory){
