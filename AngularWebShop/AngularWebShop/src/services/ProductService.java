@@ -18,15 +18,14 @@ import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
 
+import beans.Buying;
+import beans.BuyingHistory;
 import beans.Categories;
 import beans.Category;
 import beans.Product;
-import beans.ProductToAdd;
 import beans.Products;
 import beans.Review;
 import beans.Reviews;
-import beans.ShoppingCart;
-import beans.ShoppingCartItem;
 import beans.ShoppingList;
 import beans.ShoppingListFile;
 import beans.Store;
@@ -149,15 +148,6 @@ public class ProductService {
 		return categoryP.values();
 	}
 	
-	@POST
-	@Path("/add")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public String add(ProductToAdd p) {
-		getShoppingCart().addItem(getProducts().getProduct(p.id));
-		System.out.println("Product " + getProducts().getProduct(p.id) + " added with count: " + p.count);
-		return "OK";
-	}
 
 	@GET
 	@Path("/getShoppingList")
@@ -194,13 +184,6 @@ public class ProductService {
 		return products.getProduct(request.getParameter("id"));
 	}
 	
-	@GET
-	@Path("/getJustSc")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<ShoppingCartItem> getJustSc() {
-		return getShoppingCart().getItems();
-	}
-
 	@POST
 	@Path("/addCategory")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -216,40 +199,7 @@ public class ProductService {
 		}	
 		return "Dodata";
 	}
-	
-	@GET
-	@Path("/getTotal")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getTotal() {
-		return "" + getShoppingCart().getTotal();
-	}
 
-	@POST
-	@Path("/clearSc")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String clearSc() {
-		getShoppingCart().getItems().clear();
-		return "OK";
-	}
-
-	
-	/*@GET
-	@Path("/getUsersShoppingList")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<ShoppingList> getUserShoppingList(ShoppingList u){
-		HashMap<String,ShoppingList> sp = new HashMap<String,ShoppingList>();
-		
-		for(ShoppingList s : getShoppingList().getShoppingArrayList())
-		{
-			if(s.getCustomerId().equals(request.getParameter("customerId"))){
-				sp.put(s.getId(), s);
-			}
-			
-		}
-		return sp.values();
-	}*/
-	
 	@POST
 	@Path("/getUsersShoppingList")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -267,6 +217,34 @@ public class ProductService {
 	}
 	
 	@POST
+	@Path("/buyProducts")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void buyProducts(Buying b){
+		BuyingHistory bh = (BuyingHistory) ctx.getAttribute("buyingHistory");
+		int id = bh.getBuyingHistory().size();
+		id +=1;
+		b.setId(Integer.toString(id+1));	
+		
+		try {
+			BuyingHistory.writeItem(b);
+			bh.getBuyingHistory().add(b);
+			bh.getHistory().put(b.getId(), b);
+		} catch(IOException e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@GET
+	@Path("/getBuyingHistory")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Buying> getHistory(){
+		return getBuyingHistory().getValues();
+	}
+	
+	
+	
+	@POST
 	@Path("/removeItem")
 	public void removeItem(ShoppingList sp){
 		ShoppingListFile spl = (ShoppingListFile) ctx.getAttribute("shoppingList");
@@ -280,7 +258,6 @@ public class ProductService {
 		}
 		try{
 			ShoppingListFile.deleteItem(itemToRemove.getId());
-			//spl.getShoppingList().remove(itemToRemove.getId());
 			itemToRemove = spl.getShoppingList().get(itemToRemove.getId());
 			spl.getShoppingArrayList().remove(itemToRemove);
 			
@@ -289,7 +266,7 @@ public class ProductService {
 		}
 		
 	}
-	
+
 	private Products getProducts() {
 		Products products = (Products) ctx.getAttribute("products");
 		if (products == null) {
@@ -314,18 +291,17 @@ public class ProductService {
 		if(sp == null){
 			sp = new ShoppingListFile(ctx.getRealPath(""));
 			ctx.setAttribute("shoppingList", sp);
-			
 		}
 		return sp;
 	}
 
-	private ShoppingCart getShoppingCart() {
-		ShoppingCart sc = (ShoppingCart) request.getSession().getAttribute("shoppingCart");
-		if (sc == null) {
-			sc = new ShoppingCart();
-			request.getSession().setAttribute("shoppingCart", sc);
+	private BuyingHistory getBuyingHistory(){
+		BuyingHistory bh = (BuyingHistory) ctx.getAttribute("buyingHistory");
+		if(bh == null){
+			bh = new BuyingHistory(ctx.getRealPath(""));
+			ctx.setAttribute("buyingHistory", bh);
 		}
-		return sc;
+		return bh;
 	}
 
 }

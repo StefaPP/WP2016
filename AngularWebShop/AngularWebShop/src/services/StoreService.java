@@ -14,9 +14,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-
-import beans.ProductsInStore;
-import beans.ProductsInStoreData;
 import beans.Store;
 import beans.Stores;
 
@@ -35,12 +32,6 @@ public class StoreService {
 		return getStores().getValues();
 	}
 
-	@GET
-	@Path("/getStoreProducts")
-	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ProductsInStore> getStoreProducts() {
-		return getProductsOfStore().getProducts();
-	}
 
 	@DELETE
 	@Path("/deleteStore")
@@ -99,15 +90,6 @@ public class StoreService {
 		}
 		return stores;
 
-	}
-
-	private ProductsInStoreData getProductsOfStore() {
-		ProductsInStoreData pis = (ProductsInStoreData) ctx.getAttribute("pis");
-		if (pis == null) {
-			pis = new ProductsInStoreData(ctx.getRealPath(""));
-			ctx.setAttribute("pis", pis);
-		}
-		return pis;
 	}
 
 }

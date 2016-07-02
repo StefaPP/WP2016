@@ -1,0 +1,3 @@
+4;Kilje;5;10;D Express;61000:
+5;Kilje;;7;DHL;61000:
+6;Kilje;4;12;Post express;61000:

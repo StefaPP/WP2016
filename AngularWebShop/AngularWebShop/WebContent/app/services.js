@@ -15,11 +15,20 @@ webShop.factory('productsFactory', function($http, $window) {
 		console.log("usao u fabriku")
 		return $http.get('/AngularWebShop/rest/proizvodi/getCategories');
 	};
+
+	factory.buy = function(buying){
+		return $http.post('/AngularWebShop/rest/proizvodi/buyProducts',{
+			"customerId":''+buying.customerId,
+			"storeId":''+buying.storeId,
+			"productId":''+buying.productId,
+			"deliveryId":''+buying.deliveryId,
+			"totalPrice":''+buying.totalPrice
+		})
+	}
 	
-/*
-	this.storeId = storeId;
-	this.productId = productId;
-	this.deliveryId = deliveryId;*/
+	factory.getHistory = function(){
+		return $http.get('/AngularWebShop/rest/proizvodi/getBuyingHistory');
+	}
 	
 	factory.getShoppingList = function(){ 
 		return $http.get('/AngularWebShop/rest/proizvodi/getShoppingList');

@@ -295,23 +295,32 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	
 	function init(){
 		$scope.deliveryId = "";
+		$scope.buying = {};
+		
 		$scope.currentUser = $rootScope.getCurrentUser().username;
 		$scope.products = []
+		
 		deliveryFactory.getDeliverers().success(function(data){
 			$scope.deliverers = data;
 		})
-		shoppingListFactory.getUsersShoppingList($scope.currentUser).success(function(data){
 		
+		productsFactory.getHistory().success(function(data){
+			$scope.buyingHistory = data;
+		})
+		
+		shoppingListFactory.getUsersShoppingList($scope.currentUser).success(function(data){
+			$scope.total = 0;
 			$scope.sp = data;
 			 angular.forEach($scope.sp, function(item){
                  productsFactory.getProduct(item.productId).success(function (data){
                 	 $scope.products.push(data);
+                	 $scope.total+=data.price;
                  })
-
+                 
              })
            
 		})
-		
+
 		$scope.removeItem = function(productId){
 			shoppingListFactory.removeItem($scope.currentUser,productId).success(function(){
 				alert('This item has been removed from your shopping list')
@@ -319,6 +328,23 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 			})
 		}
 	}
+		
+		$scope.buy = function() {
+		$scope.buying.customerId = $scope.currentUser;
+		angular.forEach($scope.products,function(item) { 
+			$scope.buying.storeId = item.storeId;
+			$scope.buying.productId = item.id;
+			$scope.buying.deliveryId = item.deliveryId;
+			$scope.buying.totalPrice = $scope.total;
+			console.log(JSON.stringify($scope.buying));
+			productsFactory.buy($scope.buying).success(function(){
+				alert('Thank you for shopping with us <3');
+			})
+		})
+			
+	}
+		
+	
 	init();
 })
 .controller('deliveryCtrl',function($scope,deliveryFactory){
