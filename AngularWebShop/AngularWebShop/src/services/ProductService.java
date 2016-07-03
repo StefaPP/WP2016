@@ -162,8 +162,8 @@ public class ProductService {
 	public void addToCart(ShoppingList sp){
 		ShoppingListFile spf = (ShoppingListFile) ctx.getAttribute("shoppingList");		
 		spf = getShoppingList();
-		
 		for(ShoppingList spl : spf.getShoppingArrayList()){
+			System.out.println(spl.getId());
 			sId = spl.getId();
 		}
 		int i = Integer.parseInt(sId);

@@ -38,13 +38,13 @@ public class StoreService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void deleteStore(Store s) {
 		Stores stores = (Stores) ctx.getAttribute("stores");
-		System.out.println(s.getId()+ s.getName() + "<<<<");
 		if (stores.getStores().get(s.getId()) != null) {
 
 			try {
 				Stores.deleteStore(s.getId());
 				stores.getStores().remove(s.getId());
 				stores.getStoreList().remove(s);
+				ctx.setAttribute("stores",stores);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -60,14 +60,39 @@ public class StoreService {
 		s = request.getParameter("id");
 		return stores.getStore(s);
 	}
-
+	
+	@POST
+	@Path("/updateStore")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void updateStore(Store s){
+		Stores stores = (Stores) ctx.getAttribute("stores");
+		stores = getStores();
+		if(stores.getStores().containsKey(s.getId())){
+			stores.getStores().remove(s.getId());
+			stores.getStoreList().remove(s);
+			try {
+				Stores.deleteStore(s.getId());
+				Stores.writeStore(s);
+				stores.getStores().put(s.getId(), s);
+				stores.getStoreList().add(s);
+				ctx.setAttribute("stores", stores);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}else
+			System.out.println("Update nije uspeo ,navodno mapa ne sadrzi tu prodavnicu");
+	}
+ 	
 	@POST
 	@Path("/add")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addStore(Store s) {
 		Stores stores = (Stores) ctx.getAttribute("stores");
-		int id = Integer.parseInt(stores.getStoreList().get(stores.getStoreList().size() - 1).getId());
-		id += 1;
+		int id = stores.getStoreList().size();
+		id += 13; 
 		s.setId(Integer.toString(id));
 		s.setSeller("n/a");
 		try {

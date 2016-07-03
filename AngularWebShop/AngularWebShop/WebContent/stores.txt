@@ -1,5 +1,5 @@
-1;Gigatron;Bulevar Oslobodjenja 13, Novi sad;Serbia; ; ; ; ; ;
 2;Comtrade;Mercator;Serbia;na;na;na; ; ;
 3;WinWin;Hebrejska;Serbia;NA;na;na; ; ;
 4;Djak sport;Sutjeska 2 , Novi Sad;Serbia;021 555 444;djaksport@gmail.com;n/a; ; ;
-6;Pawn Shop;Los Andjeles;Amerika;0800 222  444;paws@gmail.com;n/a; ; ;
+1;Gigatroncic;Bulevar Oslobodjenja 13, Novi sad;Serbia;021 445;gigatron@gmail.com;n/a; ; ;
+17;Vulkan;Zmaj Jovina 31,Novi Sad;Serbia;021 3998183;vulkan@gmail.com;n/a; ; ;

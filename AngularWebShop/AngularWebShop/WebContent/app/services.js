@@ -147,6 +147,19 @@ webShop.factory('userFactory', function($http) {
 			"username" : '' + user.username
 		})
 	};
+	
+	factory.hireSeller = function(seller){
+		console.log(JSON.stringify(seller));
+		return $http({
+		    method : "POST",
+		    url : '/AngularWebShop/rest/users/hireSeller',
+		    data : seller,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+	}
+	
 	return factory;
 });
 
@@ -166,15 +179,25 @@ webShop.factory('storeFactory', function($http) {
 
 	factory.addStore = function(store) {
 		return $http.post('/AngularWebShop/rest/stores/add', {
-			"id" : '' + store.id,
 			"name" : '' + store.name,
 			"address" : '' + store.address,
 			"country" : '' + store.country,
 			"contact" : '' + store.contact,
-			"email" : '' + store.email,
-			"seller" : '' + store.seller
+			"email" : '' + store.email
 		})
 	};
+	
+	factory.updateStore = function(store){
+		return $http({
+		    method : "POST",
+		    url : '/AngularWebShop/rest/stores/updateStore',
+		    data : store,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+	}
+	
 	factory.getStore = function(store) {
 		console.log(store);
 		return $http.get('/AngularWebShop/rest/stores/getStore', {

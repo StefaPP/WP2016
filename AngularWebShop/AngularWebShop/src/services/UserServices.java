@@ -5,12 +5,17 @@ import java.util.Collection;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
+import beans.ShoppingList;
+import beans.ShoppingListFile;
+import beans.Stores;
 import beans.User;
 import beans.Users;
 @Path("/users")
@@ -37,13 +42,64 @@ public class UserServices {
 		System.out.println( "Signup request from " + u.getFirstName() + " ");
 		
 		try {
-			Users.writeStore(u);
+			u.setRole("customer");
+			Users.writeUser(u);
 			users.getUsers().put(u.getUsername(),u);
 			users.getUserList().add(u);
+			ctx.setAttribute("users", users);
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
 }
+	
+	
+	
+	/*for(ShoppingList s : getShoppingList().getShoppingArrayList())
+	{
+		if(s.getCustomerId().equals(sp.getCustomerId()) && s.getProductId().equals(sp.getProductId())){
+			itemToRemove.setId(s.getId());
+		
+		}
+	}
+	try{
+		ShoppingListFile.deleteItem(itemToRemove.getId());
+		itemToRemove = spl.getShoppingList().get(itemToRemove.getId());
+		spl.getShoppingArrayList().remove(itemToRemove);
+		
+	}catch(IOException e){
+		e.printStackTrace();
+	}*/
+	
+	@POST
+	@Path("/hireSeller")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void hireSeller(User u) {
+		Users users = (Users) ctx.getAttribute("users");
+		users = getUsers();
+		User promoteToSeller = new User();
+		System.out.println(">>>>>>>>>>>>>>>>  " + u.getUsername() + " <<<<<<<<<");
+		for (User user : users.getValues()) {
+			if (u.getUsername().equals(u.getUsername()))
+				promoteToSeller.setUsername(u.getUsername());
+		}
+		promoteToSeller = users.getUsers().get(u.getUsername());
+		users.getUsers().remove(promoteToSeller.getUsername());
+		users.getUserList().remove(promoteToSeller);
+		try {
+			Users.deleteUser(promoteToSeller.getUsername());
+			promoteToSeller.setRole("seller");
+			System.out.println(promoteToSeller.getUsername() + " " + promoteToSeller.getAddress() + " " + promoteToSeller.getRole());
+			Users.writeUser(promoteToSeller);
+			users.getUsers().put(promoteToSeller.getUsername(), promoteToSeller);
+			users.getUserList().add(promoteToSeller);
+			ctx.setAttribute("users", users);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 	
 	@POST
 	@Path("/login")

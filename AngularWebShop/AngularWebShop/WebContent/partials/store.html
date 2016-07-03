@@ -5,7 +5,7 @@
 			<h2>{{st.address}}</h2>
 			<h2>{{st.country}}</h2>
 			<h2>{{st.contact}}</h2>
-			<button class="btn btn-danger topright" ng-click="deleteStore(st)">Delete
+			<button class="btn btn-danger topright" ng-click="deleteStore(st)" ng-show="currentRole==='admin'">Delete
 				store</button>
 			<table>
 				<tr>
@@ -100,6 +100,16 @@
 	</div>
 	<div style="float: left; width: 33%;" ng-show="showAddSeller">
 		<h1>Hire new seller</h1>
+		
+		<select class="form-control" name="sellerSelect"
+					id="sellerSelect" ng-model="newSeller.username">
+						<option ng-repeat="u in users" value="{{u.username}}">{{u.username}}</option>
+				</select>
+		<div align="center">
+			<button type="button" class="btn btn-default" ng-click="hireSeller(u)">Hire seller !</button>
+		</div>		
+		
+		
 	</div>
 
 	<div style="float: left; width: 33%;" ng-show="showUpdateStore">

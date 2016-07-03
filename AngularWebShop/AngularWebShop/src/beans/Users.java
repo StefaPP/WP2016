@@ -15,8 +15,8 @@ public class Users {
 
 	private HashMap<String, User> users = new HashMap<String, User>();
 	private ArrayList<User> userList = new ArrayList<User>();
-	//private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
-	private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent";
+	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	//private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent";
 	
 	public Users() {
 		this(path);
@@ -70,13 +70,13 @@ public class Users {
 		}
 	}
 	
-	public static void writeStore(User u) throws IOException {
+	public static void writeUser(User u) throws IOException {
 		String line = "";
 		line += u.getUsername() + ";";
 		line += u.getPassword() + ";";
 		line += u.getFirstName() + ";";
 		line += u.getLastName() + ";";
-		line +=  "customer;";
+		line += u.getRole() +  ";";
 		line += u.getContact() + ";";
 		line += u.getEmail() + ";";
 		line += u.getAddress() + ";";
@@ -88,6 +88,31 @@ public class Users {
 		out.append(line);
 		out.newLine();
 		out.close();
+	}
+	
+	
+	public static void deleteUser(String id) throws IOException {
+		
+		File file = new File(path + "/users.txt");
+		File temp = new File(path + "/temp.txt");
+		
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
+		String line;
+		synchronized (Store.class) { 
+			while((line = reader.readLine()) != null){
+				if(!line.startsWith(id)){
+					writer.write(line);
+					writer.newLine();
+				}
+				
+			}
+				reader.close();
+				writer.close();
+		}
+		System.out.println(temp);
+		file.delete();
+		temp.renameTo(file);
 	}
 	
 

@@ -198,21 +198,23 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		});
 	}
 	
-	$scope.updateStore = function(){
-		console.log("Update store metod for:" + JSON.stringify($scope.store))
-	}
 		init();
 })
-.controller('storeDetailsCtrl',function($scope,$location,$routeParams,$rootScope,storeFactory,productsFactory){
+.controller('storeDetailsCtrl',function($scope,$location,$routeParams,$rootScope,userFactory,storeFactory,productsFactory){
 		
 		function init() {
 		
+		userFactory.getUsers().success(function(data){
+				$scope.users = data;
+			})
 		if($rootScope.isLoggedIn()){
 	 		$scope.currentUser = $rootScope.getCurrentUser().username;
 		 	$scope.currentRole = $rootScope.getCurrentUser().role;		 	
 		 }
 		
+		$scope.newSeller = {};
 		$scope.product = {};
+		
 		var id = $routeParams.id;
 		console.log("id prodavnice " + id );
 		storeFactory.getStore(id).success(function(data){
@@ -244,6 +246,20 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 			console.log($routeParams.id + " <<<<<<<<<<")
 			storeFactory.deleteStore(store).success(function() {
 				$location.path('/stores/');
+				init();
+			})
+		}
+		
+		$scope.updateStore = function(){
+			console.log("Update store method for:" + JSON.stringify($scope.store))
+			storeFactory.updateStore($scope.st).success(function (){
+				init();
+			})
+		}
+		
+		$scope.hireSeller = function(seller){
+			console.log(JSON.stringify(seller));
+			userFactory.hireSeller($scope.newSeller).success(function() {
 				init();
 			})
 		}

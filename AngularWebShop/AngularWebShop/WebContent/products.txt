@@ -7,3 +7,5 @@
 10;Decija kolica;50000.0;300.0;2000.0;Vietnam;Chico;baby & kids;http://www.decjibazar.rs/3906-thickbox_default/chicco-kolica-liteway-complete-anthractive-siva.jpg;5;  ;  ;7;
 12;Kosarkaska lopta;3000.0;9.0;1000.0;China;Spalding;sports,fitness & outdoors;http://assets.academy.com/mgen/82/10298482.jpg;4;  ;  ;5;
 13;Fudbalska lopa;3000.0;5.0;1000.0;China;Nike;sports,fitness & outdoors;http://www.soccerandrugby.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/s/c/sc2400-641.png;4;  ;  ;2;
+14;Tesla TC32H3-12410IA Klima Uredjaj Inverter;39.999;14.0;14.0;USA;Tesla;electronic & office;http://teslashop.co.rs/image/cache/catalog/tesla%20klima%20uredjaj-500x500.jpg;2;  ;  ;6;
+15;Lenovo IdeaPad 300-15IBR;34.999;15.6;1.8;Italia;Lenovo;electronic & office;https://dstatic.computeruniverse.net/images/1000/90617454EE572F0F636144C2BDB0DDAE.jpg;2;  ;  ;4;

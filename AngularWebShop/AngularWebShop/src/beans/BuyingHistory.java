@@ -15,8 +15,8 @@ public class BuyingHistory {
 
 	private HashMap<String,Buying> buyingHistory = new HashMap<String,Buying>();
 	private ArrayList<Buying> buyingHistoryList = new ArrayList<Buying>();
-//	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
-	private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent/";
+	private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+//	private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent/";
 
 	public  BuyingHistory() {
 		this(path);
@@ -75,7 +75,7 @@ public class BuyingHistory {
 		line += b.getStoreId() + ";";
 		line += b.getProductId() + ";";
 		line += b.getDeliveryId() + ";";
-		line += b.getTotalPrice() + ":";
+		line += b.getTotalPrice() + ";";
 		
 		File file = new File(path + "/buyingHistory.txt");
 		BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
