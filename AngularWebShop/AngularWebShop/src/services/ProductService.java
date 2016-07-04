@@ -277,6 +277,25 @@ public class ProductService {
 		return getBuyingHistory().getValues();
 	}
 	
+	@POST
+	@Path("/getUsersBuyingHistory")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Collection<Buying> getUsersHistory(Buying b){
+		BuyingHistory bh = (BuyingHistory) ctx.getAttribute("buyingHistory");
+		HashMap<String,Buying> buyingHistory = new HashMap<String,Buying> ();
+		bh = new BuyingHistory();
+		System.out.println(b.getCustomerId());
+		
+		for(Buying bu : bh.getBuyingHistory()){
+			if(bu.getCustomerId().equals(b.getCustomerId())){
+				buyingHistory.put(bu.getId(), bu);
+			}
+		}
+		return buyingHistory.values();
+	}
+	
+	
 	
 	
 	@POST

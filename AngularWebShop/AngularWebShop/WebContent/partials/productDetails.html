@@ -10,7 +10,7 @@
 		</p>
 	</div>
 	<button class="btn btn-danger topright"
-		ng-click="deleteProduct(product)">Delete product</button>
+		ng-click="deleteProduct(product)" ng-show="currentRole!='customer'">Delete product</button>
 	<ul class="comments" ng-repeat="r in reviews | orderBy:'-rating'">
 		<div
 			style="width: 500px; max-width: 500px; display: inline-block; background-color: lightgray;"
@@ -35,7 +35,7 @@
 		</div>
 		</li>
 	</ul>
-	<br /> <br />
+	<br/><br />
 	<div class="form-group" ng-show="loggedIn">
 		<label for="comment">Review:</label>
 		<textarea class="form-control" ng-model="review.comment" rows="3"

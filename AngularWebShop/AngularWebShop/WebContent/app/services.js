@@ -149,7 +149,6 @@ webShop.factory('userFactory', function($http) {
 	};
 	
 	factory.hireSeller = function(seller){
-		console.log(JSON.stringify(seller));
 		return $http({
 		    method : "POST",
 		    url : '/AngularWebShop/rest/users/hireSeller',
@@ -270,7 +269,6 @@ webShop.factory('storeFactory', function($http) {
 	}
 	
 	factory.deleteStore = function (store){
-		//return $http.delete('/AngularWebShop/rest/stores/',{ params :{"id" : id} });
 	 return	$http({
 		    method : "DELETE",
 		    url : '/AngularWebShop/rest/stores/deleteStore',
@@ -353,12 +351,13 @@ webShop.factory('loginFactory',function($http,$localStorage,$log,$location,$rout
 webShop.factory('shoppingListFactory', function($http) {
 
 	var factory = {};
-	factory.getSC = function() {
+	/*factory.getSC = function() {
 		return $http.get('/AngularWebShop/rest/proizvodi/getJustSc');
 	};
 	factory.getTotal = function() {
 		return $http.get('/AngularWebShop/rest/proizvodi/getTotal');
-	};
+	};*/
+	
 	factory.removeItem = function(customerId,productId) {
 		return $http.post('/AngularWebShop/rest/proizvodi/removeItem',
 		{
@@ -366,10 +365,17 @@ webShop.factory('shoppingListFactory', function($http) {
 			"customerId":'' + customerId
 		});
 		
-};
+		
+	};
+	
+	factory.getBuyingHistory = function(user) {
+		return $http.post('/AngularWebShop/rest/proizvodi/getUsersBuyingHistory',{"customerId" :'' + user});
+		
+	}
+	
+
 
 	factory.clearShoppingList = function(user){
-	console.log(user + " ======{{{{{{{{{{{{")
 	return $http.post('/AngularWebShop/rest/proizvodi/clearShoppingList',{
 		"customerId":'' + user
 	})

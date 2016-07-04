@@ -31,6 +31,7 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 }
 	
 	
+	
 	$scope.addCategory = function()
 	{
 		productsFactory.addCategory($scope.category).success(function(){
@@ -150,7 +151,7 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		}
 	init();
 })
-.controller('shoppingCartController', function($scope, shoppingCartFactory) {
+/*.controller('shoppingCartController', function($scope, shoppingCartFactory) {
 	
     function init() {
     	console.log('ShoppingCartController.Init');
@@ -173,7 +174,7 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	    	});
 		}
     };
-})
+})*/
 .controller('userCtrl',function($scope,userFactory){
 	function init() { 
 		console.log('User Controller');
@@ -221,7 +222,6 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		$scope.product = {};
 		
 		var id = $routeParams.id;
-		console.log("id prodavnice " + id );
 		storeFactory.getStore(id).success(function(data){
 			$scope.st = data;
 		})
@@ -232,7 +232,7 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		
 		productsFactory.getStoreProducts($routeParams.id).success(function(data){
 			$scope.storeProducts = data;
-			console.log(JSON.stringify($scope.storeProducts) + " <<<<<<<<<<<<<<<");
+			
 		})
 
 	}
@@ -263,10 +263,17 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		}
 		
 		$scope.hireSeller = function(seller){
-			console.log(JSON.stringify(seller));
+			
+			$scope.st.seller = $scope.newSeller.username;
+			console.log(JSON.stringify($scope.st));
 			userFactory.hireSeller($scope.newSeller).success(function() {
 				init();
+				$scope.updateStore();
 			})
+			
+			
+			
+			
 		}
 		
 		init();
@@ -328,14 +335,27 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		$scope.buying = {};
 		
 		$scope.currentUser = $rootScope.getCurrentUser().username;
-		$scope.products = []
+		$scope.products = [];
+		$scope.boughtProducts = [];
 		
+
 		deliveryFactory.getDeliverers().success(function(data){
 			$scope.deliverers = data;
 		})
 		
 		productsFactory.getHistory().success(function(data){
 			$scope.buyingHistory = data;
+		})
+		
+		
+		
+		shoppingListFactory.getBuyingHistory($scope.currentUser).success(function(data){
+			$scope.bh = data;
+			angular.forEach($scope.bh,function(item){
+				productsFactory.getProduct(item.productId).success(function(data){
+					$scope.boughtProducts.push(data);
+				})
+			})
 		})
 		
 		shoppingListFactory.getUsersShoppingList($scope.currentUser).success(function(data){
@@ -350,6 +370,8 @@ webShop.controller('productsController', function($scope,$location,productsFacto
              })
            
 		})
+		
+		
 
 		$scope.removeItem = function(productId){
 			shoppingListFactory.removeItem($scope.currentUser,productId).success(function(){

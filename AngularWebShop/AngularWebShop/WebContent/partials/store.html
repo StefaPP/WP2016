@@ -26,7 +26,7 @@
 				<tr>
 					<button type="button" class="btn btn-default"
 						ng-click="showUpdateStore= !showUpdateStore"
-						ng-show="currentRole!='customer'">Update store</button>
+						ng-show="currentRole==='admin' || currentUser==st.seller">Update store</button>
 				</tr>
 			</table>
 		</div>
@@ -103,7 +103,7 @@
 		
 		<select class="form-control" name="sellerSelect"
 					id="sellerSelect" ng-model="newSeller.username">
-						<option ng-repeat="u in users" value="{{u.username}}">{{u.username}}</option>
+						<option ng-repeat="u in users | filter:{ username: '!' + st.seller}" value="{{u.username}}">{{u.username}}</option>
 				</select>
 		<div align="center">
 			<button type="button" class="btn btn-default" ng-click="hireSeller(u)">Hire seller !</button>
@@ -141,7 +141,7 @@
 			<tr>
 				<td>Seller :</td>
 				<td><input class="form-control" type="text"
-					ng-model="st.seller" /></td>
+					ng-model="st.seller" readonly/></td>
 			</tr>
 		</table>
 		<div align="center">

@@ -54,22 +54,6 @@ public class UserServices {
 	
 	
 	
-	/*for(ShoppingList s : getShoppingList().getShoppingArrayList())
-	{
-		if(s.getCustomerId().equals(sp.getCustomerId()) && s.getProductId().equals(sp.getProductId())){
-			itemToRemove.setId(s.getId());
-		
-		}
-	}
-	try{
-		ShoppingListFile.deleteItem(itemToRemove.getId());
-		itemToRemove = spl.getShoppingList().get(itemToRemove.getId());
-		spl.getShoppingArrayList().remove(itemToRemove);
-		
-	}catch(IOException e){
-		e.printStackTrace();
-	}*/
-	
 	@POST
 	@Path("/hireSeller")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -79,6 +63,7 @@ public class UserServices {
 		Stores stores = (Stores) ctx.getAttribute("stores");
 		stores = getStores();
 		users = getUsers();
+		
 		System.out.println(request.getParameter("store") + " AJDI RADNJE ");
 		User promoteToSeller = new User();
 		for (User user : users.getValues()) {
