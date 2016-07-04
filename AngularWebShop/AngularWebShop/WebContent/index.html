@@ -62,6 +62,24 @@
     font-size: 14px;
 }
 
+.toprightUpdateDelivery {
+	position: absolute;
+    top: 0px;
+    right: 3px;
+    font-size: 14px;
+	
+}
+
+
+.toprightDeleteDelivery {
+	position: absolute;
+    top: 27px;
+    right: 3px;
+    font-size: 14px;
+	
+}
+
+
 
 .star-rating {
   margin: 0;
@@ -225,11 +243,12 @@ div.half-width {
 </head> 
 <body>
 <ul class="nvb">
-    <li style="margin-left:25%;"><a href="#users" ng-href="#users">Dashboard</a></li>
+    <li style="margin-left:25%;"><a ng-if ="getCurrentUserRole() === 'admin'" href="#users" ng-href="#users">Dashboard</a></li>
     <li><a href="#products" ng-href="#products">Products</a></li>
     <li><a href="#stores" ng-href="#stores" >Stores</a></li> 
 	<li><a ng-if="!isLoggedIn()" href="#login" ng-href="#login">Login</a></li>   
-	<li><a ng-if="isLoggedIn()" href="#shoppingList" ng-href="#shoppingList">Shopping list</a></li>   
+	<li><a ng-if="isLoggedIn() && getCurrentUserRole() == 'customer'" href="#shoppingList" ng-href="#shoppingList">Shopping list</a></li>
+	<li><a ng-if ="getCurrentUserRole() === 'admin'" href="#delivery" ng-href="#delivery">Delivery</a></li>
 	<li class="topright"><a ng-if="isLoggedIn()" ng-click="logout()"> Logout</a></li> 
 </ul>
 <div ng-view>

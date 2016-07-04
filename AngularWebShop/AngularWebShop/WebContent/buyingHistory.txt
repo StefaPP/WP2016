@@ -1,5 +1,7 @@
 0; ; ; ; ; ;
 2;Stefica;1;1;D Express;79000;
 4;Stefica;2;2;DHL;32000;
-5;Stefica;;5;Post express;8034.999;
 6;Stefica;2;15;Post express;8034.999;
+7;Stefica;3;3;FedEx;35000;
+f0b85caf-e9ff-4e60-8457-4aa784ba7fca;Stefica;2;14;UPS;35039.999;
+ee21ffe2-9978-43f3-9600-e439fc39a4a6;Stefica;3;3;D Express;35039.999;

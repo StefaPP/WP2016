@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
+import java.util.UUID;
 
 public class Deliverers {
 
@@ -66,7 +67,6 @@ private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent
 			ex.printStackTrace();
 		}
 	}
-	
 	public static void writeDelivery(Delivery d) throws IOException{
 		String line="";
 		line += d.getId() + ";";
@@ -107,19 +107,18 @@ private static String path = "D:\\WP\\AngularWebShop\\AngularWebShop\\WebContent
 	
 	
 	
-
-	/** Vraca kolekciju proizvoda. */
+	public HashMap<String, Delivery> getDeliverers(){
+		return deliverers;
+	}
+	
 	public Collection<Delivery> getValues() {
 		return deliverers.values();
 	}
 	
-
-	/** Vraca proizvod na osnovu njegovog id-a. */
 	public Delivery getDeliverer(String id) {
 		return deliverers.get(id);
 	}
 
-	/** Vraca listu proizvoda. */
 	public ArrayList<Delivery> getDeliverersList() {
 		return deliverersList;
 	}

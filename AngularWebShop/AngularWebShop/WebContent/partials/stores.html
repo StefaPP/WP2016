@@ -1,6 +1,7 @@
 <div>
 <h1 align="center">Stores:</h1>
-<div class="col" ng-repeat="s in stores">
+&nbsp;&nbsp;&nbsp;<label>Search: <input type="text" class="form-control" ng-model="searchText" data-toggle="tooltip" data-placement="right" title="Searh your favourite store by name or location"></label><br/><br/><br/>
+<div class="col" ng-repeat="s in stores | filter:searchText">
   <div class="col-md-2">
      <a href ng-click="storeDetails(s)" class="thumbnail">
       <img src="http://shmector.com/_ph/7/794491321.png" style="width:200px;height:150px" />
@@ -11,7 +12,8 @@
 </div>
 <button class="btn btn-info topright" ng-click="value = !value" >Add new store</button>
 <br/><br/><br/>
-<div align="center" ng-show="value">
+<div align="center" style="float:left;width:50%;" ng-show="value">
+
 <h1 align="center">Adding new store</h1>
 Name : <input class="form-group" type="text" name="name" ng-model="store.name"/><br/>
 Address : <input class="form-group" type="text" name="address" ng-model="store.address"/><br/>

@@ -1,6 +1,84 @@
-<div ng-repeat="d in deliverers">
-<p> {{d.name}} <p>
-<p> {{d.description}} <p>
-<p> {{d.rate}} <p>
-
+<div>
+<button class="btn btn-info topright" ng-click="value = !value">Add new delivery</button>
+<br/>
+<br/>
+<div align="center">
+<div align="center" class="list-group" style="width:40%;" ng-repeat="d in deliverers">
+  <a href class="list-group-item active">
+<p>
+{{d.name}}<br/>
+{{d.description}}
+</p>
+<button type="button" class="btn btn-default btn-xs toprightUpdateDelivery" ng-click="updateDeliverer(d)">
+<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+</button>
+<button type="button" class="btn btn-danger btn-xs toprightDeleteDelivery" ng-click="deleteDeliverer(d)">
+<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+</button>
+  </a>
 </div>
+</div>
+	<div style="float:left;width: 30%;" ng-show="value">
+		<h1 align="center">Adding new delivery service</h1>
+		<table class="table">
+			<tr>
+				<td>Name :</td>
+				<td><input class="form-control" type="text" name="name"
+					ng-model="deliverer.name" /><br /></td>
+			</tr>
+			<tr>
+				<td>Description :</td>
+				<td><input class="form-control" type="text" name="description"
+					ng-model="deliverer.description" /><br /></td>
+			<tr>
+				<td>Country :</td>
+				<td><input class="form-control" type="text" name="country"
+					ng-model="deliverer.country" /><br /></td>
+			</tr>
+			<tr>
+				<td>Rate :</td>
+				<td><input class="form-control" type="text" name="rate"
+					ng-model="deliverer.rate" /><br /></td>
+			</tr>
+		</table>
+
+		<div align="center">
+			<button type="button" class="btn btn-default"
+				ng-click="addDeliverer()">Add</button>
+		</div>
+	</div>	
+	
+	
+		<div ng-show="updateValue" style="float:left;width: 30%;">
+		<h1 align="center">Update delivery service</h1>
+		<table class="table">
+			<tr>
+				<td>Name :</td>
+				<td><input class="form-control" type="text" name="name"
+					ng-model="updDelivery.name" /><br /></td>
+			</tr>
+			<tr>
+				<td>Description :</td>
+				<td><input class="form-control" type="text" name="description"
+					ng-model="updDelivery.description" /><br /></td>
+			<tr>
+				<td>Country :</td>
+				<td><input class="form-control" type="text" name="country"
+					ng-model="updDelivery.country" /><br /></td>
+			</tr>
+			<tr>
+				<td>Rate :</td>
+				<td><input class="form-control" type="text" name="rate"
+					ng-model="updDelivery.rate" /><br /></td>
+			</tr>
+		</table>
+
+		<div align="center">
+			<button type="button" class="btn btn-default"
+				ng-click="update()">Update</button>
+		</div>
+	</div>	
+	
+</div>
+
+

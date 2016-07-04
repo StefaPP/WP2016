@@ -2,5 +2,5 @@ dox;asdf;Igor;Dojcinovic;customer;n/a;dox@sonicline.com;Prljavi telep 10,Novi Sa
 admin;admin;Admin;Admin;admin;admin;admin@admin.com;Adminova 30;Adminova;
 Stefica;asdf;Stefa;Popov;customer;064 920 4732;stefan@live.com;Gagarinova 20;Serbia;
 Kilje;asdf;Aleksandar;Okiljevic;customer;43243;kilje@gmail.com;Narodnog fronta;Serbia;
-stefan;asdf;Stefan;Popov;customer;0649204732;stefancina@live.com;Gagarinova 20,Novi Sad;Serbia;
 seller;asdf;Sellerko;Sellerkovic;seller;0543;seller@gmail.com;Sellereova 20;Amerika;
+stefan;asdf;Stefan;Popov;seller;0649204732;stefancina@live.com;Gagarinova 20,Novi Sad;Serbia;

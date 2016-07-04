@@ -12,10 +12,14 @@
 <li class=""><a href="#category">Add new category...</a></li>
 </ul>
 </div>
+
+
 <div style="float:left; width:80%;">
 <br/><br/><br/>
+&nbsp;&nbsp;&nbsp;<label>Search: <input type="text" class="form-control" ng-model="searchText" data-toggle="tooltip" data-placement="right" title="Searh any parameter"></label>
+<br/><br/>
 <div class="col"> 
-  <div class="col-md-4" ng-repeat="p in products">
+  <div class="col-md-4" ng-repeat="p in products | filter:searchText">
     <a ng-href="#/product/{{p.id}}" class="thumbnail">
       <p>{{p.name}}</p>
       <p>{{p.price}}</p>

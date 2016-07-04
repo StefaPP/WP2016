@@ -168,6 +168,52 @@ webShop.factory('deliveryFactory', function($http) {
 	factory.getDeliverers = function() {
 		return $http.get('/AngularWebShop/rest/delivery/getDeliverers');
 	};
+	
+	factory.addDeliverer = function(deliverer){
+		return $http({
+		    method : "POST",
+		    url : '/AngularWebShop/rest/delivery/addDeliverer',
+		    data : deliverer,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+	}
+	
+	factory.getDeliverer = function(deliveryID){
+		 return $http({
+		    method : "GET",
+		    url : '/AngularWebShop/rest/delivery/addDeliverer',
+		    data : deliverer,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+	
+	}
+	
+	factory.update = function(deliverer){
+		return $http({
+		    method : "POST",
+		    url : '/AngularWebShop/rest/delivery/updateDeliverer',
+		    data : deliverer,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+	}
+	
+	factory.deleteDeliverer = function(deliverer){
+		return $http({
+		    method : "DELETE",
+		    url : '/AngularWebShop/rest/delivery/deleteDeliverer',
+		    data : deliverer,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+	}
+	
 	return factory;
 })
 
@@ -178,13 +224,22 @@ webShop.factory('storeFactory', function($http) {
 	};
 
 	factory.addStore = function(store) {
-		return $http.post('/AngularWebShop/rest/stores/add', {
+/*		return $http.post('/AngularWebShop/rest/stores/add', {
 			"name" : '' + store.name,
 			"address" : '' + store.address,
 			"country" : '' + store.country,
 			"contact" : '' + store.contact,
 			"email" : '' + store.email
-		})
+		})*/
+		
+		return $http({
+		    method : "POST",
+		    url : '/AngularWebShop/rest/stores/add',
+		    data : store,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
 	};
 	
 	factory.updateStore = function(store){

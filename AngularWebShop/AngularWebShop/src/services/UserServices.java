@@ -76,9 +76,11 @@ public class UserServices {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void hireSeller(User u) {
 		Users users = (Users) ctx.getAttribute("users");
+		Stores stores = (Stores) ctx.getAttribute("stores");
+		stores = getStores();
 		users = getUsers();
+		System.out.println(request.getParameter("store") + " AJDI RADNJE ");
 		User promoteToSeller = new User();
-		System.out.println(">>>>>>>>>>>>>>>>  " + u.getUsername() + " <<<<<<<<<");
 		for (User user : users.getValues()) {
 			if (u.getUsername().equals(u.getUsername()))
 				promoteToSeller.setUsername(u.getUsername());
@@ -115,6 +117,18 @@ public class UserServices {
 			return null;
 	}
 	}
+	
+	
+	private Stores getStores() {
+		Stores stores = (Stores) ctx.getAttribute("stores");
+		if (stores == null) {
+			stores = new Stores(ctx.getRealPath(""));
+			ctx.setAttribute("stores", stores);
+		}
+		return stores;
+
+	}
+	
 	
 	private Users getUsers(){
 		Users users = (Users) ctx.getAttribute("users");

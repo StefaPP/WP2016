@@ -47,9 +47,14 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	}
 	
 })
-.controller('categoryProductsCtrl',function($scope,$routeParams,productsFactory){
+.controller('categoryProductsCtrl',function($scope,$rootScope,$routeParams,productsFactory){
 		
 	function init() { 
+		if($rootScope.isLoggedIn()){
+    		$scope.currentUser = $rootScope.getCurrentUser().username;
+    		$scope.currentRole = $rootScope.getCurrentUser().role;
+    	}
+		
 		productsFactory.getCategories().success(function (data) {
        		$scope.categories = data;
        		$scope.category = {};
@@ -182,17 +187,17 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	
 	function init() {
 		console.log('Store Controller');
-		storeFactory.getStores().success(function(data){
 		$scope.store = {};
+		storeFactory.getStores().success(function(data){
 		$scope.stores = data;			
 	});
 }
 	$scope.storeDetails = function (store) {
 		$location.path('/store/'+store.id);	
 	}
+	
 	$scope.addStore = function() {
 		console.log("Dodao sam novu prodavnicu " + $scope.store.name)
-		console.log($scope.store);
 		storeFactory.addStore($scope.store).success(function(){
 			init();
 		});
@@ -376,9 +381,43 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 .controller('deliveryCtrl',function($scope,deliveryFactory){
 	function init() {
 	console.log('DeliveryCtrl');
+	$scope.deliverer = {};
 	deliveryFactory.getDeliverers().success(function(data){
 		$scope.deliverers = data;
 	})	
-}
+}	
+	$scope.value = false;
+	$scope.addDeliverer = function(){
+		$scope.updateValue = false;
+		console.log("Add deliverer ! ");
+		deliveryFactory.addDeliverer($scope.deliverer).success(function(){
+			init();
+		})
+	}
+	
+	$scope.deleteDeliverer = function(deliverer){
+		console.log("Delete deliverer ! ");
+		deliveryFactory.deleteDeliverer(deliverer).success(function(){
+			init();
+		})
+	}
+	$scope.updateValue = false;
+	$scope.updateDeliverer = function(deliverer){
+		$scope.value = false;
+		$scope.updateValue = $scope.updateValue ? false : true;
+		console.log("Update deliverer");
+	
+		console.log(JSON.stringify(deliverer))
+		$scope.updDelivery = deliverer;
+		
+		
+	}
+	
+	$scope.update = function(){
+		deliveryFactory.update($scope.updDelivery).success(function(){
+			init();
+		})
+	}
+	
 	init();
 })

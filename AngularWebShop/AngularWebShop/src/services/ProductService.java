@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -252,10 +253,13 @@ public class ProductService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void buyProducts(Buying b){
 		BuyingHistory bh = (BuyingHistory) ctx.getAttribute("buyingHistory");
-		int id = bh.getBuyingHistory().size();
-		id +=1;
-		b.setId(Integer.toString(id+1));	
 		
+		/*int id = bh.getBuyingHistory().size();
+		id +=1;
+		b.setId(Integer.toString(id+1));	*/
+		
+		String uniqueID = UUID.randomUUID().toString();
+		b.setId(uniqueID);
 		try {
 			BuyingHistory.writeItem(b);
 			bh.getBuyingHistory().add(b);

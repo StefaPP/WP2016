@@ -3,6 +3,7 @@ package services;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -91,9 +92,8 @@ public class StoreService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addStore(Store s) {
 		Stores stores = (Stores) ctx.getAttribute("stores");
-		int id = stores.getStoreList().size();
-		id += 13; 
-		s.setId(Integer.toString(id));
+		String uniqueID = UUID.randomUUID().toString();
+		s.setId(uniqueID);
 		s.setSeller("n/a");
 		try {
 			Stores.writeStore(s);
