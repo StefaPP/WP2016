@@ -5,3 +5,4 @@ seller;asdf;Sellerko;Sellerkovic;seller;0543;seller@gmail.com;Sellereova 20;Amer
 stefan;asdf;Stefan;Popov;seller;0649204732;stefancina@live.com;Gagarinova 20,Novi Sad;Serbia;
 proba;asdf;Proba;Probic;seller;5432;proba@gmail.com;bul osl 21;Serbia;
 Kilje;asdf;Aleksandar;Okiljevic;seller;43243;kilje@gmail.com;Narodnog fronta;Serbia;
+kaplar;asdf;Aleksandar;Kaplar;seller;064 kaplar;kaplar@gmail.com;Kaplarova 20;Serbia;

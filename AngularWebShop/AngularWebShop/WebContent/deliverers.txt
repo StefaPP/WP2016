@@ -1,4 +1,4 @@
 4f4f46c4-f619-4e86-a7be-09c3daf23ea0;UPS;United Parcel Service, Inc. (UPS) is the world's largest package delivery company and a provider of supply chain management solutions.;USA;300.0;
-c7f53f8b-72d6-4331-9a26-ea1830632625;DHL Express;DHL Express is a division of the German logistics company Deutsche Post DHL providing international express mail services;Germany;30.0;
 5b5f7884-0f84-43b9-b964-1c7d7f50be08;Post Express;Post express je visokoprofesionalna usluga Pošte Srbije, koja korisinicima omogu?ava najbrži i najsigurniji prenos pošiljaka u unutrašnjem saobra?aju u propisanim i garantovanim rokovima.;Serbia;10.0;
 549ad336-3dec-4098-90c1-b13c92abbad7;FedEx;FedEx Corporation is an American global courier delivery services company headquartered in Memphis, Tennessee;USA;24.0;
+c7f53f8b-72d6-4331-9a26-ea1830632625;DHL Express;DHL Express is a division of the German logistics company Deutsche Post DHL providing international express mail services;Germany;30.0;

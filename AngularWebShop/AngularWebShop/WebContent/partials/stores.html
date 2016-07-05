@@ -10,7 +10,7 @@
     </a>
   </div>
 </div>
-<button class="btn btn-info topright" ng-click="value = !value" >Add new store</button>
+<button class="btn btn-info topright" ng-click="value = !value" ng-show="isLoggedIn() && getCurrentUserRole()==='admin'">Add new store</button>
 <br/><br/><br/>
 <div align="center" style="float:left;width:50%;" ng-show="value">
 

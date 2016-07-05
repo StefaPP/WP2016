@@ -52,18 +52,17 @@ webShop.factory('productsFactory', function($http, $window) {
 		});
 	};
 	factory.addProduct = function(product) {
-		return $http.post('/AngularWebShop/rest/proizvodi/addProduct', {
-			"name" : product.name,
-			"price" : product.price,
-			"size" : product.size,
-			"weight" : product.weight,
-			"origin" : product.origin,
-			"brandName" : product.brandName,
-			"category" : product.category,
-			"image" : product.image,
-			"storeId" : product.storeId,
-			"lager" : product.lager,
-		})
+		
+		return $http({
+		    method : "POST",
+		    url : '/AngularWebShop/rest/proizvodi/addProduct',
+		    data : product,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+		
+		
 	}
 	factory.getProductsForCategory = function(categoryName) {
 		return $http.get(

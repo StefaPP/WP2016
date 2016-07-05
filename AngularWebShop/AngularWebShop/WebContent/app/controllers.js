@@ -66,7 +66,7 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		})
 	}
 	
-	$scope.deleteCategory = function() {
+	$scope.deleteCategory = function(category) {
 		console.log("Deleting this category");
 		productsFactory.deleteCategory(category).success(function(){
 			init();
@@ -438,6 +438,7 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	$scope.update = function(){
 		deliveryFactory.update($scope.updDelivery).success(function(){
 			init();
+			$scope.updateValue = false;
 		})
 	}
 	

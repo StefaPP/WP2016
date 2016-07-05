@@ -6,3 +6,4 @@
 f0b85caf-e9ff-4e60-8457-4aa784ba7fca;Stefica;2;14;UPS;35039.999;
 ee21ffe2-9978-43f3-9600-e439fc39a4a6;Stefica;3;3;D Express;35039.999;
 c47ff8ed-7d8a-4a2f-a458-bf4a9493c53e;Stefica;1;1;FedEx;22000;
+ddcaac46-cdd0-40cd-bd6d-7e63020fb8f3;kaplar;4;5;Post Express;8000;

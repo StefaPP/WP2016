@@ -1,7 +1,7 @@
 2;Comtrade;Mercator;Serbia;na;na;na; ; ;
-3;WinWin;Hebrejska;Serbia;NA;na;na; ; ;
 4;Djak sport;Sutjeska 2 , Novi Sad;Serbia;021 555 444;djaksport@gmail.com;n/a; ; ;
 1;Gigatroncic;Bulevar Oslobodjenja 13, Novi sad;Serbia;021 445;gigatron@gmail.com;n/a; ; ;
 17;Vulkan;Zmaj Jovina 31,Novi Sad;Serbia;021 3998183;vulkan@gmail.com;n/a; ; ;
 fd1ac8de-c8cb-4a3d-a052-fc0e8ef60a45;Vitorog;Rumenacka 54 , Novi Sad;Serbia;021 3432 313;vitorog@gmail.com;Kilje; ; ;
 9f6b674b-d5be-4ec2-b35a-abf73c0861d1;Chicco;Laze Teleckog 32 , Novi Sad;Serbia;021 331441;chicco@gmail.com;Kilje; ; ;
+3;WinWin;Hebrejska;Serbia;NA;na;kaplar; ; ;

@@ -3,7 +3,6 @@
 3;Samsung monitor 17";35000;30.00;100.00;Kina;Samsung;electronic & office;http://www.kulltech.com/wordpress/wp-content/uploads/2014/06/Samsung-UD590.png;3; ; ;2;
 5;Nike Roshe;8000;13.00;400.00;Kina;Nike;clothing,shoes & jewelry;http://images.nike.com/is/image/DotCom/THN_PS/Nike-Roshe-Run-Mens-Shoe-511881_010.jpg?hei=300&wid=400&fmt=png;4; ; ;1;
 7;Nike Shorts;8000;26.00;600.00;Kina;Nike;clothing,shoes & jewelry;http://cdn2.bigcommerce.com/server4200/qpfrc9yq/products/14211/images/7636/619171_010_A__14936.1405427149.1280.1280.png?c=2; ; ; ;1;
-9;Yeezy Boost 360;750000.0;46.0;500.0;USA;Adiddas;clothing,shoes & jewelry;images/2.png;4;  ;  ;3;
 10;Decija kolica;50000.0;300.0;2000.0;Vietnam;Chico;baby & kids;http://www.decjibazar.rs/3906-thickbox_default/chicco-kolica-liteway-complete-anthractive-siva.jpg;5;  ;  ;7;
 12;Kosarkaska lopta;3000.0;9.0;1000.0;China;Spalding;sports,fitness & outdoors;http://assets.academy.com/mgen/82/10298482.jpg;4;  ;  ;5;
 13;Fudbalska lopa;3000.0;5.0;1000.0;China;Nike;sports,fitness & outdoors;http://www.soccerandrugby.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/s/c/sc2400-641.png;4;  ;  ;2;
@@ -12,9 +11,9 @@
 16;Kristina De Lux;24999.0;80.0;3000.0;Serbia;Vitorog;home,furniture & patio;http://www.vitorogpromet.rs/temp/products/KRISTINA%20DE%20LUX%20Trpezariski%20sto%20wenge%2080x80.jpg;fd1ac8de-c8cb-4a3d-a052-fc0e8ef60a45;  ;  ;3;
 17;DC-1025;7646.0;50.0;1.0;Serbia;Vitorog;home,furniture & patio;http://www.vitorogpromet.rs/temp/products/DC%201025%20siva%20eco%20koza.jpg;fd1ac8de-c8cb-4a3d-a052-fc0e8ef60a45;  ;  ;12;
 18;WX2001;6234.0;40.0;213.0;Serbia;Vitorog;home,furniture & patio;http://www.vitorogpromet.rs/temp/products/NOVO%20barska%20WX-2001%20crna.jpg;fd1ac8de-c8cb-4a3d-a052-fc0e8ef60a45;  ;  ;4;
-19;Devojka iz Bruklina;719.0;0.0;0.0;Serbia;Vulkan;movies,music & books;http://www.vulkani.rs/cached%5Cwww.vulkani.rs%5CImages/DEVOJKA-IZ-BRUKLINA-000074228164160.jpg;17;  ;  ;3;
 20;Slatka osveta;719.0;0.0;0.0;Serbia;Vulkan;movies,music & books;https://www.knjizare-vulkan.rs/slika_296853.jpg;17;  ;  ;3;
 21;Iskra u tami;639.0;0.0;0.0;Serbia;Vulkan;movies,music & books;https://www.knjizare-vulkan.rs/knjiga-iskra-u-tami-rupert-tomson-9788610010190-naslovna-strana-273963v.jpg;17;  ;  ;4;
 22;Zvecka CHICCO tulipan plava;300.0;0.0;0.0;Italia;Chicco;baby & kids;http://www.chicco.rs/images/artikli/000232000_v.jpg;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;  ;  ;3;
 23;Lopta mekana CHICCO;250.0;0.0;0.0;Italia;Chicco;baby & kids;http://www.chicco.rs/images/artikli/009040000_v.jpg;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;  ;  ;9;
 24;Kolica CHICCO Trio Enjoy Fun Garnet;30000.0;40.0;3.0;Italia;Chicco;baby & kids;http://www.chicco.rs/images/artikli/791411100_v.jpg;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;  ;  ;2;
+25;LG 3D Smart LED TV 105" 105UC9V 5K UHD;7500000.0;105.0;50.0;China;LG;electronic & office;http://gigatronshop.com/img/products/large/image54de0986c5021.jpg;1;  ;  ;2;

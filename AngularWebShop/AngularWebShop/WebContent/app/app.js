@@ -72,7 +72,6 @@ function run($rootScope,$http,$location,$localStorage,$route,loginFactory){
 	$rootScope.getCurrentUser = function(){
 		if(!loginFactory.getCurrentUser()){
 			return undefined;
-		
 		}
 		else {
 			return loginFactory.getCurrentUser();
