@@ -206,7 +206,7 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	
 		init();
 })
-.controller('storeDetailsCtrl',function($scope,$location,$routeParams,$rootScope,userFactory,storeFactory,productsFactory){
+.controller('storeDetailsCtrl',function($scope,$location,$routeParams,$rootScope,$timeout,Upload,userFactory,storeFactory,productsFactory){
 		
 		function init() {
 		
@@ -269,12 +269,36 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 			userFactory.hireSeller($scope.newSeller).success(function() {
 				init();
 				$scope.updateStore();
-			})
-			
-			
-			
-			
+			})	
 		}
+		
+		$scope.uploadFiles = function(file, errFiles) {
+	        $scope.f = file;
+	        $scope.errFile = errFiles && errFiles[0];
+	        if (file) {
+	            file.upload = Upload.upload({
+	                url: '/AngularWebShop/rest/proizvodi/upload',
+	                data: file,
+	                headers: {
+	                    'Content-Type': 'application/json'
+	           }
+	            });
+	            
+	            console.log(JSON.stringify(file) + " <<<<<<")
+	            
+	            file.upload.then(function (response) {
+	                $timeout(function () {
+	                    file.result = response.data;
+	                });
+	            }, function (response) {
+	                if (response.status > 0)
+	                    $scope.errorMsg = response.status + ': ' + response.data;
+	            }, function (evt) {
+	                file.progress = Math.min(100, parseInt(100.0 * 
+	                                         evt.loaded / evt.total));
+	            });
+	        }   
+	    }
 		
 		init();
 })

@@ -55,6 +55,14 @@ public class ProductService {
 		
 	}
 	
+	
+	@POST
+	@Path("/upload")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void upload(){
+		System.out.println("upload slidze");
+	}
+	
 	@POST
 	@Path("/addProduct")
 	@Consumes(MediaType.APPLICATION_JSON)

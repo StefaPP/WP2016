@@ -1,5 +1,5 @@
 // napravimo modul
-var webShop = angular.module('webShop', ['ngRoute','ngStorage']);
+var webShop = angular.module('webShop', ['ngRoute','ngStorage','ngFileUpload']);
 
 webShop
 .config(config)
