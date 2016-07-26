@@ -31,6 +31,8 @@ import beans.ShoppingList;
 import beans.ShoppingListFile;
 import beans.Store;
 import beans.Stores;
+import beans.WishList;
+import beans.WishListFile;
 
 @Path("/proizvodi")
 public class ProductService {
@@ -164,6 +166,12 @@ public class ProductService {
 		return getShoppingList().getValues();
 	}
 	
+	@GET
+	@Path("/getWishList")
+	public Collection<WishList> getWList(){
+		return getWishList().getValues();
+	}
+	
 	public String sId;
 	@POST
 	@Path("/addToCart")
@@ -188,6 +196,31 @@ public class ProductService {
 			e.printStackTrace();
 		}
 	}
+	public String wId;
+
+	@POST
+	@Path("/addToWishList")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void addToWishList(WishList wl) {
+		WishListFile wlf = (WishListFile) ctx.getAttribute("wishList");
+		wlf = getWishList();
+		for (WishList w : wlf.getWishArrayList()) {
+			wId = w.getId();
+		}
+		int i = Integer.parseInt(wId);
+		i += 1;
+		wl.setId(Integer.toString(i));
+		try {
+			WishListFile.writeItem(wl);
+			wlf.getWishList().put(wl.getId(), wl);
+			wlf.getWishArrayList().add(wl);
+			ctx.setAttribute("wishList", wlf);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	@GET
 	@Path("/getProduct")
@@ -348,6 +381,16 @@ public class ProductService {
 
 	}
 	
+	private WishListFile getWishList(){
+		WishListFile wl = (WishListFile) ctx.getAttribute("wishList");
+		if(wl == null)
+		{
+			wl = new WishListFile(ctx.getRealPath(""));
+			ctx.setAttribute("wishList", wl);
+		}
+		return wl;
+	}
+	
 	private ShoppingListFile getShoppingList(){
 		ShoppingListFile sp = (ShoppingListFile) ctx.getAttribute("shoppingList");
 		if(sp == null){
@@ -365,5 +408,7 @@ public class ProductService {
 		}
 		return bh;
 	}
+	
+
 
 }

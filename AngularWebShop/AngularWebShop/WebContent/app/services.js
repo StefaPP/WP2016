@@ -34,6 +34,10 @@ webShop.factory('productsFactory', function($http, $window) {
 		return $http.get('/AngularWebShop/rest/proizvodi/getShoppingList');
 	}
 	
+	factory.getWishList = function(){
+		return $http.get('/AngularWebShop/rest/proizvodi/getWishList');
+	}
+	
 	
 	
 	factory.addToCart = function(product) {
@@ -223,14 +227,6 @@ webShop.factory('storeFactory', function($http) {
 	};
 
 	factory.addStore = function(store) {
-/*		return $http.post('/AngularWebShop/rest/stores/add', {
-			"name" : '' + store.name,
-			"address" : '' + store.address,
-			"country" : '' + store.country,
-			"contact" : '' + store.contact,
-			"email" : '' + store.email
-		})*/
-		
 		return $http({
 		    method : "POST",
 		    url : '/AngularWebShop/rest/stores/add',
@@ -350,12 +346,7 @@ webShop.factory('loginFactory',function($http,$localStorage,$log,$location,$rout
 webShop.factory('shoppingListFactory', function($http) {
 
 	var factory = {};
-	/*factory.getSC = function() {
-		return $http.get('/AngularWebShop/rest/proizvodi/getJustSc');
-	};
-	factory.getTotal = function() {
-		return $http.get('/AngularWebShop/rest/proizvodi/getTotal');
-	};*/
+	
 	
 	factory.removeItem = function(customerId,productId) {
 		return $http.post('/AngularWebShop/rest/proizvodi/removeItem',
