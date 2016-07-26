@@ -16,7 +16,7 @@ public class Reviews {
 	
 	private HashMap<String,Review> reviews = new HashMap<String , Review>();
 	private ArrayList<Review> reviewList = new ArrayList<Review>();
-	private static String path = "C:\\Users\\Strefa\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	private static String path = "C:\\Users\\Bebica\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
 //	private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent/";
 	//private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent";
 	

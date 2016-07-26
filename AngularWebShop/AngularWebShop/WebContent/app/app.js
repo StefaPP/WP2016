@@ -1,5 +1,5 @@
 // napravimo modul
-var webShop = angular.module('webShop', ['ngRoute','ngStorage','ngFileUpload']);
+var webShop = angular.module('webShop', ['ngRoute','ngStorage','ngFileUpload','pageslide-directive']);
 
 webShop
 .config(config)
@@ -64,6 +64,12 @@ function config($routeProvider) {
 function run($rootScope,$http,$location,$localStorage,$route,loginFactory){
 	
 	
+	$rootScope.checked=false;
+	$rootScope.toggle = function(){
+		console.log("alo");
+		$rootScope.checked = !$rootScope.checked;
+	}
+	 
 	 $rootScope.logout = function () {
 		 console.log("Logged Out")
          loginFactory.logout();
@@ -86,7 +92,7 @@ function run($rootScope,$http,$location,$localStorage,$route,loginFactory){
           return loginFactory.getCurrentUser().role;
         }
     }
-	
+		
 	 $rootScope.isLoggedIn = function () {
          if (loginFactory.getCurrentUser()){
            return true;

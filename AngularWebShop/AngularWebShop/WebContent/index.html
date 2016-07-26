@@ -6,6 +6,7 @@
 	<script src="js/angular-route.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/ng-file-upload.js"></script>
+	<script src="js/angular-pageslide-directive.js"></script>
 	
 	<script src="app/app.js"></script>
 	<script src="app/controllers.js"></script>
@@ -241,6 +242,56 @@ div.half-width {
 	align:center;
 }
 
+
+ html {
+                overflow-x: hidden;
+            }
+
+            .ng-pageslide {
+                background: #eee;
+            }
+
+            body.ng-pageslide-body-open::before {
+                content: '.';
+                display: block;
+                position: absolute;
+                top: 0;
+                background-color: rgb(0,0,0);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                opacity: 0.5;
+                transition: opacity 1s;
+                opacity: 0.5;
+                pointer-events: all;
+            }
+
+            body.ng-pageslide-body-closed::before {
+                transition: opacity 1s;
+                content: '.';
+                display: block;
+                position: absolute;
+                top: 0;
+                background-color: rgb(0,0,0);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            #container {
+                width: 10rem;
+                height: 10rem;
+
+                p {
+                    font-size: 0.5rem!important;
+                }
+            }
+
+
 </style>
 
 </head> 
@@ -252,8 +303,19 @@ div.half-width {
 	<li><a ng-if="!isLoggedIn()" href="#login" ng-href="#login">Login</a></li>   
 	<li><a ng-if="isLoggedIn() && getCurrentUserRole() == 'customer'" href="#shoppingList" ng-href="#shoppingList">Shopping list</a></li>
 	<li><a ng-if ="getCurrentUserRole() === 'admin'" href="#delivery" ng-href="#delivery">Delivery</a></li>
+	<li><a ng-if="isLoggedIn() && getCurrentUserRole() == 'customer'" ng-click="toggle()">Wish list</a> 
 	<li class="topright"><a ng-if="isLoggedIn()" ng-click="logout()"> Logout</a></li> 
 </ul>
+
+<div pageslide="" ps-open="checked"
+	class="ng-isolate-scope ng-pageslide"
+	style="z-index: 1000; position: fixed; transition-duration: 0.5s; height: 100%; transition-property: top, bottom, left, right; width: 300px; top: 0px; bottom: 0px; right: 0px;">
+	<div style="padding: 20px" id="demo-right">
+			<p>Put here whatever you want</p>
+			<a ng-click="toggle()" class="button">Close</a>
+			</div>
+		</div>
+		
 <div ng-view>
 
 </div>

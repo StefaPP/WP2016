@@ -13,15 +13,32 @@
 		{{p.category}}<br/>
 		<img src="{{p.image}}" style="width:150px;height:100px"/>
 		<select class="form-control" name="repeatSelect" id="repeatSelect" ng-model="p.deliveryId" required>
-        <option ng-repeat="d in deliverers" value="{{d.name}}">{{d.name}}</option>
+        <option ng-repeat="d in deliverers | filter :{ country:user.country}:true" value="{{d.name}}">{{d.name}}</option>
      </select>
+  	<div><p>
+  	</p>
+  	</div>
   </div>
 </div>
 
 </div>
+
+<!-- 
+
+		<select class="form-control" name="sellerSelect" id="sellerSelect"
+			ng-model="newSeller.username">
+			<option ng-repeat="u in users | filter:{ username: '!' + st.seller}"
+				value="{{u.username}}">{{u.username}}</option>
+		</select>
+
+		 -->
+
 <h3 ng-if="total!=0">Total price of your shopping list is {{total}}.00 Din.</h3>
 <button type="button" class="btn btn-success btn-lg"  ng-click="buy()" ng-if="total!=0">
 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Finish shopping !</button>
+
+<button type="button" class="btn btn-success btn-lg" ng-click="toggle()">Toggle wishlist</button>
+
 <h1 ng-if="total==0">Your shopping cart is empty !</h1>
 </div>
 <div style="float:left;width:20%;">

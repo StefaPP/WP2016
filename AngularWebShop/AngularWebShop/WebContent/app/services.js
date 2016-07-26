@@ -141,6 +141,7 @@ webShop.factory('userFactory', function($http) {
 	factory.getUsers = function() {
 		return $http.get('/AngularWebShop/rest/users/getUsers');
 	};
+	
 	factory.getUser = function(user) {
 		return $http.get('/AngularWebShop/rest/', {
 			"username" : '' + user.username
@@ -326,8 +327,7 @@ webShop.factory('loginFactory',function($http,$localStorage,$log,$location,$rout
 			console.log("This is what server returned " + user.username)
 			console.log(JSON.stringify(user) + " <<<<<<<<<<<<<<<<<<<<<")
 			if(user.username) {
-				var currentUser = {username : username , role : user.role};
-
+				var currentUser = {username : username , role : user.role , country : user.country};
 				$localStorage.currentUser = currentUser;
 				$location.path('/products');
 			}else {

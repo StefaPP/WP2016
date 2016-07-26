@@ -3,7 +3,6 @@
 5;1;Fri Jun 24 16:24:52 CEST 2016;7;Drugi rating;2;
 6;Stefica;Wed Jun 29 11:25:04 CEST 2016;8;Ekstra tv;1;
 7;Kilje;Wed Jun 29 11:25:20 CEST 2016;3;LOs tv;1;
-8;Stefica;Wed Jun 29 19:07:35 CEST 2016;5;Rating;2;
 9;Stefica;Thu Jun 30 08:17:42 CEST 2016;7;Supet teve hhehe;3;
 10;Kilje;Thu Jun 30 08:18:00 CEST 2016;2;Ja kupio los je;3;
 11;Stefica;Thu Jun 30 08:27:40 CEST 2016;6;Fini pamuk;7;

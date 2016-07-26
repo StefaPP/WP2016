@@ -30,6 +30,11 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 	})
 }
 	
+	$scope.checked=false;
+	$scope.toggle = function(){
+		console.log("alo");
+		$scope.checked = !$scope.checked;
+	}
 	
 	
 	$scope.addCategory = function()
@@ -361,8 +366,10 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		$scope.currentUser = $rootScope.getCurrentUser().username;
 		$scope.products = [];
 		$scope.boughtProducts = [];
+		$scope.user = {};
+		$scope.user = $rootScope.getCurrentUser();
+		console.log($scope.user);
 		
-
 		deliveryFactory.getDeliverers().success(function(data){
 			$scope.deliverers = data;
 		})
@@ -420,7 +427,6 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 				init();
 			});
 	}
-		
 	
 	init();
 })
