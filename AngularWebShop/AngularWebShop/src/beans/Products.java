@@ -45,8 +45,6 @@ public class Products {
 			}
 		}
 	}
-
-	
 	private void readProducts(BufferedReader in) {
 		String line, id = "", name = "", price = "", size = "", weight = "", origin = "", brandName = "", category = "",
 				image = "", storeId = "", rating = "", review = "", lager = "";

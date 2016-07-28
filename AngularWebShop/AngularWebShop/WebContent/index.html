@@ -2,168 +2,175 @@
 <html ng-app="webShop">
 
 <head>
-	<script src="js/angular.js"></script>
-	<script src="js/angular-route.js"></script>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/ng-file-upload.js"></script>
-	<script src="js/angular-pageslide-directive.js"></script>
-	
-	<script src="app/app.js"></script>
-	<script src="app/controllers.js"></script>
-	<script src="app/services.js"></script>
-	<script src="app/directives.js"></script>
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-<link href="http://fonts.googleapis.com/css?family=Allan:bold" rel="stylesheet" type='text/css'>
+<script src="js/angular.js"></script>
+<script src="js/angular-route.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/ng-file-upload.js"></script>
+<script src="js/angular-pageslide-directive.js"></script>
+
+<script src="app/app.js"></script>
+<script src="app/controllers.js"></script>
+<script src="app/services.js"></script>
+<script src="app/directives.js"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+	crossorigin="anonymous"></script>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
+	crossorigin="anonymous">
+<link href="http://fonts.googleapis.com/css?family=Allan:bold"
+	rel="stylesheet" type='text/css'>
 
 <style type="text/css">
-
-#top,
-#bottom {
-    position: fixed;
-    left: 0;
-    right: 0;
-    height: 50%;
+#top, #bottom {
+	position: fixed;
+	left: 0;
+	right: 0;
+	height: 50%;
 }
 
 #top {
-    top: 150px;
+	top: 150px;
 }
 
 #bottom {
-    top: 0;
+	top: 0;
 }
 
 .topright {
-    position: absolute;
-    top: 80px;
-    right: 16px;
-    font-size: 14px;
+	position: absolute;
+	top: 80px;
+	right: 16px;
+	font-size: 14px;
 }
 
 .toprightRemove {
-    position: relative;
-    bottom: 52px;
-    left: 170px;
-    font-size: 14px;
+	position: relative;
+	bottom: 52px;
+	left: 170px;
+	font-size: 14px;
 }
 
 .right {
 	position: relative;
-	left:793px;
-	bottom:25px;
+	left: 793px;
+	bottom: 25px;
 }
 
-.toprightRemoveReview
- {
-    position: relative;
-    bottom: 85px;
-    left: 470px;
-    font-size: 14px;
+.toprightRemoveReview {
+	position: relative;
+	bottom: 85px;
+	left: 470px;
+	font-size: 14px;
 }
 
 .toprightUpdateDelivery {
 	position: absolute;
-    top: 0px;
-    right: 3px;
-    font-size: 14px;
-	
+	top: 0px;
+	right: 3px;
+	font-size: 14px;
 }
-
 
 .toprightDeleteDelivery {
 	position: absolute;
-    top: 27px;
-    right: 3px;
-    font-size: 14px;
-	
+	top: 27px;
+	right: 3px;
+	font-size: 14px;
 }
-
-
 
 .star-rating {
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  
-  .star {
-    padding: 1px;
-    color: #ddd;
-    font-size: 20px;
-    text-shadow: .05em .05em #aaa;
-    list-style-type: none;
-    display: inline-block;
-    cursor: pointer;
-
-    &.filled {
-      color: #fd0;
-    }
-  }
-
-  &.readonly .star.filled {
-    color: #666;
-  }
+	margin: 0;
+	padding: 0;
+	display: inline-block; . star { padding : 1px;
+	color: #ddd;
+	font-size: 20px;
+	text-shadow: .05em .05em #aaa;
+	list-style-type: none;
+	display: inline-block;
+	cursor: pointer;
+	&.
+	filled
+	{
+	color
+	:
+	#fd0;
 }
 
+}
+&
+.readonly .star.filled {
+	color: #666;
+}
 
-#ranks li { 
- display:block;
- float:left; 
- }
-
+}
+#ranks li {
+	display: block;
+	float: left;
+}
 
 p {
 	font-family: Century Gothic, sans-serif;
 }
 
-a{
+a {
 	font-family: Century Gothic, sans-serif;
 }
+
 body {
 	font-family: Century Gothic, sans-serif;
-    margin: 0;
+	margin: 0;
 }
+
 ul.nvb {
 	font-family: Century Gothic, sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-	width:100%;
-	text-align:center;
-    background-color: #333;
-    font-size: 18px;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	width: 100%;
+	text-align: center;
+	background-color: #333;
+	font-size: 18px;
 }
-li {
-	float:left;
-	text-align:left;
-	font-size: 25px;
-    cursor: pointer; 
-    cursor: hand;
-    font-family: Century Gothic, sans-serif;
-}
-.nvb li a {
-    float:left;
-	text-align:left;
-    display: block;
-    color: white;
-    padding: 18px 16px;
-    text-decoration: none;
-}
-.nvb li a:hover {
-    background: #111;
-}
-#grad1 {
-    height: 250px;
-    width:100%;
-    background: #111;
-    color:white;
-    opacity:0.95;
-}	
 
+li {
+	float: left;
+	text-align: left;
+	font-size: 25px;
+	cursor: pointer;
+	cursor: hand;
+	font-family: Century Gothic, sans-serif;
+}
+
+.nvb li a {
+	float: left;
+	text-align: left;
+	display: block;
+	color: white;
+	padding: 18px 16px;
+	text-decoration: none;
+}
+
+.nvb li a:hover {
+	background: #111;
+}
+
+#grad1 {
+	height: 250px;
+	width: 100%;
+	background: #111;
+	color: white;
+	opacity: 0.95;
+}
 
 /* ul.ver {
     list-style-type: none;
@@ -190,134 +197,168 @@ li.ver {
     color: white;
 }
  */
-
 ul.ver {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    width:200px;
-    background-color: #333;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	width: 200px;
+	background-color: #333;
 }
 
 ul.shoppingList {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    width:200px;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	width: 200px;
 }
 
 li.shoppingList {
-	float:left;
+	float: left;
 }
 
-
-
 li.ver {
-    float: left;
+	float: left;
 }
 
 .ver li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
 
 .ver li a:hover {
-    background-color: #111;
+	background-color: #111;
 }
 
 li.topright {
-    position: absolute;
-    top: 0px;
-    right: 16px;
-    font-size: 25px;
+	position: absolute;
+	top: 0px;
+	right: 16px;
+	font-size: 25px;
 }
 
 div.half-width {
-	float:left;
-	width:30%;
-	align:center;
+	float: left;
+	width: 30%;
+	align: center;
 }
 
+html {
+	overflow-x: hidden;
+}
 
- html {
-                overflow-x: hidden;
-            }
+.ng-pageslide {
+	background: #eee;
+}
 
-            .ng-pageslide {
-                background: #eee;
-            }
+body.ng-pageslide-body-open::before {
+	content: '.';
+	display: block;
+	position: absolute;
+	top: 0;
+	background-color: rgb(0, 0, 0);
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+	opacity: 0.5;
+	transition: opacity 1s;
+	opacity: 0.5;
+	pointer-events: all;
+}
 
-            body.ng-pageslide-body-open::before {
-                content: '.';
-                display: block;
-                position: absolute;
-                top: 0;
-                background-color: rgb(0,0,0);
-                left: 0;
-                right: 0;
-                bottom: 0;
-                z-index: 1;
-                opacity: 0.5;
-                transition: opacity 1s;
-                opacity: 0.5;
-                pointer-events: all;
-            }
+body.ng-pageslide-body-closed::before {
+	transition: opacity 1s;
+	content: '.';
+	display: block;
+	position: absolute;
+	top: 0;
+	background-color: rgb(0, 0, 0);
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+	opacity: 0;
+	pointer-events: none;
+}
 
-            body.ng-pageslide-body-closed::before {
-                transition: opacity 1s;
-                content: '.';
-                display: block;
-                position: absolute;
-                top: 0;
-                background-color: rgb(0,0,0);
-                left: 0;
-                right: 0;
-                bottom: 0;
-                z-index: 1;
-                opacity: 0;
-                pointer-events: none;
-            }
+#container {
+	width: 10rem;
+	height: 10rem;
+	p
+	{
+	font-size
+	:
+	0.5rem
+	!important;
+}
+}
 
-            #container {
-                width: 10rem;
-                height: 10rem;
-
-                p {
-                    font-size: 0.5rem!important;
-                }
-            }
+.toprightWL {
+    position: absolute;
+    top: 5px;
+    right: 12px;
+    font-size: 8px;
+}
 
 
 </style>
 
-</head> 
+</head>
 <body>
-<ul class="nvb">
-    <li style="margin-left:25%;"><a ng-if ="getCurrentUserRole() === 'admin'" href="#users" ng-href="#users">Users</a></li>
-    <li><a href="#products" ng-href="#products">Products</a></li>
-    <li><a href="#stores" ng-href="#stores" >Stores</a></li> 
-	<li><a ng-if="!isLoggedIn()" href="#login" ng-href="#login">Login</a></li>   
-	<li><a ng-if="isLoggedIn() && getCurrentUserRole() == 'customer'" href="#shoppingList" ng-href="#shoppingList">Shopping list</a></li>
-	<li><a ng-if ="getCurrentUserRole() === 'admin'" href="#delivery" ng-href="#delivery">Delivery</a></li>
-	<li><a ng-if="isLoggedIn() && getCurrentUserRole() == 'customer'" ng-click="toggle()">Wish list</a> 
-	<li class="topright"><a ng-if="isLoggedIn()" ng-click="logout()"> Logout</a></li> 
-</ul>
-
-<div pageslide="" ps-open="checked"
-	class="ng-isolate-scope ng-pageslide"
-	style="z-index: 1000; position: fixed; transition-duration: 0.5s; height: 100%; transition-property: top, bottom, left, right; width: 300px; top: 0px; bottom: 0px; right: 0px;">
-	<div style="padding: 20px" id="demo-right">
-			<p>Put here whatever you want</p>
-			<a ng-click="toggle()" class="button">Close</a>
+	<div pageslide="" ps-open="checked"
+		class="ng-isolate-scope ng-pageslide"
+		style="z-index: 1000; position: fixed; transition-duration: 0.5s; height: 100%; transition-property: top, bottom, left, right; width: 300px; top: 0px; bottom: 0px; right: 0px;">
+		<div style="padding: 20px" id="demo-right">
+			<div>
+				<h2>Wishlist</h2>
+				<div align="center" class="list-group" style="width: 100%;"
+					ng-repeat="w in wishListProducts">
+					<a href class="list-group-item">
+						<p>
+							{{w.name}}<br/>{{w.price}} Din.
+						</p>
+						<button type="button" class="btn btn-danger toprightWL" ng-click="removeWish(w.id)">
+  						<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+						</button>
+						<button type="button" ng-click="addToCart(w)">Add to cart
+  						<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+						</button>
+					</a>
+				</div>
 			</div>
 		</div>
-		
-<div ng-view>
+	</div>
+	</div>
 
-</div>
+
+	<ul class="nvb">
+		<li style="margin-left: 25%;"><a
+			ng-if="getCurrentUserRole() === 'admin'" href="#users"
+			ng-href="#users">Users</a></li>
+		<li><a href="#products" ng-href="#products">Products</a></li>
+		
+		<li><a href="#stores" ng-href="#stores">Stores</a></li>
+		
+		<li><a ng-if="!isLoggedIn()" href="#login" ng-href="#login">Login</a></li>
+		
+		<li><a ng-if="isLoggedIn() && getCurrentUserRole() == 'customer'"
+			href="#shoppingList" ng-href="#shoppingList">Shopping list</a></li>
+		
+		<li><a ng-if="getCurrentUserRole() === 'admin'" href="#delivery"
+			ng-href="#delivery">Delivery</a></li>
+		
+		<li><a ng-if="isLoggedIn() && getCurrentUserRole() == 'customer'"
+			ng-click="toggle()">Wish list</a>
+		
+		<li class="topright"><a ng-if="isLoggedIn()" ng-click="logout()">
+				Logout</a></li>
+	</ul>
+
+
+<div ng-view></div>
 </body>
 </html>

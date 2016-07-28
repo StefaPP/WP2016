@@ -31,6 +31,7 @@ import beans.ShoppingList;
 import beans.ShoppingListFile;
 import beans.Store;
 import beans.Stores;
+import beans.User;
 import beans.WishList;
 import beans.WishListFile;
 
@@ -166,10 +167,18 @@ public class ProductService {
 		return getShoppingList().getValues();
 	}
 	
-	@GET
-	@Path("/getWishList")
-	public Collection<WishList> getWList(){
-		return getWishList().getValues();
+	@POST
+	@Path("/getUsersWishList")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<WishList> getWList(User u){
+		HashMap<String,WishList> wl = new HashMap<String,WishList>();
+		for(WishList w : getWishList().getWishArrayList()){
+			if(w.getCustomerId().equals(u.getUsername())){
+				wl.put(w.getId(), w);
+			}
+		}
+		return wl.values();
 	}
 	
 	public String sId;
@@ -196,11 +205,11 @@ public class ProductService {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	public String wId;
-
 	@POST
-	@Path("/addToWishList")
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/addWish")
 	public void addToWishList(WishList wl) {
 		WishListFile wlf = (WishListFile) ctx.getAttribute("wishList");
 		wlf = getWishList();
@@ -362,6 +371,28 @@ public class ProductService {
 		
 	}
 
+	@POST
+	@Path("/removeWish")
+	public void removeWish(WishList wl){
+		WishListFile wlf = (WishListFile) ctx.getAttribute("wishList");
+		WishList wishToRemove = new WishList();
+		for(WishList w : getWishList().getWishArrayList()){
+			if(w.getCustomerId().equals(wl.getCustomerId()) && w.getProductId().equals(wl.getProductId())){
+				wishToRemove.setId(w.getId());
+			}
+		}
+		try{
+			WishListFile.deleteItem(wishToRemove.getId());
+			wishToRemove = wlf.getWishList().get(wishToRemove.getId());
+			wlf.getWishArrayList().remove(wishToRemove);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
 	private Products getProducts() {
 		Products products = (Products) ctx.getAttribute("products");
 		if (products == null) {

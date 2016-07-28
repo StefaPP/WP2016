@@ -1,16 +1,31 @@
-webShop.controller('productsController', function($scope,$location,productsFactory,$rootScope) {
+webShop.controller('productsController', function($rootScope,$scope,$location,$rootScope,productsFactory,shoppingListFactory) {
 	
     function init() {
-    	if($rootScope.isLoggedIn()){
-    		$scope.currentUser = $rootScope.getCurrentUser().username;
-    		$scope.currentRole = $rootScope.getCurrentUser().role;
     		
-    	}
-        productsFactory.getProducts().success(function (data) {
+	    productsFactory.getProducts().success(function (data) {
         	$scope.products = data;
 		});
      
-        console.log($scope.currentUser);
+		
+		if($rootScope.isLoggedIn()){
+    		$scope.currentUser = $rootScope.getCurrentUser().username;
+    		$scope.currentRole = $rootScope.getCurrentUser().role;
+    		$scope.usersWishList = $rootScope.getCurrentUser();
+    		$rootScope.wishListProducts = [];
+    		
+    		productsFactory.getUsersWishList($scope.usersWishList).success(function(data){
+    		 	$scope.wishList = data;		
+    		 	
+    		 	angular.forEach($scope.wishList,function(item){
+				productsFactory.getProduct(item.productId).success(function(data){
+					$rootScope.wishListProducts.push(data);
+					
+				})
+			})
+    	})
+    
+    	}
+    
     }
 	init();
 	
@@ -18,24 +33,30 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		productsFactory.getCategories().success(function (data) {
        		$scope.categories = data;
        		$scope.category = {};
+    
 	 });
 	}
 	
 	initCats();
-	$scope.addToCart = function(product) {
-		productsFactory.getShoppingList().success(function(data){
-	 	$scope.shoppingList = data;
-		productsFactory.addToCart(product).success(function(data) {
+	
+
+	$rootScope.removeWish = function(productId){
+		productsFactory.removeWish($scope.currentUser,productId).success(function(){
+				init();
+		})
+	}	
+
+	$rootScope.addToCart = function(product) {
+		 product.customerId = $rootScope.getCurrentUser().username;
+		 product.productId = product.id;
+		 productsFactory.addToCart(product).success(function(data) {
+			 productsFactory.removeWish($scope.currentUser,product.productId).success(function(){
+					init();
+			})
+			 
 		});	
-	})
-}
-	
-	$scope.checked=false;
-	$scope.toggle = function(){
-		console.log("alo");
-		$scope.checked = !$scope.checked;
-	}
-	
+
+	 }
 	
 	$scope.addCategory = function()
 	{
@@ -51,6 +72,10 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 			initCats();
 		})
 	}
+	
+	
+	
+	
 	
 })
 .controller('categoryProductsCtrl',function($scope,$rootScope,$routeParams,productsFactory){
@@ -111,6 +136,29 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		});	
 
 		 $scope.product.lager -= 1; 
+	 }
+	 
+	 $scope.addWish = function(product){
+		 product.customerId = $rootScope.getCurrentUser().username;
+		 $scope.usersWishList = $rootScope.getCurrentUser();
+		 product.productId = $scope.product.id;
+		 product.storeId = $scope.product.storeId;
+		 productsFactory.addWish(product).success(function(data) {
+			 
+			 productsFactory.getUsersWishList($scope.usersWishList).success(function(data){
+	    		 	$scope.wishList = data;		
+	    		 	
+	    		 	angular.forEach($scope.wishList,function(item){
+					productsFactory.getProduct(item.productId).success(function(data){
+						$rootScope.wishListProducts.push(data);
+						
+					})
+				})
+	    	})
+			 
+			 init();
+		});	
+
 	 }
 	 
 	 $scope.get = function(star){
@@ -328,17 +376,13 @@ webShop.controller('productsController', function($scope,$location,productsFacto
 		})
 	}
 })
-.controller('loginCtrl',function($scope,$location,loginFactory,userFactory,productsFactory){
+.controller('loginCtrl',function($scope,$location,loginFactory,userFactory){
 	
 	function init() {
 		//console.log('Login Controller')
 		userFactory.getUsers().success(function(data){
 				$scope.users = data;
 			})
-		productsFactory.getWishList().success(function(data){
-	 	$scope.wishList = data;
-	
-		})
 		}
 		
 		init();
