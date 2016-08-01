@@ -1,12 +1,24 @@
 webShop.controller('productsController', function($rootScope,$scope,$location,$rootScope,productsFactory,shoppingListFactory) {
 	
     function init() {
-    		
+    	
+
+    	$scope.slider = {
+    			  min: 0,
+    			  max: 50000,
+    			  options: {
+    				step: 1000,
+    			    floor: 0,
+    			    ceil: 100000
+    			  }
+    			};
+    	
 	    productsFactory.getProducts().success(function (data) {
         	$scope.products = data;
 		});
      
-		
+	   
+	    $rootScope.products = [];
 		if($rootScope.isLoggedIn()){
     		$scope.currentUser = $rootScope.getCurrentUser().username;
     		$scope.currentRole = $rootScope.getCurrentUser().role;
@@ -15,7 +27,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
     		
     		productsFactory.getUsersWishList($scope.usersWishList).success(function(data){
     		 	$scope.wishList = data;		
-    		 	
+    		 	console.log($scope.wishList);
     		 	angular.forEach($scope.wishList,function(item){
 				productsFactory.getProduct(item.productId).success(function(data){
 					$rootScope.wishListProducts.push(data);
@@ -23,7 +35,6 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 				})
 			})
     	})
-    
     	}
     
     }
@@ -50,12 +61,22 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		 product.customerId = $rootScope.getCurrentUser().username;
 		 product.productId = product.id;
 		 productsFactory.addToCart(product).success(function(data) {
+			 shoppingListFactory.getUsersShoppingList(product.customerId).success(function(data){
+					$scope.total = 0;
+					$scope.sp = data;
+					 angular.forEach($scope.sp, function(item){
+		                 productsFactory.getProduct(item.productId).success(function (data){
+		                	 $rootScope.products.push(data);
+		                	 $scope.total+=data.price;
+		                 })
+		                 
+		             })
+		           
+				})
 			 productsFactory.removeWish($scope.currentUser,product.productId).success(function(){
-					init();
+				 init();
 			})
-			 
 		});	
-
 	 }
 	
 	$scope.addCategory = function()
@@ -124,6 +145,22 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		 })
 	 }
 	 
+	 $rootScope.removeWish = function(productId){
+		 $scope.usersWishList = $rootScope.getCurrentUser();
+		 productsFactory.removeWish($scope.currentUser,productId).success(function(){
+		 productsFactory.getUsersWishList($scope.usersWishList).success(function(data){
+ 		 	$scope.wishList = data;		
+ 		 	$rootScope.wishListProducts = [];
+ 		 	angular.forEach($scope.wishList,function(item){
+				productsFactory.getProduct(item.productId).success(function(data){
+					$rootScope.wishListProducts.push(data);
+					
+				})
+			})
+ 	})
+			})
+		}	
+	 
 	 $scope.addToCart = function(product) {
 		 alert('You have successfully added ' + $scope.product.name + ' to cart');
 		 product.customerId = $rootScope.getCurrentUser().username;
@@ -144,10 +181,10 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		 product.productId = $scope.product.id;
 		 product.storeId = $scope.product.storeId;
 		 productsFactory.addWish(product).success(function(data) {
-			 
-			 productsFactory.getUsersWishList($scope.usersWishList).success(function(data){
+			alert("This item was added to wishlist")
+		 productsFactory.getUsersWishList($scope.usersWishList).success(function(data){
 	    		 	$scope.wishList = data;		
-	    		 	
+	    		 	$rootScope.wishListProducts = [];
 	    		 	angular.forEach($scope.wishList,function(item){
 					productsFactory.getProduct(item.productId).success(function(data){
 						$rootScope.wishListProducts.push(data);
@@ -158,6 +195,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 			 
 			 init();
 		});	
+		 
 
 	 }
 	 
@@ -412,7 +450,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		$scope.buying = {};
 		
 		$scope.currentUser = $rootScope.getCurrentUser().username;
-		$scope.products = [];
+		$rootScope.products = [];
 		$scope.boughtProducts = [];
 		$scope.user = {};
 		$scope.user = $rootScope.getCurrentUser();
@@ -442,7 +480,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 			$scope.sp = data;
 			 angular.forEach($scope.sp, function(item){
                  productsFactory.getProduct(item.productId).success(function (data){
-                	 $scope.products.push(data);
+                	 $rootScope.products.push(data);
                 	 $scope.total+=data.price;
                  })
                  
@@ -450,8 +488,6 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
            
 		})
 		
-		
-
 		$scope.removeItem = function(productId){
 			shoppingListFactory.removeItem($scope.currentUser,productId).success(function(){
 				alert('This item has been removed from your shopping list')

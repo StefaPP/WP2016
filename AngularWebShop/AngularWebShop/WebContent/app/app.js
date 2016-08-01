@@ -1,5 +1,5 @@
 // napravimo modul
-var webShop = angular.module('webShop', ['ngRoute','ngStorage','ngFileUpload','pageslide-directive']);
+var webShop = angular.module('webShop', ['ngRoute','ngStorage','ngFileUpload','pageslide-directive','rzModule']);
 
 webShop
 .config(config)

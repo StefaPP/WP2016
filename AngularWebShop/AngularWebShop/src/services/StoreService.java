@@ -79,7 +79,6 @@ public class StoreService {
 				stores.getStoreList().add(s);
 				ctx.setAttribute("stores", stores);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
