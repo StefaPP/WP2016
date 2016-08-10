@@ -1,7 +1,12 @@
 <div>
-	<div class="jumbotron">
+<div class="jumbotron">
 		<h1>{{product.name}}</h1>
-		<h3>Price : {{product.price}} RSD</h3>
+		<h3 ng-if="!discountProduct">Price : {{product.price}} RSD</h3>
+		<div ng-if="discountProduct">		
+		<h3 class="strikethrough">Price : {{product.price}} RSD</h3>
+		<h2><u>NEW PRICE :{{newPrice}} rsd </u>  <strong style="background:red;">({{discountProduct.discountRate}}% OFF ! ) <strong></h2>
+		<h2>Valid untill : {{discountProduct.endDate|date:'mediumDate'}}</h2>
+		</div>
 		<h3>Lager : {{product.lager}}</h3>
 		<img style="width: 400px; height: 300px;" src="{{product.image}}">
 		<p>
@@ -13,10 +18,27 @@
 				role="button"
 				ng-disabled="product.lager===0 || currentRole!='customer'">Add
 				to wish list </button>
+			<button class="btn btn-primary btn-lg" ng-click="value = !value"
+				role="button">Add on sale</button>
 		<div ng-show="product.lager==0">This product is currently
 			unavailable</div>
-		</p>
+	<div ng-show="value">
+	<h2>Add on sale</h2>
+	<h6>Start date</h6>
+	 <md-datepicker ng-model="startDate" md-placeholder="Enter start date"
+        md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+      <h6>End date</h6>
+	 <md-datepicker ng-model="endDate" md-placeholder="Enter end date"
+        md-min-date="startDate" md-max-date="maxDate2"></md-datepicker>
+	<h6>Discount rate</h6>
+	<input class="form-control" style="width:300px;" type="number" min="0" max="100"
+					step="10" ng-model="discount" /><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-info" ng-click="addOnSale(product)"
+				role="button">Finish</button>
 	</div>
+	</div>
+	
+	<div>
 	<button class="btn btn-danger topright"
 		ng-click="deleteProduct(product)"
 		ng-show="currentRole!='customer' && isLoggedIn()">Delete
@@ -51,6 +73,7 @@
 	<br />
 	<div class="form-group" ng-show="loggedIn && currentRole=='customer'">
 		<label for="comment">Review:</label>
+		<h6>Review</h6>
 		<textarea class="form-control" ng-model="review.comment" rows="3"
 			cols="80" id="comment"></textarea>
 		<br />
@@ -65,4 +88,5 @@
 			<br /> <br />
 		</div>
 	</div>
+</div>
 </div>

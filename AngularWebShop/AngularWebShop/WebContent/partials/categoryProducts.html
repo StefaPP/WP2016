@@ -1,5 +1,6 @@
 <div>
 <div style="float:left; width:20%;">
+<ul class="ver"><li><a href="#products" ng-href="#products">All products</a></li></ul>
 <ul class="ver"  ng-repeat="c in categories">
   <li class="ver"><div><a ng-href="#/category/{{c.name}}" href="#products">{{c.name}}</a>
   <button type="button" class="btn btn-danger btn-xs toprightRemove" ng-click="deleteCategory(c)" ng-show="currentUser ==='admin'">
@@ -13,9 +14,17 @@
 </ul>
 </div>
 <div style="float:left; width:80%;">
+<div style="width:80%;">
+<rzslider
+    rz-slider-model="slider.min"
+    rz-slider-high="slider.max"
+    rz-slider-options="slider.options"></rzslider>
+      <button type="button" class="btn btn-default" ng-click="slider.min = 0;slider.max=1000000">Reset range</button>
+</div>
+&nbsp;&nbsp;&nbsp;<label>Search: <input type="text" class="form-control" ng-model="searchText" data-toggle="tooltip" data-placement="right" title="Searh any parameter"></label>
 <br/><br/><br/>
 <div class="col"> 
-  <div class="col-md-4" ng-repeat="p in categoryProducts">
+  <div class="col-md-4" ng-repeat="p in categoryProducts | filter:searchText | rangeFilter:slider">
     <a ng-href="#/product/{{p.id}}" class="thumbnail">
       <p>{{p.name}}</p>
       <p>{{p.price}}</p>

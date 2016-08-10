@@ -8,7 +8,7 @@ public class Discount {
 	private String startDate;
 	private String endDate;
 	private String discountRate;
-
+	
 	private Discount() {
 
 	}

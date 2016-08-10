@@ -5,4 +5,5 @@ seller;asdf;Sellerko;Sellerkovic;seller;0543;seller@gmail.com;Sellereova 20;USA;
 stefan;asdf;Stefan;Popov;seller;0649204732;stefancina@live.com;Gagarinova 20,Novi Sad;Serbia;
 proba;asdf;Proba;Probic;seller;5432;proba@gmail.com;bul osl 21;Serbia;
 Kilje;asdf;Aleksandar;Okiljevic;customer;43243;kilje@gmail.com;Narodnog fronta;USA;
-kaplar;asdf;Aleksandar;Kaplar;customer;064 kaplar;kaplar@gmail.com;Kaplarova 20;Germany;
+kaplar;asdf;Aleksandar;Kaplar;seller;064 kaplar;kaplar@gmail.com;Kaplarova 20;Germany;
+Sopka;asdf;Aleksandra;Shopka;customer;0645486367;sopka@hotmail.com;Dr Kasap 9;Rusinija;

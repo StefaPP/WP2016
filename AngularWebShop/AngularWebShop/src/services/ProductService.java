@@ -18,11 +18,15 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 import beans.Buying;
 import beans.BuyingHistory;
 import beans.Categories;
 import beans.Category;
+import beans.Discount;
+import beans.Discounts;
 import beans.Product;
 import beans.Products;
 import beans.Review;
@@ -53,51 +57,65 @@ public class ProductService {
 	@GET
 	@Path("/getCategories")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Category> getCategories(){
+	public Collection<Category> getCategories() {
 		return getCats().getCategories();
-		
+
 	}
-	
-	
+
 	@POST
 	@Path("/upload")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public void upload(){
+	public void upload() {
 		System.out.println("upload slidze");
 	}
-	
+
+	@POST
+	@Path("/addOnSale")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void addOnSale(Discount dis) {
+
+		String uniqueID = UUID.randomUUID().toString();
+		dis.setId(uniqueID);
+		System.err.println(dis);
+		try {
+			Discounts.writeItem(dis);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Add on sale service");
+	}
+
 	@POST
 	@Path("/addProduct")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String addProduct(Product p) {
 		Products products = (Products) ctx.getAttribute("products");
 		products = getProducts();
-		int id = Integer.parseInt(products.getProductList().get(products.getProductList().size()-1).getId());
-		id +=1;
+		int id = Integer.parseInt(products.getProductList().get(products.getProductList().size() - 1).getId());
+		id += 1;
 		p.setId(Integer.toString(id));
 		p.setReview(" ");
 		p.setRating(" ");
-		
-		try { 
+
+		try {
 			Products.writeProduct(p);
 			products.getProducts().put(p.getId(), p);
 			products.getProductList().add(p);
 			ctx.setAttribute("products", products);
-		}
-		catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		System.out.println(p + " <<<<<<<<");
 		return null;
 	}
-	
+
 	@DELETE
 	@Path("/deleteProduct")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void deleteProduct(Product p){
+	public void deleteProduct(Product p) {
 		Products products = (Products) ctx.getAttribute("products");
-		if(products.getProducts().get(p.getId()) != null){
-			
+		if (products.getProducts().get(p.getId()) != null) {
+
 			try {
 				Products.deleteProduct(p.getId());
 				products.getProducts().remove(p.getId());
@@ -107,15 +125,14 @@ public class ProductService {
 			}
 		}
 	}
-	
-	
+
 	@DELETE
 	@Path("/deleteCategory")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void deleteProduct(Category c){
+	public void deleteProduct(Category c) {
 		Categories categories = (Categories) ctx.getAttribute("categories");
-		if(categories.getCats().get(c.getName()) != null){
-			
+		if (categories.getCats().get(c.getName()) != null) {
+
 			try {
 				Categories.deleteCategory(c.getName());
 				categories.getCats().remove(c.getName());
@@ -125,40 +142,36 @@ public class ProductService {
 			}
 		}
 	}
-	
-	
+
 	@GET
 	@Path("/getProductsOfStore")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Product> getProductsFromStore() {
-		HashMap<String,Product> storeProducts = new HashMap<String,Product> ();
+		HashMap<String, Product> storeProducts = new HashMap<String, Product>();
 		String storeId = request.getParameter("id");
-		for(Product p : getProducts().getValues()){
-			if (p.getStoreId().equals(storeId))
-			{
+		for (Product p : getProducts().getValues()) {
+			if (p.getStoreId().equals(storeId)) {
 				storeProducts.put(p.getId(), p);
 			}
-				
+
 		}
-			return storeProducts.values();
+		return storeProducts.values();
 	}
 
 	@GET
 	@Path("/getProductsForCategory")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Product> getProductsForCategory(){
-		HashMap<String,Product> categoryP = new HashMap<String,Product>();
+	public Collection<Product> getProductsForCategory() {
+		HashMap<String, Product> categoryP = new HashMap<String, Product>();
 		String catName = request.getParameter("name");
-		for(Product p : getProducts().getValues()){
-			if (p.getCategory().equals(catName))
-			{
+		for (Product p : getProducts().getValues()) {
+			if (p.getCategory().equals(catName)) {
 				categoryP.put(p.getId(), p);
 			}
-				
+
 		}
 		return categoryP.values();
 	}
-	
 
 	@GET
 	@Path("/getShoppingList")
@@ -166,34 +179,35 @@ public class ProductService {
 	public Collection<ShoppingList> getProductList() {
 		return getShoppingList().getValues();
 	}
-	
+
 	@POST
 	@Path("/getUsersWishList")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<WishList> getWList(User u){
-		HashMap<String,WishList> wl = new HashMap<String,WishList>();
-		for(WishList w : getWishList().getWishArrayList()){
-			if(w.getCustomerId().equals(u.getUsername())){
+	public Collection<WishList> getWList(User u) {
+		HashMap<String, WishList> wl = new HashMap<String, WishList>();
+		for (WishList w : getWishList().getWishArrayList()) {
+			if (w.getCustomerId().equals(u.getUsername())) {
 				wl.put(w.getId(), w);
 			}
 		}
 		return wl.values();
 	}
-	
+
 	public String sId;
+
 	@POST
 	@Path("/addToCart")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void addToCart(ShoppingList sp){
-		ShoppingListFile spf = (ShoppingListFile) ctx.getAttribute("shoppingList");		
+	public void addToCart(ShoppingList sp) {
+		ShoppingListFile spf = (ShoppingListFile) ctx.getAttribute("shoppingList");
 		spf = getShoppingList();
-		for(ShoppingList spl : spf.getShoppingArrayList()){
+		for (ShoppingList spl : spf.getShoppingArrayList()) {
 			System.out.println(spl.getId());
 			sId = spl.getId();
 		}
 		int i = Integer.parseInt(sId);
-		i+=1;
+		i += 1;
 		sp.setId(Integer.toString(i));
 		sp.setDeliveryId("n/a");
 		try {
@@ -201,13 +215,13 @@ public class ProductService {
 			spf.getShoppingList().put(sp.getId(), sp);
 			spf.getShoppingArrayList().add(sp);
 			ctx.setAttribute("shoppingList", spf);
-		}catch(IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public String wId;
+
 	@POST
 	@Path("/addWish")
 	public void addToWishList(WishList wl) {
@@ -224,13 +238,12 @@ public class ProductService {
 			wlf.getWishList().put(wl.getId(), wl);
 			wlf.getWishArrayList().add(wl);
 			ctx.setAttribute("wishList", wlf);
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	@GET
 	@Path("/getProduct")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -239,160 +252,165 @@ public class ProductService {
 		Products products = new Products();
 		return products.getProduct(request.getParameter("id"));
 	}
-	
+
 	@POST
 	@Path("/addCategory")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String addCategory(Category c) {
 		Categories cats = (Categories) ctx.getAttribute("categories");
-		try{
+		try {
 			Categories.writeCategory(c);
 			cats.getCats().put(c.getName(), c);
 			cats.getCategoryList().add(c);
 			ctx.setAttribute("categories", cats);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
+		}
 		return "Dodata";
 	}
 
 	@POST
 	@Path("/getUsersShoppingList")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<ShoppingList> getUserShoppingList(ShoppingList u){
-		HashMap<String,ShoppingList> sp = new HashMap<String,ShoppingList>();
-		
-		for(ShoppingList s : getShoppingList().getShoppingArrayList())
-		{
-			if(s.getCustomerId().equals(u.getCustomerId())){
+	public Collection<ShoppingList> getUserShoppingList(ShoppingList u) {
+		HashMap<String, ShoppingList> sp = new HashMap<String, ShoppingList>();
+
+		for (ShoppingList s : getShoppingList().getShoppingArrayList()) {
+			if (s.getCustomerId().equals(u.getCustomerId())) {
 				sp.put(s.getId(), s);
-			}	
+			}
 		}
 		return sp.values();
 	}
-	
-	
+
 	@POST
 	@Path("/clearShoppingList")
 	public void clearShoppingList(ShoppingList u) {
 		ShoppingListFile spl = (ShoppingListFile) ctx.getAttribute("shoppingList");
-		ShoppingList itemToRemove = new ShoppingList();	
-		
-		for(ShoppingList s : getShoppingList().getShoppingList().values())
-		{
-			if(s.getCustomerId().equals(u.getCustomerId())){
+		ShoppingList itemToRemove = new ShoppingList();
+
+		for (ShoppingList s : getShoppingList().getShoppingList().values()) {
+			if (s.getCustomerId().equals(u.getCustomerId())) {
 				System.out.println(s.getCustomerId() + "==" + u.getCustomerId());
 				itemToRemove.setId(s.getId());
-			
-		try{
-			ShoppingListFile.deleteItem(itemToRemove.getId());
-			itemToRemove = spl.getShoppingList().get(itemToRemove.getId());
-			spl.getShoppingArrayList().remove(itemToRemove);
-			ctx.setAttribute("shoppingList", spl);
-			
-		}catch(IOException e){
-			e.printStackTrace();
+
+				try {
+					ShoppingListFile.deleteItem(itemToRemove.getId());
+					itemToRemove = spl.getShoppingList().get(itemToRemove.getId());
+					spl.getShoppingArrayList().remove(itemToRemove);
+					ctx.setAttribute("shoppingList", spl);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
-}
-}
-		
-	
+
 	@POST
 	@Path("/buyProducts")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void buyProducts(Buying b){
+	public void buyProducts(Buying b) {
 		BuyingHistory bh = (BuyingHistory) ctx.getAttribute("buyingHistory");
-		
-		/*int id = bh.getBuyingHistory().size();
-		id +=1;
-		b.setId(Integer.toString(id+1));	*/
-		
+
+		/*
+		 * int id = bh.getBuyingHistory().size(); id +=1;
+		 * b.setId(Integer.toString(id+1));
+		 */
+
 		String uniqueID = UUID.randomUUID().toString();
 		b.setId(uniqueID);
 		try {
 			BuyingHistory.writeItem(b);
 			bh.getBuyingHistory().add(b);
 			bh.getHistory().put(b.getId(), b);
-		} catch(IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/getBuyingHistory")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Buying> getHistory(){
+	public Collection<Buying> getHistory() {
 		return getBuyingHistory().getValues();
 	}
-	
+
 	@POST
 	@Path("/getUsersBuyingHistory")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Collection<Buying> getUsersHistory(Buying b){
+	public Collection<Buying> getUsersHistory(Buying b) {
 		BuyingHistory bh = (BuyingHistory) ctx.getAttribute("buyingHistory");
-		HashMap<String,Buying> buyingHistory = new HashMap<String,Buying> ();
+		HashMap<String, Buying> buyingHistory = new HashMap<String, Buying>();
 		bh = new BuyingHistory();
 		System.out.println(b.getCustomerId());
-		
-		for(Buying bu : bh.getBuyingHistory()){
-			if(bu.getCustomerId().equals(b.getCustomerId())){
+
+		for (Buying bu : bh.getBuyingHistory()) {
+			if (bu.getCustomerId().equals(b.getCustomerId())) {
 				buyingHistory.put(bu.getId(), bu);
 			}
 		}
 		return buyingHistory.values();
 	}
-	
-	
-	
-	
+
 	@POST
 	@Path("/removeItem")
-	public void removeItem(ShoppingList sp){
+	public void removeItem(ShoppingList sp) {
 		ShoppingListFile spl = (ShoppingListFile) ctx.getAttribute("shoppingList");
 		ShoppingList itemToRemove = new ShoppingList();
-		for(ShoppingList s : getShoppingList().getShoppingArrayList())
-		{
-			if(s.getCustomerId().equals(sp.getCustomerId()) && s.getProductId().equals(sp.getProductId())){
+		for (ShoppingList s : getShoppingList().getShoppingArrayList()) {
+			if (s.getCustomerId().equals(sp.getCustomerId()) && s.getProductId().equals(sp.getProductId())) {
 				itemToRemove.setId(s.getId());
-			
+
 			}
 		}
-		try{
+		try {
 			ShoppingListFile.deleteItem(itemToRemove.getId());
 			itemToRemove = spl.getShoppingList().get(itemToRemove.getId());
 			spl.getShoppingArrayList().remove(itemToRemove);
-			
-		}catch(IOException e){
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-	}
 
+	}
+	
+	@GET
+	@Path("/discountPrice")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Discount getDiscountPrice() {
+		Discounts ds = new Discounts();
+		String productId = request.getParameter("id");
+		for(Discount d : ds.getDiscountList()) {
+			if(d.getProductId().equals(productId)){
+				return d;
+			}
+		}
+		return null;
+
+	}
+	
 	@POST
 	@Path("/removeWish")
-	public void removeWish(WishList wl){
+	public void removeWish(WishList wl) {
 		WishListFile wlf = (WishListFile) ctx.getAttribute("wishList");
 		WishList wishToRemove = new WishList();
-		for(WishList w : getWishList().getWishArrayList()){
-			if(w.getCustomerId().equals(wl.getCustomerId()) && w.getProductId().equals(wl.getProductId())){
+		for (WishList w : getWishList().getWishArrayList()) {
+			if (w.getCustomerId().equals(wl.getCustomerId()) && w.getProductId().equals(wl.getProductId())) {
 				wishToRemove.setId(w.getId());
 			}
 		}
-		try{
+		try {
 			WishListFile.deleteItem(wishToRemove.getId());
 			wishToRemove = wlf.getWishList().get(wishToRemove.getId());
 			wlf.getWishArrayList().remove(wishToRemove);
-		}catch(IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
+
 	private Products getProducts() {
 		Products products = (Products) ctx.getAttribute("products");
 		if (products == null) {
@@ -411,35 +429,41 @@ public class ProductService {
 		return cats;
 
 	}
-	
-	private WishListFile getWishList(){
+
+	private WishListFile getWishList() {
 		WishListFile wl = (WishListFile) ctx.getAttribute("wishList");
-		if(wl == null)
-		{
+		if (wl == null) {
 			wl = new WishListFile(ctx.getRealPath(""));
 			ctx.setAttribute("wishList", wl);
 		}
 		return wl;
 	}
-	
-	private ShoppingListFile getShoppingList(){
+
+	private ShoppingListFile getShoppingList() {
 		ShoppingListFile sp = (ShoppingListFile) ctx.getAttribute("shoppingList");
-		if(sp == null){
+		if (sp == null) {
 			sp = new ShoppingListFile(ctx.getRealPath(""));
 			ctx.setAttribute("shoppingList", sp);
 		}
 		return sp;
 	}
 
-	private BuyingHistory getBuyingHistory(){
+	private Discounts getDiscounts() {
+		Discounts ds = (Discounts) ctx.getAttribute("discounts");
+		if (ds == null) {
+			ds = new Discounts(ctx.getRealPath(""));
+			ctx.setAttribute("discounts", ds);
+		}
+		return ds;
+	}
+
+	private BuyingHistory getBuyingHistory() {
 		BuyingHistory bh = (BuyingHistory) ctx.getAttribute("buyingHistory");
-		if(bh == null){
+		if (bh == null) {
 			bh = new BuyingHistory(ctx.getRealPath(""));
 			ctx.setAttribute("buyingHistory", bh);
 		}
 		return bh;
 	}
-	
-
 
 }

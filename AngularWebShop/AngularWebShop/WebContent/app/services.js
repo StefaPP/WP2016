@@ -4,6 +4,7 @@ webShop.factory('productsFactory', function($http, $window) {
 	factory.getProducts = function() {
 		return $http.get('/AngularWebShop/rest/proizvodi/getJustProducts');
 	};
+	
 	factory.getProduct = function(id) {
 		return $http.get('/AngularWebShop/rest/proizvodi/getProduct/', {
 			params : {
@@ -11,6 +12,15 @@ webShop.factory('productsFactory', function($http, $window) {
 			}
 		});
 	};
+	
+	factory.getDiscountPrice = function(id) {
+		return $http.get('/AngularWebShop/rest/proizvodi/discountPrice/', {
+			params : {
+				"id" : id
+			}
+		});
+	};
+	
 	factory.getCategories = function() {
 		console.log("usao u fabriku")
 		return $http.get('/AngularWebShop/rest/proizvodi/getCategories');
@@ -372,6 +382,22 @@ webShop.factory('loginFactory',function($http,$localStorage,$log,$location,$rout
 	}
 	
 });
+
+webShop.factory('saleFactory',function($http){
+	var factory = {};
+	console.log("?????????????????????????????????????")
+	factory.addOnSale = function(product){
+		return $http.post('/AngularWebShop/rest/proizvodi/addOnSale',{
+			"productId":''+product.id,
+			"storeId":''+product.storeId,
+			"startDate":''+product.startDate,
+			"endDate":''+product.endDate,
+			"discountRate":''+product.discount
+		});
+	}
+	
+	return factory;
+})
 
 webShop.factory('shoppingListFactory', function($http) {
 

@@ -3,16 +3,16 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
     function init() {
     	
 
-    	$scope.slider = {
-    			  min: 0,
-    			  max: 50000,
-    			  options: {
-    				step: 1000,
-    			    floor: 0,
-    			    ceil: 100000
-    			  }
-    			};
-    	
+	    $scope.slider = {
+		  min: 0,
+		  max: 100000,
+		  options: {
+			step: 1000,
+		    floor: 0,
+		    ceil: 100000
+		  }
+		};
+		
 	    productsFactory.getProducts().success(function (data) {
         	$scope.products = data;
 		});
@@ -107,6 +107,16 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
     		$scope.currentRole = $rootScope.getCurrentUser().role;
     	}
 		
+		$scope.slider = {
+				  min: 0,
+				  max: 100000,
+				  options: {
+					step: 1000,
+				    floor: 0,
+				    ceil: 100000
+				  }
+				};
+	
 		productsFactory.getCategories().success(function (data) {
        		$scope.categories = data;
        		$scope.category = {};
@@ -125,7 +135,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	}
 	init();
 })
-.controller('productDetailsCtrl',function($scope,$location,$rootScope,$routeParams,productsFactory,reviewFactory){
+.controller('productDetailsCtrl',function($scope,$location,$rootScope,$routeParams,saleFactory,productsFactory,reviewFactory){
 	
 	 $scope.starRating = 0;	
 	 $scope.click = function (param) {
@@ -205,6 +215,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		 
 	 }
 	 	function init() {
+
 	 	if($rootScope.isLoggedIn()){
 	 		$scope.loggedIn = true;
 	 		$scope.currentUser = $rootScope.getCurrentUser().username;
@@ -220,8 +231,21 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		var id = $routeParams.id;
 		$scope.review.productId = id;
 		$scope.review.user = $scope.currentUser;
+		$scope.newPrice = "";
+		$scope.product = {};
+		$scope.discountProduct = {};
+		
+		productsFactory.getDiscountPrice(id).success(function(data){
+			$scope.discountProduct = data;
+			if($scope.discountProduct)
+			$scope.discountProduct.endDate = new Date($scope.discountProduct.endDate.replace(/-/g,"/"));
+			
+		})
+		
 		productsFactory.getProduct(id).success(function(data){	
 			$scope.product = data;
+			$scope.newPrice = $scope.product.price - ($scope.product.price * ($scope.discountProduct.discountRate/100));
+			
 		})
 		
 		reviewFactory.getReviews().success(function(data){
@@ -240,6 +264,35 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		$scope.review = {};
 		$scope.starRating = 0;	
 		}
+	
+	$scope.startDate = "";
+	$scope.endDate   = "";
+	$scope.discount =  "";
+	$scope.myDate = new Date();
+	  $scope.minDate = new Date(
+	      $scope.myDate.getFullYear(),
+	      $scope.myDate.getMonth(),
+	      $scope.myDate.getDate());
+	  $scope.maxDate = new Date(
+	      $scope.myDate.getFullYear(),
+	      $scope.myDate.getMonth() + 2,
+	      $scope.myDate.getDate());
+	  $scope.maxDate2 = new Date(
+		  $scope.maxDate.getFullYear(),
+		  $scope.maxDate.getMonth()+2,
+		  $scope.maxDate.getDate());
+	
+	  $scope.addOnSale = function(product){
+		console.log("Adding on sale " + JSON.stringify(product) + " from " + $scope.startDate + " to " + $scope.endDate + " with a discount of " + $scope.discount);
+		product.startDate = $scope.startDate;
+		product.endDate = $scope.endDate;
+		product.discount = $scope.discount
+		saleFactory.addOnSale(product).success(function(){
+			init();
+		})
+	  
+	  }
+	
 	init();
 })
 /*.controller('shoppingCartController', function($scope, shoppingCartFactory) {
@@ -557,4 +610,18 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	}
 	
 	init();
-})
+}).filter('rangeFilter',function() {
+	return function(items,slider){
+	
+		var filtered = [];
+		var priceMin = parseFloat(slider.min);
+		var priceMax = parseFloat(slider.max);
+		
+		angular.forEach(items,function(item){
+			if((item.price >= priceMin && item.price <= priceMax)){
+				filtered.push(item);
+			}
+		});
+		return filtered;
+	};
+});
