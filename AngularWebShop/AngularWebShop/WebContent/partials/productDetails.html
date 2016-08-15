@@ -1,92 +1,102 @@
 <div>
-<div class="jumbotron">
+	<div class="jumbotron">
 		<h1>{{product.name}}</h1>
-		<h3 ng-if="!discountProduct">Price : {{product.price}} RSD</h3>
-		<div ng-if="discountProduct">		
-		<h3 class="strikethrough">Price : {{product.price}} RSD</h3>
-		<h2><u>NEW PRICE :{{newPrice}} rsd </u>  <strong style="background:red;">({{discountProduct.discountRate}}% OFF ! ) <strong></h2>
-		<h2>Valid untill : {{discountProduct.endDate|date:'mediumDate'}}</h2>
-		</div>
-		<h3>Lager : {{product.lager}}</h3>
-		<img style="width: 400px; height: 300px;" src="{{product.image}}">
-		<p>
-			<button class="btn btn-primary btn-lg" ng-click="addToCart(product)"
-				role="button"
-				ng-disabled="product.lager===0 || currentRole!='customer'">Add
-				to cart !</button>
-			<button class="btn btn-primary btn-lg" ng-click="addWish(product)"
-				role="button"
-				ng-disabled="product.lager===0 || currentRole!='customer'">Add
-				to wish list </button>
-			<button class="btn btn-primary btn-lg" ng-click="value = !value"
-				role="button">Add on sale</button>
-		<div ng-show="product.lager==0">This product is currently
-			unavailable</div>
-	<div ng-show="value">
-	<h2>Add on sale</h2>
-	<h6>Start date</h6>
-	 <md-datepicker ng-model="startDate" md-placeholder="Enter start date"
-        md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
-      <h6>End date</h6>
-	 <md-datepicker ng-model="endDate" md-placeholder="Enter end date"
-        md-min-date="startDate" md-max-date="maxDate2"></md-datepicker>
-	<h6>Discount rate</h6>
-	<input class="form-control" style="width:300px;" type="number" min="0" max="100"
-					step="10" ng-model="discount" /><br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-info" ng-click="addOnSale(product)"
-				role="button">Finish</button>
+		<h3 ng-if="!newPrice">Price : {{product.price}} RSD</h3>
+		<h3 ng-if="discountProduct.startDate">
+			This product is on sale from: {{discountProduct.startDate |
+			date:'mediumDate'}}
+			</h5>
+			<div ng-if="newPrice">
+				<h3 class="strikethrough">Price : {{product.price}} RSD</h3>
+				<h2>
+					<u>NEW PRICE :{{newPrice}} rsd </u> <strong
+						style="background: red;">({{discountProduct.discountRate}}%
+						OFF ! ) <strong>
+				</h2>
+				<h2>Valid untill :
+					{{discountProduct.endDate|date:'mediumDate'}}</h2>
+			</div>
+			<h3>Lager : {{product.lager}}</h3>
+			<img style="width: 400px; height: 300px;" src="{{product.image}}">
+			<p>
+				<button class="btn btn-primary btn-lg" ng-click="addToCart(product)"
+					role="button"
+					ng-disabled="product.lager===0 || currentRole!='customer'">Add
+					to cart !</button>
+				<button class="btn btn-primary btn-lg" ng-click="addWish(product)"
+					role="button"
+					ng-disabled="product.lager===0 || currentRole!='customer'">Add
+					to wish list</button>
+				<button class="btn btn-primary btn-lg" ng-click="value = !value"
+					role="button" ng-if="currentUser === store.seller">Add on sale</button>
+			<div ng-show="product.lager==0">This product is currently
+				unavailable</div>
+			<div ng-show="value">
+				<h2>Add on sale</h2>
+				<h6>Start date</h6>
+				<md-datepicker ng-model="startDate"
+					md-placeholder="Enter start date" md-min-date="minDate"
+					md-max-date="maxDate"></md-datepicker>
+				<h6>End date</h6>
+				<md-datepicker ng-model="endDate" md-placeholder="Enter end date"
+					md-min-date="startDate" md-max-date="maxDate2"></md-datepicker>
+				<h6>Discount rate</h6>
+				<input class="form-control" style="width: 300px;" type="number"
+					min="0" max="100" step="10" ng-model="discount" /><br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-info" ng-click="addOnSale(product)"
+					role="button">Finish</button>
+			</div>
 	</div>
-	</div>
-	
+
 	<div>
-	<button class="btn btn-danger topright"
-		ng-click="deleteProduct(product)"
-		ng-show="currentRole!='customer' && isLoggedIn()">Delete
-		product</button>
-	<ul class="comments" ng-repeat="r in reviews | orderBy:'-rating'">
-		<div
-			style="width: 500px; max-width: 500px; display: inline-block; background-color: lightgray;"
-			ng-show="r.productId === review.productId ">
-			<li id="ranks"><p style="font-size: 16px;">{{r.comment}}</p> <br />
-				<button type="button"
-					class="btn btn-danger btn-xs toprightRemoveReview"
-					ng-click="deleteReview(r)"
-					ng-show="r.user===currentUser || currentRole==='admin'">
-					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-				</button>
+		<button class="btn btn-danger topright"
+			ng-click="deleteProduct(product)"
+			ng-show="currentRole!='customer' && isLoggedIn()">Delete
+			product</button>
+		<ul class="comments" ng-repeat="r in reviews | orderBy:'-rating'">
+			<div
+				style="width: 500px; max-width: 500px; display: inline-block; background-color: lightgray;"
+				ng-show="r.productId === review.productId ">
+				<li id="ranks"><p style="font-size: 16px;">{{r.comment}}</p> <br />
+					<button type="button"
+						class="btn btn-danger btn-xs toprightRemoveReview"
+						ng-click="deleteReview(r)"
+						ng-show="r.user===currentUser || currentRole==='admin'">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					</button>
 
-				<div
-					style='display: inline-block; margin: 0px; padding: 0px; cursor: pointer;'
-					ng-repeat='i in get(r.rating) track by $index'>
-					<img
-						src="http://www.codeproject.com/script/ratings/images/star-fill-lg.png">
-				</div>
+					<div
+						style='display: inline-block; margin: 0px; padding: 0px; cursor: pointer;'
+						ng-repeat='i in get(r.rating) track by $index'>
+						<img
+							src="http://www.codeproject.com/script/ratings/images/star-fill-lg.png">
+					</div>
 
-				<p style="font-size: 14px;" class="text-right">
-					<i style="color: gray">{{r.date | date:'medium'}}<br />by:{{r.user}}
-					</i>
-				</p>
-		</div>
-		</li>
-	</ul>
-	<br />
-	<br />
-	<div class="form-group" ng-show="loggedIn && currentRole=='customer'">
-		<label for="comment">Review:</label>
-		<h6>Review</h6>
-		<textarea class="form-control" ng-model="review.comment" rows="3"
-			cols="80" id="comment"></textarea>
-		<br />
-		<div star-rating rating="starRating" read-only="false" max-rating="10"
-			click="click(param)"></div>
-		<p ng-show="starRating==0">Please rate this product</p>
-		<div>
-			<span class="label label-primary">Product rating:
-				{{starRating}}</span><br /> <br />
-			<button type="button" class="btn btn-primary" ng-click="addReview()"
-				ng-disabled="!review.comment || starRating==0">Add review</button>
-			<br /> <br />
+					<p style="font-size: 14px;" class="text-right">
+						<i style="color: gray">{{r.date | date:'medium'}}<br />by:{{r.user}}
+						</i>
+					</p>
+			</div>
+			</li>
+		</ul>
+		<br /> <br />
+		<div class="form-group" ng-show="loggedIn && currentRole=='customer'">
+			<label for="comment">Review:</label>
+			<h6>Review</h6>
+			<textarea class="form-control" ng-model="review.comment" rows="3"
+				cols="80" id="comment"></textarea>
+			<br />
+			<div star-rating rating="starRating" read-only="false"
+				max-rating="10" click="click(param)"></div>
+			<p ng-show="starRating==0">Please rate this product</p>
+			<div>
+				<span class="label label-primary">Product rating:
+					{{starRating}}</span><br /> <br />
+				<button type="button" class="btn btn-primary" ng-click="addReview()"
+					ng-disabled="!review.comment || starRating==0">Add review</button>
+				<br /> <br />
+			</div>
 		</div>
 	</div>
-</div>
 </div>

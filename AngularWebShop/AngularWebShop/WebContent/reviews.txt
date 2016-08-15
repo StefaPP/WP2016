@@ -8,3 +8,4 @@
 11;Stefica;Thu Jun 30 08:27:40 CEST 2016;6;Fini pamuk;7;
 12;Stefica;Sat Jul 02 19:30:22 CEST 2016;8;Dobra lopta;12;
 13;Stefica;Thu Aug 04 09:06:48 CEST 2016;4;A sta ako dodam malo duzi revju sad kad sam njakao ove duzine jebene?;12;
+14;Stefica;Sun Aug 14 08:50:42 CEST 2016;5;Superiska tv;1;

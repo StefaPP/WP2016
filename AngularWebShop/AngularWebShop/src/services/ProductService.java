@@ -1,6 +1,7 @@
 package services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -53,6 +55,7 @@ public class ProductService {
 	public Collection<Product> getJustProducts() {
 		return getProducts().getValues();
 	}
+
 
 	@GET
 	@Path("/getCategories")
@@ -109,6 +112,8 @@ public class ProductService {
 		return null;
 	}
 
+	
+	
 	@DELETE
 	@Path("/deleteProduct")
 	@Consumes(MediaType.APPLICATION_JSON)

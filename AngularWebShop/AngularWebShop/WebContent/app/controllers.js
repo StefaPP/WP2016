@@ -1,8 +1,7 @@
 webShop.controller('productsController', function($rootScope,$scope,$location,$rootScope,productsFactory,shoppingListFactory) {
 	
     function init() {
-    	
-
+ 
 	    $scope.slider = {
 		  min: 0,
 		  max: 100000,
@@ -12,13 +11,14 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		    ceil: 100000
 		  }
 		};
-		
+	    
 	    productsFactory.getProducts().success(function (data) {
-        	$scope.products = data;
+        	$rootScope.products = data;
 		});
-     
-	   
+	    
+	    
 	    $rootScope.products = [];
+    
 		if($rootScope.isLoggedIn()){
     		$scope.currentUser = $rootScope.getCurrentUser().username;
     		$scope.currentRole = $rootScope.getCurrentUser().role;
@@ -67,7 +67,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 					 angular.forEach($scope.sp, function(item){
 		                 productsFactory.getProduct(item.productId).success(function (data){
 		                	 $rootScope.products.push(data);
-		                	 $scope.total+=data.price;
+		                	 $scope.total += $rootScope.products.slice(-1)[0].price;
 		                 })
 		                 
 		             })
@@ -135,7 +135,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	}
 	init();
 })
-.controller('productDetailsCtrl',function($scope,$location,$rootScope,$routeParams,saleFactory,productsFactory,reviewFactory){
+.controller('productDetailsCtrl',function($scope,$location,$rootScope,$routeParams,saleFactory,productsFactory,reviewFactory,storeFactory){
 	
 	 $scope.starRating = 0;	
 	 $scope.click = function (param) {
@@ -181,8 +181,6 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		 productsFactory.addToCart(product).success(function(data) {
 			 init();
 		});	
-
-		 $scope.product.lager -= 1; 
 	 }
 	 
 	 $scope.addWish = function(product){
@@ -192,12 +190,13 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		 product.storeId = $scope.product.storeId;
 		 productsFactory.addWish(product).success(function(data) {
 			alert("This item was added to wishlist")
-		 productsFactory.getUsersWishList($scope.usersWishList).success(function(data){
+			
+			productsFactory.getUsersWishList($scope.usersWishList).success(function(data){
 	    		 	$scope.wishList = data;		
 	    		 	$rootScope.wishListProducts = [];
 	    		 	angular.forEach($scope.wishList,function(item){
 					productsFactory.getProduct(item.productId).success(function(data){
-						$rootScope.wishListProducts.push(data);
+					$rootScope.wishListProducts.push(data);
 						
 					})
 				})
@@ -215,7 +214,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		 
 	 }
 	 	function init() {
-
+	 	
 	 	if($rootScope.isLoggedIn()){
 	 		$scope.loggedIn = true;
 	 		$scope.currentUser = $rootScope.getCurrentUser().username;
@@ -233,20 +232,35 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		$scope.review.user = $scope.currentUser;
 		$scope.newPrice = "";
 		$scope.product = {};
-		$scope.discountProduct = {};
+		$scope.store =  {};
+		$rootScope.discountProduct = {};
+		
+	
 		
 		productsFactory.getDiscountPrice(id).success(function(data){
-			$scope.discountProduct = data;
-			if($scope.discountProduct)
-			$scope.discountProduct.endDate = new Date($scope.discountProduct.endDate.replace(/-/g,"/"));
-			
+			$rootScope.discountProduct = data;
+			if($rootScope.discountProduct) {
+			$rootScope.discountProduct.startDate = new Date($rootScope.discountProduct.startDate.replace(/-/g,"/"));
+			$rootScope.discountProduct.endDate = new Date($rootScope.discountProduct.endDate.replace(/-/g,"/"));
+			}
 		})
 		
 		productsFactory.getProduct(id).success(function(data){	
 			$scope.product = data;
-			$scope.newPrice = $scope.product.price - ($scope.product.price * ($scope.discountProduct.discountRate/100));
+			var currentTime = new Date();
+			console.log("Is " + $rootScope.discountProduct.startDate + " equal to " + currentTime)
 			
-		})
+			if($scope.discountProduct && $rootScope.discountProduct.startDate <= currentTime){
+				console.log("Is " + $rootScope.discountProduct.startDate + " equal to " + currentTime)
+			$scope.newPrice = $scope.product.price - ($scope.product.price * ($rootScope.discountProduct.discountRate/100));
+		}
+		
+			storeFactory.getStore($scope.product.storeId).success(function(data){
+				$scope.store = data;
+				console.log("> " + JSON.stringify($scope.store))
+			})
+		
+	})
 		
 		reviewFactory.getReviews().success(function(data){
 			 $scope.reviews = data;
@@ -470,7 +484,6 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 .controller('loginCtrl',function($scope,$location,loginFactory,userFactory){
 	
 	function init() {
-		//console.log('Login Controller')
 		userFactory.getUsers().success(function(data){
 				$scope.users = data;
 			})
@@ -483,12 +496,10 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	}
 	$scope.user = {};
 	$scope.login = function () {
-	//	console.log($scope.user.username + " " + $scope.user.password)
-		loginFactory.login($scope.user.username,$scope.user.password,loginCbck);
+	loginFactory.login($scope.user.username,$scope.user.password,loginCbck);
 	}
 	function loginCbck(success){
 		if(success){
-		//	console.log('success!');
 		}
 		else{
 			$scope.value = true;
@@ -504,10 +515,50 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		
 		$scope.currentUser = $rootScope.getCurrentUser().username;
 		$rootScope.products = [];
+		$rootScope.discountProducts = [];
+		$rootScope.newPrices = [];
 		$scope.boughtProducts = [];
+		
 		$scope.user = {};
 		$scope.user = $rootScope.getCurrentUser();
 		console.log($scope.user);
+		
+		
+		shoppingListFactory.getUsersShoppingList($scope.currentUser).success(function(data){
+			$scope.total = 0;
+			$scope.sp = data;
+			var currentTime = new Date();		
+			angular.forEach($scope.sp, function(item){
+				 productsFactory.getDiscountPrice(item.productId).success(function(data){
+						$rootScope.discountProducts.push(data);		
+						
+				 })
+				 
+				 productsFactory.getProduct(item.productId).success(function (data){
+                	 $rootScope.products.push(data);
+                	 
+                	 if($rootScope.discountProducts.slice(-1)[0]) {
+                	 console.log("This product exists on discount list " + $rootScope.discountProducts.slice(-1)[0].productId)
+                	 $rootScope.discountProducts.slice(-1)[0].startDate = new Date($rootScope.discountProducts.slice(-1)[0].startDate.replace(/-/g,"/")); 
+                	 }
+                	 
+                	
+                	
+                	 if($rootScope.discountProducts.slice(-1)[0] && $rootScope.products.slice(-1)[0].id === $rootScope.discountProducts.slice(-1)[0].productId
+                			 && $rootScope.discountProducts.slice(-1)[0].startDate <= currentTime)
+                	 {	
+                		  $rootScope.newPrices.push($rootScope.products.slice(-1)[0].price - ($rootScope.products.slice(-1)[0].price *($rootScope.discountProducts.slice(-1)[0].discountRate/100)));
+                	      $rootScope.products.slice(-1)[0].price = $rootScope.newPrices.slice(-1)[0];
+                	      console.log($rootScope.products.slice(-1)[0].price)
+                	 }
+                	 
+                	 $scope.total+=$rootScope.products.slice(-1)[0].price;
+				 })	 
+				 
+             })
+           
+		})
+		
 		
 		deliveryFactory.getDeliverers().success(function(data){
 			$scope.deliverers = data;
@@ -528,19 +579,6 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 			})
 		})
 		
-		shoppingListFactory.getUsersShoppingList($scope.currentUser).success(function(data){
-			$scope.total = 0;
-			$scope.sp = data;
-			 angular.forEach($scope.sp, function(item){
-                 productsFactory.getProduct(item.productId).success(function (data){
-                	 $rootScope.products.push(data);
-                	 $scope.total+=data.price;
-                 })
-                 
-             })
-           
-		})
-		
 		$scope.removeItem = function(productId){
 			shoppingListFactory.removeItem($scope.currentUser,productId).success(function(){
 				alert('This item has been removed from your shopping list')
@@ -551,7 +589,8 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		
 		$scope.buy = function() {
 		$scope.buying.customerId = $scope.currentUser;
-		angular.forEach($scope.products,function(item) { 
+		
+		angular.forEach($rootScope.products,function(item) { 
 			$scope.buying.storeId = item.storeId;
 			$scope.buying.productId = item.id;
 			$scope.buying.deliveryId = item.deliveryId;
