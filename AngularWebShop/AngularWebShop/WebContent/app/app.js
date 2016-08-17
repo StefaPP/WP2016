@@ -59,6 +59,10 @@ function config($routeProvider) {
 		templateUrl : 'partials/shoppingList.html',
 		controller : 'shoppingListCtrl'
 	})
+	.when('/sale',{
+		templateUrl : 'partials/sale.html',
+		controller : 'saleCtrl'
+	})
 }
 
 function run($rootScope,$http,$location,$localStorage,$route,loginFactory){

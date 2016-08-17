@@ -56,7 +56,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 				init();
 		})
 	}	
-
+	
 	$rootScope.addToCart = function(product) {
 		 product.customerId = $rootScope.getCurrentUser().username;
 		 product.productId = product.id;
@@ -134,6 +134,40 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		})
 	}
 	init();
+})
+.controller('saleCtrl',function($scope,saleFactory,productsFactory){
+	
+	initCats();
+	init();
+	function initCats() {
+		productsFactory.getCategories().success(function (data) {
+       		$scope.categories = data;
+       		$scope.category = {};
+    
+	 });
+	}
+	
+	function init() {
+		$scope.discounts = {};
+		$scope.products = {};
+		$scope.productsOnSale = [];
+		
+		productsFactory.getDiscounts().success(function(data){
+			$scope.discounts = data;
+		
+		productsFactory.getProducts().success(function(data){
+			$scope.products = data
+		})
+		
+		angular.forEach($scope.discounts,function(item){
+			
+		})
+		
+		})
+		
+	}
+	
+	
 })
 .controller('productDetailsCtrl',function($scope,$location,$rootScope,$routeParams,saleFactory,productsFactory,reviewFactory,storeFactory){
 	
@@ -495,6 +529,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		$location.path('/signup');
 	}
 	$scope.user = {};
+	
 	$scope.login = function () {
 	loginFactory.login($scope.user.username,$scope.user.password,loginCbck);
 	}

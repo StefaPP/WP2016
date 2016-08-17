@@ -1,6 +1,8 @@
 <div>
 <div style="float:left; width:20%;">
-<ul class="ver"><li><a href="#products" ng-href="#products">All products</a></li>
+<ul class="ver">
+<li><a href ng-click="search = !search">Search &nbsp;<span class="glyphicon glyphicon-search"></span></a></li>
+<li><a href="#products" ng-href="#products">All products</a></li>
 <li><a href="#sale" ng-href="#sale">Sale !</a></li>
 </ul>
 <ul class="ver"  ng-repeat="c in categories">
@@ -16,6 +18,7 @@
 </ul>
 </div>
  <div style="float:left; width:80%;">
+<div ng-show="search">
 <div style="width:80%;">
 <rzslider
     rz-slider-model="slider.min"
@@ -24,8 +27,16 @@
      </rzslider>
      <button type="button" class="btn btn-default" ng-click="slider.min = 0;slider.max=1000000">Reset range</button>
     </div>
-&nbsp;&nbsp;&nbsp;<label>Search: <input type="text" class="form-control" ng-model="searchText" data-toggle="tooltip" data-placement="right" title="Searh any parameter"></label>
+&nbsp;&nbsp;&nbsp;<label>Search by name: <input type="text" class="form-control" ng-model="searchText.name" data-toggle="tooltip" data-placement="right" title="Searh by name"></label>
+	<label>Search by brand name <input type="text" class="form-control" ng-model="searchText.brandName" data-toggle="tooltip" data-placement="right" title="Search by brandName"></label>
+	<label>Search by category <input type="text" class="form-control" ng-model="searchText.category" data-toggle="tooltip" data-placement="right" title="Search by category"></label>
+	<label>Search by description <input type="text" class="form-control" ng-model="searchText.description" data-toggle="tooltip" data-placement="right" title="Search by description"></label>
+	<label>Search by country <input type="text" class="form-control" ng-model="searchText.origin" data-toggle="tooltip" data-placement="right" title="Search by country"></label>
+	<label>Search by lager <input type="text" class="form-control" ng-model="searchText.lager" data-toggle="tooltip" data-placement="right" title="Search by lager"></label>
+	<label>Search by color <input type="text" class="form-control" ng-model="searchText.color" data-toggle="tooltip" data-placement="right" title="Search by color"></label>
+	
 <br/><br/>
+</div>
 <div class="col"> 
   <div class="col-md-4" ng-repeat="p in products | filter:searchText | rangeFilter:slider">
     <a ng-href="#/product/{{p.id}}" class="thumbnail">

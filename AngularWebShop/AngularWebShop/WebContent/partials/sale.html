@@ -1,4 +1,5 @@
 <div>
+<div>
 <div style="float:left; width:20%;">
 <ul class="ver">
 <li><a href ng-click="search = !search">Search &nbsp;<span class="glyphicon glyphicon-search"></span></a></li>
@@ -32,15 +33,18 @@
 	<label>Search by country <input type="text" class="form-control" ng-model="searchText.origin" data-toggle="tooltip" data-placement="right" title="Search by country"></label>
 	<label>Search by lager <input type="text" class="form-control" ng-model="searchText.lager" data-toggle="tooltip" data-placement="right" title="Search by lager"></label>
 	<label>Search by color <input type="text" class="form-control" ng-model="searchText.color" data-toggle="tooltip" data-placement="right" title="Search by color"></label><br/><br/><br/>
-<div class="col"> 
-  <div class="col-md-4" ng-repeat="p in categoryProducts | filter:searchText | rangeFilter:slider">
-    <a ng-href="#/product/{{p.id}}" class="thumbnail">
-      <p>{{p.name}}</p>
-      <p>{{p.price}}</p>
-      <img src="{{p.image}}" style="width:150px;height:100px">
-    </a>
-  </div>
-</div>	
+
+
+
+
 </div>
-</div>
+
+
+
+
+
+
+
+
+
 

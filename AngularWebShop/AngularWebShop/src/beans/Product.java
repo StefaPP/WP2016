@@ -5,6 +5,7 @@ public class Product {
 
 	private String id;
 	private String name;
+	private String description;
 	private double price;
 	private double size;
 	private double weight;
@@ -16,6 +17,7 @@ public class Product {
 	private String rating;
 	private String review;
 	private int lager;
+	private String color;
 
 	/** Koristi se samo za AngularJS */
 	private int count;
@@ -23,11 +25,12 @@ public class Product {
 	public Product() {
 	}
 
-	public Product(String id, String name, double price, double size, double weight, String origin, String brandName,
-			String category, String image, String storeId, String rating, String review, int lager) {
+	public Product(String id, String name,String description ,double price, double size, double weight, String origin, String brandName,
+			String category, String image, String storeId, String rating, String review, int lager,String color) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.description = description;
 		this.price = price;
 		this.size = size;
 		this.weight = weight;
@@ -39,6 +42,7 @@ public class Product {
 		this.rating = rating;
 		this.review = review;
 		this.lager = lager;
+		this.color = color;
 	}
 
 	public double getSize() {
@@ -145,5 +149,20 @@ public class Product {
 		this.price = price;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
 	
 }

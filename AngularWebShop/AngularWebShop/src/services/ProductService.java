@@ -56,7 +56,12 @@ public class ProductService {
 		return getProducts().getValues();
 	}
 
-
+	@GET
+	@Path("/discounts")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Discount> getDisc() {
+		return getDiscounts().getValues();
+	}
 	@GET
 	@Path("/getCategories")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -99,7 +104,7 @@ public class ProductService {
 		p.setId(Integer.toString(id));
 		p.setReview(" ");
 		p.setRating(" ");
-
+		
 		try {
 			Products.writeProduct(p);
 			products.getProducts().put(p.getId(), p);

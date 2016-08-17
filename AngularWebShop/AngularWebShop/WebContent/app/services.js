@@ -21,6 +21,10 @@ webShop.factory('productsFactory', function($http, $window) {
 		});
 	};
 	
+	factory.getDiscounts = function () {
+		return $http.get('/AngularWebShop/rest/proizvodi/discounts');
+	}
+	
 	factory.getCategories = function() {
 		console.log("usao u fabriku")
 		return $http.get('/AngularWebShop/rest/proizvodi/getCategories');
