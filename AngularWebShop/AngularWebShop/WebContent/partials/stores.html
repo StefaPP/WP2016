@@ -1,6 +1,17 @@
 <div>
 <h1 align="center">Stores:</h1>
-&nbsp;&nbsp;&nbsp;<label>Search: <input type="text" class="form-control" ng-model="searchText" data-toggle="tooltip" data-placement="right" title="Searh your favourite store by name or location"></label><br/><br/><br/>
+
+<div>
+&nbsp;&nbsp;&nbsp;<label>Search by name: <input type="text" class="form-control" ng-model="searchText.name" data-toggle="tooltip" data-placement="right" title="Searh by name"></label>
+		<label>Search by country: <input type="text" class="form-control" ng-model="searchText.country" data-toggle="tooltip" data-placement="right" title="Searh by country"></label>
+	<button type="button" class="btn btn-default btn" ng-click="searchText={};slider.min = 0; slider.max=1000000"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		Reset search</button>
+<br/><br/>
+</div>
+
+<!-- &nbsp;&nbsp;&nbsp;<label>Search: <input type="text" class="form-control" ng-model="searchText" data-toggle="tooltip" data-placement="right" title="Searh your favourite store by name or location"></label><br/><br/><br/>
+
+ -->
 <div class="col" ng-repeat="s in stores | filter:searchText">
   <div class="col-md-2">
      <a href ng-click="storeDetails(s)" class="thumbnail">

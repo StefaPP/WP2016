@@ -135,10 +135,21 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	}
 	init();
 })
-.controller('saleCtrl',function($scope,saleFactory,productsFactory){
+.controller('saleCtrl',function($scope,$rootScope,saleFactory,productsFactory){
 	
 	initCats();
 	init();
+	
+	$scope.slider = {
+			  min: 0,
+			  max: 100000,
+			  options: {
+				step: 1000,
+			    floor: 0,
+			    ceil: 100000
+			  }
+			};
+	
 	function initCats() {
 		productsFactory.getCategories().success(function (data) {
        		$scope.categories = data;
@@ -150,23 +161,47 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	function init() {
 		$scope.discounts = {};
 		$scope.products = {};
-		$scope.productsOnSale = [];
+		$rootScope.productsOnSale = [];
+		$rootScope.productsToBeOnSale = [];
+		
+		$rootScope.dis = [];
+		$rootScope.ndis = [];
 		
 		productsFactory.getDiscounts().success(function(data){
 			$scope.discounts = data;
-		
-		productsFactory.getProducts().success(function(data){
-			$scope.products = data
-		})
-		
+			
+		var currentDate = new Date();	
 		angular.forEach($scope.discounts,function(item){
+			item.startDate = new Date(item.startDate.replace(/-/g,"/"));
+			if(item.startDate <= currentDate ){
+					console.log(item.startDate)
+					$rootScope.dis.push(item);
+				}
+			else {
+				console.log("Yet to be on sale " + item.startDate)
+				$rootScope.ndis.push(item)
+			}
+			
 			
 		})
-		
-		})
-		
-	}
+			
+		angular.forEach($rootScope.dis,function(item){
+			productsFactory.getProduct(item.productId).success(function(data){
+				$rootScope.productsOnSale.push(data);
+					})
+				})	
 	
+		angular.forEach($rootScope.ndis,function(item){
+			productsFactory.getProduct(item.productId).success(function(data){
+				$rootScope.productsToBeOnSale.push(data);
+						
+					
+					})
+				})	
+				
+				
+			})
+		}
 	
 })
 .controller('productDetailsCtrl',function($scope,$location,$rootScope,$routeParams,saleFactory,productsFactory,reviewFactory,storeFactory){

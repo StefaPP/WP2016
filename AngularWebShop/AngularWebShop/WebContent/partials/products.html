@@ -34,7 +34,8 @@
 	<label>Search by country <input type="text" class="form-control" ng-model="searchText.origin" data-toggle="tooltip" data-placement="right" title="Search by country"></label>
 	<label>Search by lager <input type="text" class="form-control" ng-model="searchText.lager" data-toggle="tooltip" data-placement="right" title="Search by lager"></label>
 	<label>Search by color <input type="text" class="form-control" ng-model="searchText.color" data-toggle="tooltip" data-placement="right" title="Search by color"></label>
-	
+		<button type="button" class="btn btn-default btn" ng-click="searchText={};slider.min = 0; slider.max=1000000"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		Reset search</button>
 <br/><br/>
 </div>
 <div class="col"> 

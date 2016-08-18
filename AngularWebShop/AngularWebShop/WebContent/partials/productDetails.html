@@ -27,11 +27,11 @@
 					role="button"
 					ng-disabled="product.lager===0 || currentRole!='customer'">Add
 					to wish list</button>
-				<button class="btn btn-primary btn-lg" ng-click="value = !value"
-					role="button" ng-if="currentUser === store.seller">Add on sale</button>
+				<button class="btn btn-primary btn-lg" ng-click="value1 = !value1"
+					role="button" ng-show="currentUser==store.seller">Add on sale</button>
 			<div ng-show="product.lager==0">This product is currently
 				unavailable</div>
-			<div ng-show="value">
+			<div ng-show="value1">
 				<h2>Add on sale</h2>
 				<h6>Start date</h6>
 				<md-datepicker ng-model="startDate"
