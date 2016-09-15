@@ -3,13 +3,15 @@ package beans;
 public class Category {
 	String name;
 	String description;
+	Category subcategory;
 	
 	public Category() {}
 	
-	public Category(String name, String description) {
+	public Category(String name, String description,Category sub) {
 		super();
 		this.name = name;
 		this.description = description;
+		this.subcategory = sub;
 	}
 	
 	public String getName() {
@@ -24,6 +26,16 @@ public class Category {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public Category getSubcategory() {
+		return subcategory;
+	}
+
+	public void setSubcategory(Category subcategory) {
+		this.subcategory = subcategory;
+	}
+	
+	
 	
 	
 }

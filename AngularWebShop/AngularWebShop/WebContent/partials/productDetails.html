@@ -2,7 +2,7 @@
 	<div class="jumbotron">
 		<h1>{{product.name}}</h1>
 		<h3 ng-if="!newPrice">Price : {{product.price}} RSD</h3>
-		<h3 ng-if="discountProduct.startDate">
+		<h3 ng-if="discountProduct.show">
 			This product is on sale from: {{discountProduct.startDate |
 			date:'mediumDate'}}
 			</h5>
@@ -17,6 +17,9 @@
 					{{discountProduct.endDate|date:'mediumDate'}}</h2>
 			</div>
 			<h3>Lager : {{product.lager}}</h3>
+			<h3 ng-if="productScore">Product score : {{productScore}} <img src="http://www.codeproject.com/script/ratings/images/star-fill-lg.png"> </h3>
+			<h3 ng-if="!productScore">This product has not been rated yet. Be the first one to do it</h3>
+			
 			<img style="width: 400px; height: 300px;" src="{{product.image}}">
 			<p>
 				<button class="btn btn-primary btn-lg" ng-click="addToCart(product)"

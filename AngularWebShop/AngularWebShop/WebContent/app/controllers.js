@@ -309,8 +309,11 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		productsFactory.getDiscountPrice(id).success(function(data){
 			$rootScope.discountProduct = data;
 			if($rootScope.discountProduct) {
+			var currentTime = new Date();
 			$rootScope.discountProduct.startDate = new Date($rootScope.discountProduct.startDate.replace(/-/g,"/"));
 			$rootScope.discountProduct.endDate = new Date($rootScope.discountProduct.endDate.replace(/-/g,"/"));
+			if($rootScope.discountProduct.startDate <= currentTime && $rootScope.discountProduct.endDate >= currentTime)
+				$rootScope.discountProduct.show = true;
 			}
 		})
 		
@@ -319,7 +322,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 			var currentTime = new Date();
 			console.log("Is " + $rootScope.discountProduct.startDate + " equal to " + currentTime)
 			
-			if($scope.discountProduct && $rootScope.discountProduct.startDate <= currentTime){
+			if($scope.discountProduct && $rootScope.discountProduct.startDate <= currentTime && $rootScope.discountProduct.endDate >= currentTime){
 				console.log("Is " + $rootScope.discountProduct.startDate + " equal to " + currentTime)
 			$scope.newPrice = $scope.product.price - ($scope.product.price * ($rootScope.discountProduct.discountRate/100));
 		}
@@ -332,7 +335,21 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	})
 		
 		reviewFactory.getReviews().success(function(data){
+			 var productScore = 0;
 			 $scope.reviews = data;
+			 var cnt = 0;
+			 angular.forEach($scope.reviews,(function(item){
+				 if(item.productId != $scope.review.productId){
+					 return;
+				 }
+				 else {
+					cnt++;
+		    		productScore += parseInt(item.rating);
+				    console.log("Trenutna ocena :" + productScore + "\n a counter " + cnt)
+				 }
+			 }))
+			 $scope.productScore = productScore/cnt;
+			 
 		 })
 	};
 	    $scope.getNumber = function(num) {
@@ -378,30 +395,6 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	
 	init();
 })
-/*.controller('shoppingCartController', function($scope, shoppingCartFactory) {
-	
-    function init() {
-    	console.log('ShoppingCartController.Init');
-        shoppingCartFactory.getSC().success(function (data) {
-        	$scope.sc = data;
-		});
-
-        shoppingCartFactory.getTotal().success(function(data) {
-        	$scope.total = data;
-        });
-    }
-
-	init();
-	
-	$scope.clearSc = function() {
-		if (confirm('Da li ste sigurni?') == true) {
-	    	shoppingCartFactory.clearSc().success(function(data) {
-	    		$scope.sc = {};
-	    		$scope.total = 0.0;
-	    	});
-		}
-    };
-})*/
 .controller('userCtrl',function($scope,userFactory){
 	function init() { 
 		console.log('User Controller');
