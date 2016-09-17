@@ -38,42 +38,39 @@
 		Reset search</button>
 <br/><br/>
 </div>
+
+<div ng-if="productsOnSale.length  !=''">
+<div>
+<h1>Currently on sale</h1>
+</div>
 <div class="col"> 
   <div class="col-md-4" ng-repeat="p in productsOnSale | filter:searchText | rangeFilter:slider">
     <a ng-href="#/product/{{p.id}}" class="thumbnail">
       <p>{{p.name}}</p>
-      <p>{{p.price}}</p>
+      Old price:<p class="strikethrough">{{p.price}}</p>
+      New price<p>{{p.newPrice}}</p>
       <img src="{{p.image}}" style="width:150px;height:100px">
     </a>
   </div>
-  <div ng-if="productsToBeOnSale">
-  <div>
-<h1>On sale soon...</h1>
+ </div>
+ </div>
+
+<div ng-show="productsWereOnSale.length !=''">
+ <div>
+<h1>Finished sales</h1>
 </div>
-<br><br>
+<br><br><br>
 <div class="col"> 
-  <div class="col-md-4" ng-repeat="s in productsToBeOnSale | filter:searchText | rangeFilter:slider">
-    <a ng-href="#/product/{{s.id}}" class="thumbnail">
+  <div class="col-md-4" ng-repeat="s in productsWereOnSale | filter:searchText | rangeFilter:slider">
+    <a ng-href class="thumbnail">
       <p>{{s.name}}</p>
+      <p>Discount rate:{{s.discountRate}}%</p>
       <img src="{{s.image}}" style="width:150px;height:100px">
     </a>
   </div>
   </div>
 </div>
 </div>	
-<!-- <div ng-if="productsToBeOnSale">
-<h1>On sale soon...</h1>
-<div class="col"> 
-  <div class="col-md-2" ng-repeat="p in productsToBeOnSale | filter:searchText | rangeFilter:slider">
-    <a ng-href="#/product/{{p.id}}" class="thumbnail">
-      <p>{{p.name}}</p>
-      <p>{{p.price}}</p>
-      <img src="{{p.image}}" style="width:150px;height:100px">
-    </a>
-  </div>
-  </div>
-</div>	 -->
-
 </div>
 </div>
 

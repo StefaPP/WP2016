@@ -12,4 +12,4 @@ b10086f6-0c2e-4689-a80c-0a65a14dde29;Stefica;4;12;Post Express;6000;
 0ad056db-ac98-494e-86ec-2ffb4d99a435;Stefica;4;13;Post Express;6000;
 b11731fb-a303-49f0-a95f-1804cd40230a;Kilje;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;22;UPS;2350;
 c0ad712a-fcea-41c7-a483-6d9846c767e4;Kilje;4;12;FedEx;2350;
-e0de33e5-2781-41f3-8435-9fdcd3fcd788;Kilje;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;23;UPS;2350;
+e0de33e5-2781-41f3-8435-9fdcd3fcd788;Kilje;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;23;UPS;2350;8734680e-cb23-4673-b7fe-6ab071e69f85;Stefica;4;5;Post Express;5600;

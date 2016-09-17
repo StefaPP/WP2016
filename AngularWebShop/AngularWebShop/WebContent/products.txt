@@ -1,11 +1,8 @@
 1;Televizor marke Sony, 51 cm dijagonala;Televizor;22000.00;30.00;100.00;Kina;Sony;electronic & office;http://pcw.cdn.dixons.com/css/themes/sony_tv_range/img/r4-hero-tv.png;1; ; ;3;gray;
 2;Sony digitalna kamera;Fotoaparat;32000;30.00;100.00;Kina;Sony;electronic & office;http://media.coopelectricalshop.co.uk/media/default/Products/SON-CAM-DSCWX100B-BK.png;2; ; ;3;gray;
 3;Samsung monitor 17";Monitor za desktop racunare;35000;30.00;100.00;Kina;Samsung;electronic & office;http://www.kulltech.com/wordpress/wp-content/uploads/2014/06/Samsung-UD590.png;3; ; ;2;gray;
-5;Nike Roshe;Patike za svaki dan;8000;13.00;400.00;Kina;Nike;clothing,shoes & jewelry;http://images.nike.com/is/image/DotCom/THN_PS/Nike-Roshe-Run-Mens-Shoe-511881_010.jpg?hei=300&wid=400&fmt=png;4; ; ;1;black;
 7;Nike Shorts;Sportski sorc za sve aktivnosti,prati na 30 stepeni;8000;26.00;600.00;Kina;Nike;clothing,shoes & jewelry;http://cdn2.bigcommerce.com/server4200/qpfrc9yq/products/14211/images/7636/619171_010_A__14936.1405427149.1280.1280.png?c=2; ; ; ;1;black;
 10;Decija kolica;Kolica za bebe do 3 godine;50000.0;300.0;2000.0;Vietnam;Chico;baby & kids;http://www.decjibazar.rs/3906-thickbox_default/chicco-kolica-liteway-complete-anthractive-siva.jpg;5;  ;  ;7;black;
-12;Kosarkaska lopta;Kozna lopta za sve terene;3000.0;9.0;1000.0;China;Spalding;sports,fitness & outdoors;http://assets.academy.com/mgen/82/10298482.jpg;4;  ;  ;5;orange;
-13;Fudbalska lopta;Fudbalska indoor lopta;3000.0;5.0;1000.0;China;Nike;sports,fitness & outdoors;http://www.soccerandrugby.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/s/c/sc2400-641.png;4;  ;  ;2;red;
 14;Tesla TC32H3-12410IA Klima Uredjaj Inverter;Klima ,5 brzina,ladi ko frikom;39.999;14.0;14.0;USA;Tesla;electronic & office;http://teslashop.co.rs/image/cache/catalog/tesla%20klima%20uredjaj-500x500.jpg;2;  ;  ;6;white;
 15;Lenovo IdeaPad 300-15IBRl;Kineska proizvodnja ,bez operativnog sistema;34.999;15.6;1.8;Italia;Lenovo;electronic & office;https://dstatic.computeruniverse.net/images/1000/90617454EE572F0F636144C2BDB0DDAE.jpg;2;  ;  ;4;gray;
 16;Kristina De Lux;Sank stolica ,nije za debele ljude;24999.0;80.0;3000.0;Serbia;Vitorog;home,furniture & patio;http://www.vitorogpromet.rs/temp/products/KRISTINA%20DE%20LUX%20Trpezariski%20sto%20wenge%2080x80.jpg;fd1ac8de-c8cb-4a3d-a052-fc0e8ef60a45;  ;  ;3;black;
@@ -16,3 +13,5 @@
 22;Zvecka CHICCO tulipan plava;Zvecka za vasu bebu da vas ne smara;300.0;0.0;0.0;Italia;Chicco;baby & kids;http://www.chicco.rs/images/artikli/000232000_v.jpg;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;  ;  ;3;teal;
 23;Lopta mekana CHICCO;Lopta za bebe s kojom ce moci da napravi svoje prve fudbalske korake;250.0;0.0;0.0;Italia;Chicco;baby & kids;http://www.chicco.rs/images/artikli/009040000_v.jpg;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;  ;  ;9;blue;
 24;Kolica CHICCO Trio Enjoy Fun Garnet;Decija kolica za do 5 godina;30000.0;40.0;3.0;Italia;Chicco;baby & kids;http://www.chicco.rs/images/artikli/791411100_v.jpg;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;  ;  ;2;red;
+12;Kosarkaska loptica;Kozna lopta za sve terene;3000.0;9.0;1000.0;China;Spalding;sports,fitness & outdoors;http://assets.academy.com/mgen/82/10298482.jpg;4; ; ;5;orange;
+5;Nike Roshe;Patike za svaki dan;5600.0;13.0;400.0;Kina;Nike;clothing,shoes & jewelry;http://images.nike.com/is/image/DotCom/THN_PS/Nike-Roshe-Run-Mens-Shoe-511881_010.jpg?hei=300&wid=400&fmt=png;4; ; ;0;black;

@@ -13,6 +13,17 @@ webShop.factory('productsFactory', function($http, $window) {
 		});
 	};
 	
+	factory.getDiscountedProduct = function(item) {
+		return $http({ 
+		method : "POST",
+		    url : '/AngularWebShop/rest/proizvodi/getDiscountProduct',
+		    data : item,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		})
+	}
+	
 	factory.getDiscountPrice = function(id) {
 		return $http.get('/AngularWebShop/rest/proizvodi/discountPrice/', {
 			params : {
@@ -98,10 +109,19 @@ webShop.factory('productsFactory', function($http, $window) {
 		    headers : {
 		        'Content-Type' : 'application/json'
 		    }
-		});
-		
-		
+		});	
 	}
+	factory.updateProduct = function(product){
+		return $http({
+			method : "POST",
+			url : '/AngularWebShop/rest/proizvodi/updateProduct',
+		    data : product,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+	}
+	
 	factory.getProductsForCategory = function(categoryName) {
 		return $http.get(
 				'/AngularWebShop/rest/proizvodi/getProductsForCategory', {
@@ -389,7 +409,6 @@ webShop.factory('loginFactory',function($http,$localStorage,$log,$location,$rout
 
 webShop.factory('saleFactory',function($http){
 	var factory = {};
-	console.log("?????????????????????????????????????")
 	factory.addOnSale = function(product){
 		return $http.post('/AngularWebShop/rest/proizvodi/addOnSale',{
 			"productId":''+product.id,

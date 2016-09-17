@@ -163,43 +163,55 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		$scope.products = {};
 		$rootScope.productsOnSale = [];
 		$rootScope.productsToBeOnSale = [];
+		$rootScope.productsWereOnSale = [];
 		
 		$rootScope.dis = [];
 		$rootScope.ndis = [];
+		$rootScope.wdis = [];
 		
 		productsFactory.getDiscounts().success(function(data){
 			$scope.discounts = data;
 			
 		var currentDate = new Date();	
+		currentDate.setHours(0);
+		
 		angular.forEach($scope.discounts,function(item){
 			item.startDate = new Date(item.startDate.replace(/-/g,"/"));
-			if(item.startDate <= currentDate ){
-					console.log(item.startDate)
-					$rootScope.dis.push(item);
-				}
+			item.endDate = new Date(item.endDate.replace(/-/g,"/"));
+			
+			console.log("Is this" + item.startDate +" after " + currentDate + " and before " + item.endDate);
+			
+			if(item.startDate <= currentDate && item.endDate >= currentDate ){
+				console.log(item.startDate)
+				$rootScope.dis.push(item);
+			}
+			else if(item.startDate >= currentDate){
+				$rootScope.ndis.push(item);
+			}
+			
 			else {
-				console.log("Yet to be on sale " + item.startDate)
-				$rootScope.ndis.push(item)
+				$rootScope.wdis.push(item);
+				console.log(item.productId)
+				console.log("Skinut je sa rasprodaje !")
 			}
 			
 			
 		})
-			
 		angular.forEach($rootScope.dis,function(item){
-			productsFactory.getProduct(item.productId).success(function(data){
+			productsFactory.getDiscountedProduct(item).success(function(data){
+				data.discountRate = item.discountRate;
+				data.newPrice = data.price - (data.price * (item.discountRate/100));
+				console.log("This is the product " + JSON.stringify(data));
 				$rootScope.productsOnSale.push(data);
 					})
-				})	
-	
-		angular.forEach($rootScope.ndis,function(item){
-			productsFactory.getProduct(item.productId).success(function(data){
-				$rootScope.productsToBeOnSale.push(data);
-						
-					
-					})
-				})	
-				
-				
+				})
+		angular.forEach($rootScope.wdis,function(item){
+				productsFactory.getProduct(item.productId).success(function(data){
+					data.discountRate = item.discountRate;
+					console.log("This is the product " + JSON.stringify(data));
+					$rootScope.productsWereOnSale.push(data);
+							})
+						})	
 			})
 		}
 	
@@ -217,6 +229,17 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 			 $location.path("/products");
 		 })
 	 }
+	 
+	 $scope.update = function (id){
+		 $location.url("/updateProduct/" + id)
+	 }
+	 
+	 $scope.updateProduct = function(product){
+		 productsFactory.updateProduct(product).success(function(){
+			 console.log("Product has been successfuly updated")
+		 })
+	 }
+	 
 	 
 	 $scope.deleteReview = function(review) {
 		 reviewFactory.deleteReview(review).success(function() {
@@ -276,6 +299,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		 
 
 	 }
+
 	 
 	 $scope.get = function(star){
 		 $scope.stars = parseInt(star);
@@ -294,7 +318,11 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	 		$scope.shoppingList = data;
 	 		console.log("Shopping list" + JSON.stringify($scope.shoppingList))
 	 	});
-	 	
+	 		productsFactory.getCategories().success(function (data) {
+	       		$scope.cats = data;
+	       		
+		 });
+	 		
 		$scope.review = {};
 		var id = $routeParams.id;
 		$scope.review.productId = id;
@@ -314,6 +342,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 			$rootScope.discountProduct.endDate = new Date($rootScope.discountProduct.endDate.replace(/-/g,"/"));
 			if($rootScope.discountProduct.startDate <= currentTime && $rootScope.discountProduct.endDate >= currentTime)
 				$rootScope.discountProduct.show = true;
+				$scope.newPrice = $scope.product.price - ($scope.product.price * ($rootScope.discountProduct.discountRate/100));
 			}
 		})
 		
@@ -349,7 +378,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 				 }
 			 }))
 			 $scope.productScore = productScore/cnt;
-			 
+			 $scope.productScore = Math.round( $scope.productScore* 10) / 10
 		 })
 	};
 	    $scope.getNumber = function(num) {
@@ -651,15 +680,20 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	}
 		
 		$scope.buy = function() {
-		$scope.buying.customerId = $scope.currentUser;
-		
+			
+		$scope.buying.customerId = $scope.currentUser;	
 		angular.forEach($rootScope.products,function(item) { 
 			$scope.buying.storeId = item.storeId;
 			$scope.buying.productId = item.id;
 			$scope.buying.deliveryId = item.deliveryId;
-			$scope.buying.totalPrice = $scope.total;
+			$scope.buying.totalPrice = item.price;
 			console.log(JSON.stringify($scope.buying));
-			productsFactory.buy($scope.buying)
+			productsFactory.buy($scope.buying).success(function(){
+				item.lager = item.lager-1;
+				delete item.deliveryId;
+				console.log(">>>>" + JSON.stringify(item))
+				productsFactory.updateProduct(item);
+			})
 		})
 			alert('Thank you for shopping with us <3');
 			shoppingListFactory.clearShoppingList($scope.buying.customerId).success(function(){

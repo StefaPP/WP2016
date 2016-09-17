@@ -69,30 +69,75 @@ public class ProductService {
 		return getCats().getCategories();
 
 	}
-
+	
+	/*
 	@POST
-	@Path("/upload")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public void upload() {
-		System.out.println("upload slidze");
+	@Path("/updateStore")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void updateStore(Store s){
+		Stores stores = (Stores) ctx.getAttribute("stores");
+		stores = getStores();
+		if(stores.getStores().containsKey(s.getId())){
+			stores.getStores().remove(s.getId());
+			stores.getStoreList().remove(s);
+			try {
+				Stores.deleteStore(s.getId());
+				Stores.writeStore(s);
+				stores.getStores().put(s.getId(), s);
+				stores.getStoreList().add(s);
+				ctx.setAttribute("stores", stores);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}else
+			System.out.println("Update nije uspeo ,navodno mapa ne sadrzi tu prodavnicu");
 	}
+ 	*/
+	
+	@POST
+	@Path("/updateProduct")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void updateProduct(Product p){
+		Products products = (Products) ctx.getAttribute("products");
+		products = getProducts();
+		if(products.getProducts().containsKey(p.getId())){
+			products.getProducts().remove(p.getId());
+			products.getProductList().remove(p);
+			try{
+				Products.deleteProduct(p.getId());
+				Products.writeProduct(p);
+				products.getProducts().put(p.getId(),p);
+				products.getProductList().add(p);
+				ctx.setAttribute("products", products);
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else
+			System.out.println("Update nije uspeo ,navodno mapa ne sadrzi ovaj proizvod");
+	}
+	
 
 	@POST
 	@Path("/addOnSale")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addOnSale(Discount dis) {
-
+		Discounts ds = new Discounts();
 		String uniqueID = UUID.randomUUID().toString();
 		dis.setId(uniqueID);
 		System.err.println(dis);
 		try {
 			Discounts.writeItem(dis);
+			ds.getDiscounts().put(dis.getId(), dis);
+			ds.getDiscountList().add(dis);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		System.out.println("Add on sale service");
 	}
 
+	
 	@POST
 	@Path("/addProduct")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -262,7 +307,26 @@ public class ProductService {
 		Products products = new Products();
 		return products.getProduct(request.getParameter("id"));
 	}
-
+	
+	@POST
+	@Path("/getDiscountProduct")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Product getDiscountProduct(Discount d){
+		Products prods = new Products();
+		Discounts ds = new Discounts();
+		for(Discount dis : ds.getDiscounts().values()){
+			if(dis.getId().equals(d.getId())){
+				for(Product p : prods.getProducts().values())
+					if(p.getId().equals(d.getProductId())){
+						System.out.println("nasooo produkts");
+						return p;
+					}
+			}
+		}
+		return null;
+	}
+	
 	@POST
 	@Path("/addCategory")
 	@Consumes(MediaType.APPLICATION_JSON)

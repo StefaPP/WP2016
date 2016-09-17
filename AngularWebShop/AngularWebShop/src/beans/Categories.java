@@ -83,6 +83,11 @@ public class Categories {
 		String line = "";
 		line += c.getName() + " ;";
 		line += c.getDescription() + " ;";
+		if(c.getSubcategory()!=null){
+			line+=c.getSubcategory().getName() + ";";
+		}else{
+			line+="null" + ";";
+		}
 		File file = new File(path + "/categories.txt");
 		BufferedWriter out = new BufferedWriter(new FileWriter(file, true));
 		out.append(line);

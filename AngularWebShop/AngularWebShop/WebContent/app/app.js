@@ -31,6 +31,10 @@ function config($routeProvider) {
 		templateUrl: 'partials/productDetails.html',
 		controller : 'productDetailsCtrl'
 	})
+	.when('/updateProduct/:id',{
+		templateUrl: 'partials/updateProduct.html',
+		controller : 'productDetailsCtrl'
+	})
 	.when('/users',{
 		templateUrl: 'partials/user.html',
 		controller : 'userCtrl'

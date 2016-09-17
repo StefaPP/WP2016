@@ -1,11 +1,4 @@
-0; ; ; ; ; ; 
-780d43f6-f350-4b0c-b832-2fd732e0dbfa;12;4;Thu Aug 11 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Thu Aug 25 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);30;
-71988f4a-2be2-46bd-bfe7-1f62058886d1;24;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;Mon Aug 15 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Wed Aug 31 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);80;
-d2a480b7-aa6d-47e1-b539-e7fed9fadeb4;22;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;Tue Aug 09 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Tue Aug 16 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);50;
-180c1d1a-573c-4b04-9f38-c1c3d9334fe7;23;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;Tue Aug 23 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Wed Aug 24 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);60;
-a4f0ac04-a070-446f-9e38-5211b84f3884;18;fd1ac8de-c8cb-4a3d-a052-fc0e8ef60a45;Wed Aug 17 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Wed Aug 24 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);30;
-0d858035-b770-40a7-ad1a-ececd055e0cd;15;2;Tue Aug 10 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Thu Aug 25 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);40;
-381a5a7c-4a10-490f-ac69-5fbcb1d691b6;10;5;Thu Aug 09 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Tue Aug 23 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);20;
-9a3a9a43-7a19-4d22-a4bb-0c186750e9b5;14;2;Wed Aug 24 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Tue Aug 30 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);30;
-ebe2d92c-8b56-476a-a4e6-a3418ee2a0da;20;17;Thu Aug 18 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Tue Aug 23 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);90;
-20452248-0c30-4cdf-b698-71e4830bd95c;3;3;Wed Aug 24 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Wed Aug 31 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);30;
+6aa084a7-6b79-4f98-a1a0-f843c65d3f6c;13;4;Sat Sep 17 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Tue Sep 20 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);30;
+b15b77aa-7077-4b6c-a6a4-4d2ec3d7a5eb;12;4;Wed Sep 21 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Thu Sep 29 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);40;
+7ce7574b-d812-4b7f-8c55-bc357e276d79;5;4;Sat Sep 17 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Wed Sep 21 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);30;
+1ce7574b-d812-4b7f-8c55-bc357e276d79;5;22;Sat Sep 16 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);Wed Sep 17 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);40;
