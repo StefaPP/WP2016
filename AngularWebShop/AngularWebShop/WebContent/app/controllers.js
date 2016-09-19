@@ -1,4 +1,4 @@
-webShop.controller('productsController', function($rootScope,$scope,$location,$rootScope,productsFactory,shoppingListFactory) {
+webShop.controller('productsController', function($rootScope,$scope,$location,$routeParams,productsFactory,shoppingListFactory) {
 	
     function init() {
  
@@ -50,7 +50,24 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	
 	initCats();
 	
-
+	
+	$scope.go = function (catName) {
+		console.log(catName)
+		productsFactory.getCategoryByName(catName).success(function(category){
+			$rootScope.ucategory = category;
+			console.log(">>>> "  + JSON.stringify($rootScope.ucategory))
+			$location.path('updateCategory/' +  catName);
+		})
+	};
+	
+		
+	$scope.updateCategory = function(category){
+		productsFactory.updateCategory(category).success(function(){
+				init();
+				$location.path('products')
+			})
+		}
+		
 	$rootScope.removeWish = function(productId){
 		productsFactory.removeWish($scope.currentUser,productId).success(function(){
 				init();
@@ -133,6 +150,13 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 			init();
 		})
 	}
+	
+	$scope.updateCategory = function(category){
+		productsFactory.updateCategory(category).success(function(){
+			init();
+		})
+	}
+	
 	init();
 })
 .controller('saleCtrl',function($scope,$rootScope,saleFactory,productsFactory){
@@ -194,7 +218,6 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 				console.log(item.productId)
 				console.log("Skinut je sa rasprodaje !")
 			}
-			
 			
 		})
 		angular.forEach($rootScope.dis,function(item){
@@ -424,13 +447,32 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	
 	init();
 })
-.controller('userCtrl',function($scope,userFactory){
+.controller('complaintsCtrl',function($scope,shoppingListFactory){
 	function init() { 
-		console.log('User Controller');
-		userFactory.getUsers().success(function(data){
-			$scope.users = data;
+		
+		shoppingListFactory.getComplaints().success(function (data){
+			$scope.complaints = data;
+		
 		})
 	}
+		
+		$scope.deleteComplaint = function(complaint) {
+			shoppingListFactory.deleteComplaint(complaint).success(function(){
+				alert('Complaint rejected')
+				init();
+		})
+	}
+			
+		$scope.acceptComplaint = function(complaint) {
+			shoppingListFactory.deleteFromHistory(complaint).success(function(){
+				alert('Complaint accepted');
+				shoppingListFactory.deleteComplaint(complaint).success(function(){
+					init();
+				})
+			})
+		}
+		
+	
 	init();
 })
 .controller('storeCtrl',function($scope,$window,$location,$routeParams,storeFactory){
@@ -669,6 +711,7 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 			angular.forEach($scope.bh,function(item){
 				productsFactory.getProduct(item.productId).success(function(data){
 					data.dateBought = new Date(item.date.replace(/-/g,"/"));
+					data.boughtId = item.id;
 					$scope.boughtProducts.push(data);
 				})
 			})
@@ -697,10 +740,10 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 			
 			$scope.complaint.customerId = $scope.currentUser;
 			$scope.complaint.productId = product.id;
-			$scope.complaint.storeId = product.storeId;
+			$scope.complaint.storeId = product.boughtId;
 			
 			shoppingListFactory.sendComplaint($scope.complaint).success(function(){
-				console.log("Zalba uspesno poslata")
+				alert('You successfuly sent your complaint')
 				$scope.complaint = {};
 			})
 			
@@ -710,7 +753,6 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		$scope.buy = function() {
 		var currentDate = new Date();
 		$scope.buying.customerId = $scope.currentUser;	
-	
 		angular.forEach($rootScope.products,function(item) { 
 			
 			$scope.buying.storeId = item.storeId;

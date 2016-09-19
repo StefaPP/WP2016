@@ -8,9 +8,9 @@
 
 <ul class="ver"  ng-repeat="c in categories">
   <li class="ver"><div><a ng-href="#/category/{{c.name}}" href="#products">{{c.name}}</a>
-  <button type="button" class="btn btn-danger btn-xs toprightRemove" ng-click="deleteCategory(c)" ng-show="currentUser ==='admin'">
+ <button type="button" class="btn btn-danger btn-xs toprightRemove" ng-click="deleteCategory(c)" ng-show="currentUser ==='admin'">
   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-  </button>
+
   </div>
   </li>
 </ul>
@@ -19,6 +19,7 @@
 </ul>
 </div>
 <div style="float:left; width:80%;">
+<div ng-show="search">
 <div style="width:80%;">
 <rzslider
     rz-slider-model="slider.min"
@@ -34,6 +35,7 @@
 	<label>Search by color <input type="text" class="form-control" ng-model="searchText.color" data-toggle="tooltip" data-placement="right" title="Search by color"></label><br/><br/><br/>
 	<button type="button" class="btn btn-default btn" ng-click="searchText={};slider.min = 0; slider.max=1000000"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 		Reset search</button>
+</div>
 <div class="col"> 
   <div class="col-md-4" ng-repeat="p in categoryProducts | filter:searchText | rangeFilter:slider">
     <a ng-href="#/product/{{p.id}}" class="thumbnail">

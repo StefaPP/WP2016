@@ -86,9 +86,9 @@ public class BuyingHistory {
 	
 	
 	public static void deleteItem(String id) throws IOException{
-		File file = new File(path + "/shoppingList.txt");
+		File file = new File(path + "/buyingHistory.txt");
 		File temp = new File(path + "/temp.txt");
-		
+
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		BufferedWriter writer = new BufferedWriter(new FileWriter(temp));
 		String line;

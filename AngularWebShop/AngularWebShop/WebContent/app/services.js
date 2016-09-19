@@ -13,6 +13,8 @@ webShop.factory('productsFactory', function($http, $window) {
 		});
 	};
 	
+	
+	
 	factory.getDiscountedProduct = function(item) {
 		return $http({ 
 		method : "POST",
@@ -47,6 +49,7 @@ webShop.factory('productsFactory', function($http, $window) {
 			"storeId":''+buying.storeId,
 			"productId":''+buying.productId,
 			"deliveryId":''+buying.deliveryId,
+			"date" :''+ buying.date,
 			"totalPrice":''+buying.totalPrice
 		})
 	}
@@ -130,6 +133,27 @@ webShop.factory('productsFactory', function($http, $window) {
 					}
 				})
 	};
+	
+	factory.updateCategory = function(category){
+		return $http({
+		    method : "POST",
+		    url : '/AngularWebShop/rest/proizvodi/updateCategory',
+		    data : category,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+	}
+	
+	factory.getCategoryByName = function(categoryName){
+		return $http.get(
+				'/AngularWebShop/rest/proizvodi/getCategoryByName', {
+					params : {
+						"name" : categoryName
+					}
+				})
+	}
+	
 	
 	factory.deleteCategory = function(category)
 	{
@@ -437,6 +461,33 @@ webShop.factory('shoppingListFactory', function($http) {
 			    }
 		})
 	}
+	
+	factory.getComplaints = function(){
+		return $http.get('/AngularWebShop/rest/proizvodi/getComplaints')
+	}
+	
+	factory.deleteComplaint = function(complaint){
+		return	$http({
+		    method : "DELETE",
+		    url : '/AngularWebShop/rest/proizvodi/deleteComplaint',
+		    data : complaint,
+		    headers : {
+		        'Content-Type' : 'application/json'
+		    }
+		});
+	}
+	
+	factory.deleteFromHistory = function(complaint) {
+	return	$http({
+		method : "DELETE",
+	    url : '/AngularWebShop/rest/proizvodi/deleteFromHistory',
+	    data : complaint,
+	    headers : {
+	        'Content-Type' : 'application/json'
+	    }
+	});
+	}
+	
 	
 	factory.removeItem = function(customerId,productId) {
 		return $http.post('/AngularWebShop/rest/proizvodi/removeItem',

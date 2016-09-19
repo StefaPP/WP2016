@@ -1,7 +1,7 @@
-electronic & office; ;monitors;
-baby & kids; ; ;
-clothing,shoes & jewelry; ; ;
+electronic & office; ; ;
 home,furniture & patio; ; ;
 movies,music & books; ; ;
 sports,fitness & outdoors; ; ;
-monitors; ; ;
+monitors; ;electronic & office;
+baby & kids ;dsdasds ;null;
+clothing,shoes & jewelry ;odjeca ;null;

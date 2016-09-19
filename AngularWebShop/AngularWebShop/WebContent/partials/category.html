@@ -1,11 +1,8 @@
-<div>
 <div align="center">
+<div align="center" style="width:30%;">
 <h1 align="center">Adding new category</h1>
-Name : <input class="form-group" type="text" name="storeId" ng-model="category.name"/><br/>
-Description : <input class="form-group" type="text" name="name" ng-model="category.description"/><br/>
-Parent category : <select class="form-control" name="repeatSelect"
-					id="repeatSelect" ng-model="product.category">
-						<option ng-repeat="c in categories" value="{{c.name}}">{{c.name}}</option>
+Name : <input class="form-control" type="text" name="storeId" ng-model="category.name"/><br/>
+Description : <input class="form-control" type="text" name="name" ng-model="category.description"/><br/>
 <button type="button" ng-click="addCategory()">Add category</button>
 </div>
 </div>

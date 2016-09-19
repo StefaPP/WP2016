@@ -35,9 +35,9 @@ function config($routeProvider) {
 		templateUrl: 'partials/updateProduct.html',
 		controller : 'productDetailsCtrl'
 	})
-	.when('/users',{
-		templateUrl: 'partials/user.html',
-		controller : 'userCtrl'
+	.when('/complaints',{
+		templateUrl: 'partials/complaints.html',
+		controller : 'complaintsCtrl'
 	})
 	.when('/stores',{
 		templateUrl : 'partials/stores.html',
@@ -66,6 +66,10 @@ function config($routeProvider) {
 	.when('/sale',{
 		templateUrl : 'partials/sale.html',
 		controller : 'saleCtrl'
+	})
+	.when('/updateCategory/:catName',{
+		templateUrl : 'partials/updateCategory.html',
+		controller : 'productsController'
 	})
 }
 

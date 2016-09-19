@@ -1,0 +1,20 @@
+<div>
+<table class="table">
+<tr>
+<th>Customer</th>
+<th>Description</th>
+<th>Product ID</th>
+<th>&nbsp;</th>
+<th>&nbsp;</th>
+</tr>
+<tr ng-repeat="c in complaints">
+<td>{{c.customerId}}</td>
+<td>{{c.description}}</td>
+<td>{{c.productId}}</td>
+<td><button class="btn btn-danger" ng-click="deleteComplaint(c)">Reject complaint</button></td>
+<td><button class="btn btn-success" ng-click="acceptComplaint(c)">Accept complaint</button></td>
+</tr>
+</table>
+
+
+</div>

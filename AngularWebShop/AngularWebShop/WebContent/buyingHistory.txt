@@ -1,3 +1,0 @@
-8734680e-cb23-4673-b7fe-6ab071e69f85;Stefica;4;5;Post Express;Sat Sep 17 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);5600;
-919f730a-6d6f-4c18-867e-88c97daf973d;Stefica;4;12;Post Express;Sat Sep 17 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);3000;
-33b98453-45db-402d-9f5b-4f5e375e1ffc;Stefica;fd1ac8de-c8cb-4a3d-a052-fc0e8ef60a45;18;Post Express;Sat Sep 17 2016 00:00:00 GMT+0200 (Central Europe Daylight Time);6234;

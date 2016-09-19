@@ -1,6 +1,8 @@
 package services;
 
 import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -94,6 +96,31 @@ public class ProductService {
 			System.out.println("Update nije uspeo ,navodno mapa ne sadrzi ovaj proizvod");
 	}
 	
+	@POST
+	@Path("/updateCategory")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void updateCategory(Category c){
+		Categories cats = new Categories();
+		System.out.println(c.getName());
+		if(cats.getCats().containsKey(c.getName())){
+			System.out.println("usao odje");
+			cats.getCategories().remove(c);
+			cats.getCats().remove(c);
+			cats.getCategoryList().remove(c);
+			try{
+				Categories.deleteCategory(c.getName());
+				Categories.writeCategory(c);
+				cats.getCats().put(c.getName(),c);
+				cats.getCategoryList().add(c);
+				ctx.setAttribute("categories", cats);
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else
+			System.out.println("Update nije uspeo ,navodno mapa ne sadrzi ovaj proizvod");
+		}
+	
+	
 
 	@POST
 	@Path("/addOnSale")
@@ -120,9 +147,8 @@ public class ProductService {
 	public String addProduct(Product p) {
 		Products products = (Products) ctx.getAttribute("products");
 		products = getProducts();
-		int id = Integer.parseInt(products.getProductList().get(products.getProductList().size() - 1).getId());
-		id += 1;
-		p.setId(Integer.toString(id));
+		String uniqueID = UUID.randomUUID().toString();
+		p.setId(uniqueID);
 		p.setReview(" ");
 		p.setRating(" ");
 		
@@ -138,8 +164,6 @@ public class ProductService {
 		return null;
 	}
 
-	
-	
 	@DELETE
 	@Path("/deleteProduct")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -203,7 +227,20 @@ public class ProductService {
 		}
 		return categoryP.values();
 	}
-
+	
+	@GET
+	@Path("/getCategoryByName")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Category getCategoryByName(){
+		Categories cats = new Categories();
+		String catName = request.getParameter("name");
+		for(Category c : cats.getCats().values()){
+			if(c.getName().equals(catName))
+				return c;
+		}
+		return null;
+	}
+	
 	@GET
 	@Path("/getShoppingList")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -362,7 +399,6 @@ public class ProductService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void buyProducts(Buying b) {
 		BuyingHistory bh = (BuyingHistory) ctx.getAttribute("buyingHistory");
-
 		String uniqueID = UUID.randomUUID().toString();
 		b.setId(uniqueID);
 		try {
@@ -417,6 +453,54 @@ public class ProductService {
 			e.printStackTrace();
 		}
 		
+		
+	}
+	
+	@GET
+	@Path("/getComplaints")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Complaint> getComplaints(){ 
+		Complaints c = new Complaints();
+		return c.getComplaints().values();
+	}
+	
+	@DELETE
+	@Path("/deleteComplaint")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteComplaint(Complaint c){
+		Complaints comps = new Complaints();
+		System.out.println(c.getId());
+		if(comps.getComplaints().get(c.getId()) !=null){
+			
+			try {
+				Complaints.deleteItem(c.getId());
+				comps.getComplaints().remove(c.getId());
+				comps.getComplaintsList().remove(c);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}	
+	}
+	
+	@DELETE
+	@Path("/deleteFromHistory")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteFromHistory(Complaint c){
+		BuyingHistory bh = new BuyingHistory();
+		Buying b = new Buying();
+		System.out.println("Treba da obrisem ovo iz istorije "  + c.getStoreId());
+		if(bh.getHistory().get(c.getStoreId()) != null){	
+				System.out.println("Nasao sam u istoriji");
+				b = bh.getHistory().get(c.getStoreId());
+				System.out.println("Dodelio sam " + b.getId() + " : " + b.getProductId()+ " : " + b.getCustomerId());
+			try{
+				BuyingHistory.deleteItem(b.getId());
+				bh.getBuyingHistory().remove(b);
+				bh.getHistory().remove(b);
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 	
