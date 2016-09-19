@@ -427,6 +427,17 @@ webShop.factory('shoppingListFactory', function($http) {
 	var factory = {};
 	
 	
+	factory.sendComplaint = function(complaint){
+		return $http({
+			method : 'POST',
+			url : '/AngularWebShop/rest/proizvodi/sendComplaint',
+			data : complaint,
+			headers : {
+			        'Content-Type' : 'application/json'
+			    }
+		})
+	}
+	
 	factory.removeItem = function(customerId,productId) {
 		return $http.post('/AngularWebShop/rest/proizvodi/removeItem',
 		{

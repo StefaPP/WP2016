@@ -38,7 +38,7 @@ public class BuyingHistory {
 		}
 	}
 	private void readProducts(BufferedReader in) {
-		String line, id="",customerId = "",storeId="",productId="",deliveryId="",totalPrice="";
+		String line, id="",customerId = "",storeId="",productId="",deliveryId="",date="",totalPrice="";
 		
 		StringTokenizer st;
 		try {
@@ -53,9 +53,10 @@ public class BuyingHistory {
 					storeId = st.nextToken().trim();
 					productId = st.nextToken().trim();
 					deliveryId = st.nextToken().trim();
+					date = st.nextToken().trim();
 					totalPrice = st.nextToken().trim();
 				}
-				Buying b = new Buying(id, customerId, storeId, productId, deliveryId,totalPrice);
+				Buying b = new Buying(id, customerId, storeId, productId, deliveryId,date,totalPrice);
 				buyingHistory.put(b.getId(), b);
 				buyingHistoryList.add(b);
 				
@@ -73,6 +74,7 @@ public class BuyingHistory {
 		line += b.getStoreId() + ";";
 		line += b.getProductId() + ";";
 		line += b.getDeliveryId() + ";";
+		line += b.getDate() + ";";
 		line += b.getTotalPrice() + ";";
 		
 		File file = new File(path + "/buyingHistory.txt");

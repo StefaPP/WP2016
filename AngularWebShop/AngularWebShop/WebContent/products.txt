@@ -7,7 +7,6 @@
 15;Lenovo IdeaPad 300-15IBRl;Kineska proizvodnja ,bez operativnog sistema;34.999;15.6;1.8;Italia;Lenovo;electronic & office;https://dstatic.computeruniverse.net/images/1000/90617454EE572F0F636144C2BDB0DDAE.jpg;2;  ;  ;4;gray;
 16;Kristina De Lux;Sank stolica ,nije za debele ljude;24999.0;80.0;3000.0;Serbia;Vitorog;home,furniture & patio;http://www.vitorogpromet.rs/temp/products/KRISTINA%20DE%20LUX%20Trpezariski%20sto%20wenge%2080x80.jpg;fd1ac8de-c8cb-4a3d-a052-fc0e8ef60a45;  ;  ;3;black;
 17;DC-1025;Isto nesto iz Vitorogove ponude;7646.0;50.0;1.0;Serbia;Vitorog;home,furniture & patio;http://www.vitorogpromet.rs/temp/products/DC%201025%20siva%20eco%20koza.jpg;fd1ac8de-c8cb-4a3d-a052-fc0e8ef60a45;  ;  ;12;white;
-18;WX2001;Opet stolica;6234.0;40.0;213.0;Serbia;Vitorog;home,furniture & patio;http://www.vitorogpromet.rs/temp/products/NOVO%20barska%20WX-2001%20crna.jpg;fd1ac8de-c8cb-4a3d-a052-fc0e8ef60a45;  ;  ;4;black;
 20;Slatka osveta;Knjiga za more;719.0;0.0;0.0;Serbia;Vulkan;movies,music & books;https://www.knjizare-vulkan.rs/slika_296853.jpg;17;  ;  ;3;n/a;
 21;Iskra u tami;Best seller u 0 drzava;639.0;0.0;0.0;Serbia;Vulkan;movies,music & books;https://www.knjizare-vulkan.rs/knjiga-iskra-u-tami-rupert-tomson-9788610010190-naslovna-strana-273963v.jpg;17;  ;  ;4;n/a;
 22;Zvecka CHICCO tulipan plava;Zvecka za vasu bebu da vas ne smara;300.0;0.0;0.0;Italia;Chicco;baby & kids;http://www.chicco.rs/images/artikli/000232000_v.jpg;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;  ;  ;3;teal;
@@ -15,3 +14,5 @@
 24;Kolica CHICCO Trio Enjoy Fun Garnet;Decija kolica za do 5 godina;30000.0;40.0;3.0;Italia;Chicco;baby & kids;http://www.chicco.rs/images/artikli/791411100_v.jpg;9f6b674b-d5be-4ec2-b35a-abf73c0861d1;  ;  ;2;red;
 12;Kosarkaska loptica;Kozna lopta za sve terene;3000.0;9.0;1000.0;China;Spalding;sports,fitness & outdoors;http://assets.academy.com/mgen/82/10298482.jpg;4; ; ;5;orange;
 5;Nike Roshe;Patike za svaki dan;5600.0;13.0;400.0;Kina;Nike;clothing,shoes & jewelry;http://images.nike.com/is/image/DotCom/THN_PS/Nike-Roshe-Run-Mens-Shoe-511881_010.jpg?hei=300&wid=400&fmt=png;4; ; ;0;black;
+12;Kosarkaska loptica;Kozna lopta za sve terene;3000.0;9.0;1000.0;China;Spalding;sports,fitness & outdoors;http://assets.academy.com/mgen/82/10298482.jpg;4; ; ;4;orange;
+18;WX2001;Opet stolica;6234.0;40.0;213.0;Serbia;Vitorog;home,furniture & patio;http://www.vitorogpromet.rs/temp/products/NOVO%20barska%20WX-2001%20crna.jpg;fd1ac8de-c8cb-4a3d-a052-fc0e8ef60a45; ; ;3;black;

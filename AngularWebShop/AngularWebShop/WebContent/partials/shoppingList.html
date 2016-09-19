@@ -1,47 +1,63 @@
 <div>
-<div style="float:left;width:40%;">
-<div ng-repeat="p in products">
+	<div style="float: left; width: 40%;">
+		<div ng-repeat="p in products">
 
- <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">{{p.name}} &nbsp;&nbsp;<button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(p.id)">
-  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-</button></h3>
-  </div>
-  <div class="panel-body">
-		{{p.price}}.00 DIN<br/>
-		{{p.brandName}}<br/>
-		{{p.category}}<br/>
-		<img src="{{p.image}}" style="width:150px;height:100px"/>
-		<select class="form-control" name="repeatSelect" id="repeatSelect" ng-model="p.deliveryId" required>
-        <option ng-repeat="d in deliverers | filter :{ country:user.country}:true" value="{{d.name}}">{{d.name}}</option>
-     </select>
-  	<div><p>
-  	</p>
-  	</div>
-  </div>
-</div>
-</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						{{p.name}} &nbsp;&nbsp;
+						<button type="button" class="btn btn-danger btn-xs"
+							ng-click="removeItem(p.id)">
+							<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+						</button>
+					</h3>
+				</div>
+				<div class="panel-body">
+					{{p.price}}.00 DIN<br /> {{p.brandName}}<br /> {{p.category}}<br />
+					<img src="{{p.image}}" style="width: 150px; height: 100px" /> <select
+						class="form-control" name="repeatSelect" id="repeatSelect"
+						ng-model="p.deliveryId" required>
+						<option
+							ng-repeat="d in deliverers | filter :{ country:user.country}:true"
+							value="{{d.name}}">{{d.name}}</option>
+					</select>
+					<div>
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</div>
 
-<h3 ng-if="total!=0">Total price of your shopping list is {{total}}.00 Din.</h3>
-<button type="button" class="btn btn-success btn-lg"  ng-click="buy()" ng-if="total!=0">
-<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Finish shopping !</button>
-<h1 ng-if="total==0">Your shopping cart is empty !</h1>
-</div>
-<div style="float:left;width:20%;">
-&nbsp;&nbsp;&nbsp;&nbsp;
-<button type="button" class="btn btn-info btn-lg"  ng-click="value = !value">Show history</button>
-</div>
-<div style="float:left;width:40%;" ng-show="value">
-<h2>Your buying history</h2>
-<div align="center" class="list-group" style="width:30%;" ng-repeat="p in boughtProducts">
-  <a href class="list-group-item">
-<p>
-{{p.name}}<br/>
-{{p.description}}
-{{p.price}}
-</p>
- </a>
-</div>
-</div>
+		<h3 ng-if="total!=0">Total price of your shopping list is
+			{{total}}.00 Din.</h3>
+		<button type="button" class="btn btn-success btn-lg" ng-click="buy()"
+			ng-if="total!=0">
+			<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Finish
+			shopping !
+		</button>
+		<h1 ng-if="total==0">Your shopping cart is empty !</h1>
+	</div>
+	<div style="float: left; width: 20%;">
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<button type="button" class="btn btn-info btn-lg"
+			ng-click="value = !value">Show history</button>
+	</div>
+
+	<div style="float: left; width: 40%;" ng-show="value">
+		<h2>Your buying history</h2>
+		<div align="center" class="list-group" style="width: 30%;"
+			ng-repeat="p in boughtProducts">
+			<a href class="list-group-item" ng-click="setID(p);show= !show">
+				<p>
+					{{p.name}}<br /> {{p.description}} {{p.price}}
+				</p>
+			</a>
+			<div ng-show="complaint.productId == p.id && p.dateBought < complaintDeadline && show">
+				<textarea ng-model="complaint.description">
+				 </textarea>
+				<button class="btn btn-danger"
+					ng-click="sendComplaint(p);show = !show">Send complaint</button>
+			</div>
+		</div>
+	</div>
 </div>

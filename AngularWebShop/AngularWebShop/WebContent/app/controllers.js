@@ -599,18 +599,19 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 	}
 	
 })
-.controller('shoppingListCtrl',function($scope,$rootScope,shoppingListFactory,productsFactory,deliveryFactory) {
+.controller('shoppingListCtrl',function($scope,$rootScope,$location,shoppingListFactory,productsFactory,deliveryFactory) {
 	
 	function init(){
 		$scope.deliveryId = "";
 		$scope.buying = {};
-		
+		$scope.complaint = {};
 		$scope.currentUser = $rootScope.getCurrentUser().username;
+		
 		$rootScope.products = [];
 		$rootScope.discountProducts = [];
 		$rootScope.newPrices = [];
-		$scope.boughtProducts = [];
 		
+		$scope.boughtProducts = [];
 		$scope.user = {};
 		$scope.user = $rootScope.getCurrentUser();
 		console.log($scope.user);
@@ -663,9 +664,11 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 		
 		
 		shoppingListFactory.getBuyingHistory($scope.currentUser).success(function(data){
+			console.log(JSON.stringify(data))
 			$scope.bh = data;
 			angular.forEach($scope.bh,function(item){
 				productsFactory.getProduct(item.productId).success(function(data){
+					data.dateBought = new Date(item.date.replace(/-/g,"/"));
 					$scope.boughtProducts.push(data);
 				})
 			})
@@ -678,16 +681,44 @@ webShop.controller('productsController', function($rootScope,$scope,$location,$r
 			})
 		}
 	}
-		
-		$scope.buy = function() {
+	
+
+			$scope.setID = function(p){
+				$scope.complaint.productId = p.id; 
+				$scope.complaintDeadline = new Date()
+				$scope.complaintDeadline.setDate($scope.complaintDeadline.getDate()+14);
+				console.log($scope.complaintDeadline)
+			}
 			
+			$scope.sendComplaint = function(product){
+			var currentDate = new Date();
+			
+			
+			
+			$scope.complaint.customerId = $scope.currentUser;
+			$scope.complaint.productId = product.id;
+			$scope.complaint.storeId = product.storeId;
+			
+			shoppingListFactory.sendComplaint($scope.complaint).success(function(){
+				console.log("Zalba uspesno poslata")
+				$scope.complaint = {};
+			})
+			
+		}
+	
+			
+		$scope.buy = function() {
+		var currentDate = new Date();
 		$scope.buying.customerId = $scope.currentUser;	
+	
 		angular.forEach($rootScope.products,function(item) { 
+			
 			$scope.buying.storeId = item.storeId;
 			$scope.buying.productId = item.id;
 			$scope.buying.deliveryId = item.deliveryId;
+			$scope.buying.date = currentDate;
 			$scope.buying.totalPrice = item.price;
-			console.log(JSON.stringify($scope.buying));
+			
 			productsFactory.buy($scope.buying).success(function(){
 				item.lager = item.lager-1;
 				delete item.deliveryId;

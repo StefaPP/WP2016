@@ -7,13 +7,14 @@ public class Buying {
 	private String storeId;
 	private String productId;
 	private String deliveryId;
+	private String date;
 	private String totalPrice;
 	
 	public Buying(){
 		
 	}
 	
-	public Buying(String id, String customerId, String storeId, String productId, String deliveryId,
+	public Buying(String id, String customerId, String storeId, String productId, String deliveryId,String date,
 			String totalPrice) {
 		super();
 		this.id = id;
@@ -21,6 +22,7 @@ public class Buying {
 		this.storeId = storeId;
 		this.productId = productId;
 		this.deliveryId = deliveryId;
+		this.date = date;
 		this.totalPrice = totalPrice;
 	}
 	
@@ -60,7 +62,14 @@ public class Buying {
 	public void setDeliveryId(String deliveryId) {
 		this.deliveryId = deliveryId;
 	}
-	
-	
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 
 }

@@ -27,6 +27,8 @@ import beans.Buying;
 import beans.BuyingHistory;
 import beans.Categories;
 import beans.Category;
+import beans.Complaint;
+import beans.Complaints;
 import beans.Discount;
 import beans.Discounts;
 import beans.Product;
@@ -69,32 +71,6 @@ public class ProductService {
 		return getCats().getCategories();
 
 	}
-	
-	/*
-	@POST
-	@Path("/updateStore")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateStore(Store s){
-		Stores stores = (Stores) ctx.getAttribute("stores");
-		stores = getStores();
-		if(stores.getStores().containsKey(s.getId())){
-			stores.getStores().remove(s.getId());
-			stores.getStoreList().remove(s);
-			try {
-				Stores.deleteStore(s.getId());
-				Stores.writeStore(s);
-				stores.getStores().put(s.getId(), s);
-				stores.getStoreList().add(s);
-				ctx.setAttribute("stores", stores);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		}else
-			System.out.println("Update nije uspeo ,navodno mapa ne sadrzi tu prodavnicu");
-	}
- 	*/
 	
 	@POST
 	@Path("/updateProduct")
@@ -387,11 +363,6 @@ public class ProductService {
 	public void buyProducts(Buying b) {
 		BuyingHistory bh = (BuyingHistory) ctx.getAttribute("buyingHistory");
 
-		/*
-		 * int id = bh.getBuyingHistory().size(); id +=1;
-		 * b.setId(Integer.toString(id+1));
-		 */
-
 		String uniqueID = UUID.randomUUID().toString();
 		b.setId(uniqueID);
 		try {
@@ -429,6 +400,26 @@ public class ProductService {
 		return buyingHistory.values();
 	}
 
+	@POST
+	@Path("/sendComplaint")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void sendComplaint(Complaint c){
+		Complaints comps = new Complaints();
+		System.out.println(c.getCustomerId() + " : " + c.getDescription());
+		String uniqueID = UUID.randomUUID().toString();
+		c.setId(uniqueID);
+		try {
+			Complaints.writeItem(c);
+			comps.getComplaints().put(c.getId(), c);
+			comps.getComplaintsList().add(c);
+			
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	@POST
 	@Path("/removeItem")
 	public void removeItem(ShoppingList sp) {
