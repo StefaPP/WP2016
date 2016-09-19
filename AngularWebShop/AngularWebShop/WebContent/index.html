@@ -15,11 +15,12 @@
 <script src="js/rzslider.js"></script>
 
 
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.js"></script>
- 
-
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.js"></script>
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
@@ -27,10 +28,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
-    <script src="https://gitcdn.link/repo/angular/bower-material/master/angular-material.js"></script>
 
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
-<link rel="stylesheet" type="text/css" href="js/rzslider.css"/>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.css">
+<link rel="stylesheet" type="text/css" href="js/rzslider.css" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
@@ -72,7 +74,6 @@
 	font-size: 14px;
 }
 
-
 .toprightRemove {
 	position: relative;
 	bottom: 52px;
@@ -81,10 +82,10 @@
 }
 
 .goright {
-	positon : absolute;
-	bottom : 10px;
+	positon: absolute;
+	bottom: 10px;
 	left: 200px;
-	font-size:14px;
+	font-size: 14px;
 }
 
 .right {
@@ -325,16 +326,14 @@ body.ng-pageslide-body-closed::before {
 	0.5rem
 	!important;
 }
-}
 
+}
 .toprightWL {
-    position: absolute;
-    top: 5px;
-    right: 12px;
-    font-size: 8px;
+	position: absolute;
+	top: 5px;
+	right: 12px;
+	font-size: 8px;
 }
-
-
 </style>
 
 </head>
@@ -349,13 +348,15 @@ body.ng-pageslide-body-closed::before {
 					ng-repeat="w in wishListProducts">
 					<a href class="list-group-item">
 						<p>
-							{{w.name}}<br/>{{w.brandName}}
+							{{w.name}}<br />{{w.brandName}}
 						</p>
-						<button type="button" class="btn btn-danger toprightWL" ng-click="removeWish(w.id)">
-  						<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+						<button type="button" class="btn btn-danger toprightWL"
+							ng-click="removeWish(w.id)">
+							<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
 						</button>
-						<button type="button" ng-click="addToCart(w)">Add to cart
-  						<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+						<button type="button" ng-click="addToCart(w)">
+							Add to cart <span class="glyphicon glyphicon-shopping-cart"
+								aria-hidden="true"></span>
 						</button>
 					</a>
 				</div>
@@ -370,25 +371,24 @@ body.ng-pageslide-body-closed::before {
 			ng-if="getCurrentUserRole() === 'admin'" href="#complaints"
 			ng-href="#complaints">Complaints</a></li>
 		<li><a href="#products" ng-href="#products">Products</a></li>
-		
+
 		<li><a href="#stores" ng-href="#stores">Stores</a></li>
-		
+
 		<li><a ng-if="!isLoggedIn()" href="#login" ng-href="#login">Login</a></li>
-		
+
 		<li><a ng-if="isLoggedIn() && getCurrentUserRole() == 'customer'"
 			href="#shoppingList" ng-href="#shoppingList">Shopping list</a></li>
-		
+
 		<li><a ng-if="getCurrentUserRole() === 'admin'" href="#delivery"
 			ng-href="#delivery">Delivery</a></li>
-		
+
 		<li><a ng-if="isLoggedIn() && getCurrentUserRole() == 'customer'"
 			ng-click="toggle()">Wish list</a>
-		
 		<li class="topright"><a ng-if="isLoggedIn()" ng-click="logout()">
 				Logout</a></li>
 	</ul>
 
 
-<div ng-view></div>
+	<div ng-view></div>
 </body>
 </html>

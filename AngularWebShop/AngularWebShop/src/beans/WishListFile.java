@@ -15,7 +15,7 @@ public class WishListFile {
 
 	private HashMap<String, WishList> wishList = new HashMap<String, WishList>();
 	private ArrayList<WishList> wishArrayList = new ArrayList<WishList>();
-	private static String path = "C:\\Users\\Bebica\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	private static String path = "C:\\Users\\Strefa\\git\\WP2016\\AngularWebShop\\AngularWebShop\\WebContent\\";
 
 	public WishListFile() {
 		this(path);

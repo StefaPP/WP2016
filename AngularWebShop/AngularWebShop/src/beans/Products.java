@@ -11,19 +11,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-/**
- * Klasa koja reprezentuje spisak raspolozivih proizvoda za kupovinu. Spisak
- * proizvoda se inicijalizuje iz tekstualne datoteke, koja je oblika: <br>
- * id;naziv;jedinicna cena
- */
+
 public class Products {
 	private HashMap<String, Product> products = new HashMap<String, Product>();
 	private ArrayList<Product> productList = new ArrayList<Product>();
-	private static String path = "C:\\Users\\Bebica\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
-	// private static String path =
-	// "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent/";
-	// private static String path =
-	// "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent";
+	private static String path = "C:\\Users\\Strefa\\git\\WP2016\\AngularWebShop\\AngularWebShop\\WebContent\\";
 
 	public Products() {
 

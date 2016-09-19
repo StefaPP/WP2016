@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
 public class Discounts {
 	private HashMap<String, Discount> discounts = new HashMap<String, Discount>();
 	private ArrayList<Discount> discountList = new ArrayList<Discount>();
-	private static String path = "C:\\Users\\Bebica\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	private static String path = "C:\\Users\\Strefa\\git\\WP2016\\AngularWebShop\\AngularWebShop\\WebContent\\";
 
 	public Discounts() {
 		this(path);

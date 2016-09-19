@@ -15,9 +15,8 @@ public class ShoppingListFile {
 	
 	private HashMap<String,ShoppingList> shoppingList = new HashMap<String,ShoppingList>();
 	private ArrayList<ShoppingList> shoppingArrayList = new ArrayList<ShoppingList>();
-	private static String path = "C:\\Users\\Bebica\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
-	//private static String path = "/home/student/git/WP2016/AngularWebShop/AngularWebShop/WebContent";
-	
+	private static String path = "C:\\Users\\Strefa\\git\\WP2016\\AngularWebShop\\AngularWebShop\\WebContent\\";
+
 	public ShoppingListFile()
 	{
 		this(path);

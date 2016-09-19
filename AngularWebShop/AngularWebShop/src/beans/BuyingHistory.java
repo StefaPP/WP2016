@@ -15,7 +15,7 @@ public class BuyingHistory {
 
 	private HashMap<String,Buying> buyingHistory = new HashMap<String,Buying>();
 	private ArrayList<Buying> buyingHistoryList = new ArrayList<Buying>();
-	private static String path = "C:\\Users\\Bebica\\Desktop\\WP\\AngularWebShop\\AngularWebShop\\WebContent\\";
+	private static String path = "C:\\Users\\Strefa\\git\\WP2016\\AngularWebShop\\AngularWebShop\\WebContent\\";
 	public  BuyingHistory() {
 		this(path);
 	}
